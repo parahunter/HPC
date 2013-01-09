@@ -1,0 +1,12 @@
+dmetrics e.%user:e.%dcr:e.%l2dr:e.%PAPI_l1_dcm:e.%PAPI_l2_dcm:name
+dsort e.user
+scc basic:version:warn:parallel:query:loop:pipe:inline:memops:fe:cg
+dcc basic:version:warn:parallel:query:loop:pipe:inline:memops:fe:cg:src
+sthresh 75
+dthresh 75
+name long
+view user
+tlmode thread:root:depth=10
+tldata all
+setpath $expts:.
+tabs functions:callers-callees:calltree:source:disasm:timeline:header:
