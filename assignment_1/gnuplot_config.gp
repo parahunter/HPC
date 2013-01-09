@@ -148,15 +148,15 @@ set key left bottom Left
 set xlabel 'Memory footprint (KB)'
 set ylabel 'Performances (MFlops/s)'
 set logscale x
-set xtics 16,2,4096
+set xtics 4,2,2048
 set title 'Performances of FOR loops permutation'
-plot "results_2013-01-09_21-55.dat" using 1:2 title "nat" w lp, \
-"results_2013-01-09_21-55.dat" using 1:3 title "nmk" w lp, \
-"results_2013-01-09_21-55.dat" using 1:4 title "nkm" w lp, \
-"results_2013-01-09_21-55.dat" using 1:5 title "knm" w lp, \
-"results_2013-01-09_21-55.dat" using 1:6 title "kmn" w lp, \
-"results_2013-01-09_21-55.dat" using 1:7 title "mnk" w lp, \
-"results_2013-01-09_21-55.dat" using 1:8 title "mkn" w lp
+plot "plotData.dat" using 1:2 title "nat" w lp, \
+"plotData.dat" using 1:3 title "nmk" w lp, \
+"plotData.dat" using 1:4 title "nkm" w lp, \
+"plotData.dat" using 1:5 title "knm" w lp, \
+"plotData.dat" using 1:6 title "kmn" w lp, \
+"plotData.dat" using 1:7 title "mnk" w lp, \
+"plotData.dat" using 1:8 title "mkn" w lp
 set terminal postscript eps enhanced color
 set output "plot.eps"
 replot

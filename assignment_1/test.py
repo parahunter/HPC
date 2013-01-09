@@ -2,10 +2,10 @@
 
 import re
 import math
-from subprocess import Popen, PIPE
+from subprocess import Popen, PIPE, call
 import datetime
 
-memory_approx =   [(x) for x in [16, 32, 64, 128, 256 , 512, 1024, 2048, 4096]] #, 4096, 8192, 16384]] 
+memory_approx =   [(x) for x in [4, 8, 16, 32, 64, 128, 256 , 512, 1024, 2048]] #, 4096, 8192, 16384]] 
 implementation = ["nat","nmk","nkm","knm","kmn","mnk","mkn"] # "blk"] (when ready)
 times = 1
  
@@ -47,6 +47,10 @@ def main():
 		fi = open(filename,"a+")
 		fi.write("\n")
 		fi.close()
-
+	call("rm plotData.dat", shell=True)
+	call(("cp %s plotData.dat" % filename), shell=True)
+	call("gnuplot \"./gnuplot_config.gp\"", shell=True)
+	call("lscpu > cpuinfo.txt", shell=True)
+#	call("rm plotData.dat", shell=True)
 if __name__ == "__main__":
 	main()
