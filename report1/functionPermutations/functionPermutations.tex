@@ -23,4 +23,67 @@ L3 cache:              8192K\\
 NUMA node0 CPU(s):     4-7\\
 NUMA node1 CPU(s):     0-3\\
 \\
+Stufff that could be interesting to do:
 
+- use suncc pragmas
+http://docs.oracle.com/cd/E24457_01/html/E21990/bjaby.html#scrolltoc
+
+- compiler options
+http://docs.oracle.com/cd/E24457_01/html/E21990/bjapp.html#scrolltoc
+
+- fast  does not follow the IEEE 754 standard strictly
+expands to 
+
+- fns  SSE flush-to-zero mode and, where available, denormals-are-zero mode, which causes subnormal results to be flushed to zero, and, where available, this option also causes subnormal operands to be treated as zero
+
+It would be interesting to toggle between SSE instruction set and the old 80 bit floating point
+
+-fsimple [0-2] chooses how much simplification should be done to floating point expressiongs
+0 : no simplifications
+1 : IEEE 754 default rounding/trapping modes do not change after process initialization.
+
+Computations producing no visible result other than potential floating-point exceptions may be deleted.
+
+Computations with Infinity or NaNs as operands need not propagate NaNs to their results. For example, x*0 may be replaced by 0.
+
+Computations do not depend on sign of zero.
+
+With -fsimple=1, the optimizer is not allowed to optimize completely without regard to roundoff or exceptions. In particular, a floating-point computation cannot be replaced by one that produces different results with rounding modes held constant at runtime.
+
+2: 
+Includes all the functionality of -fsimple=1 and also enables use of SIMD instructions to compute reductions when -xvector=simd is in effect.
+The compiler attempts aggressive floating-point optimizations that might cause many programs to produce different numeric results due to changes in rounding. For example, -fsimple=2 permits the optimizer to replace all computations of x/y in a given loop with x*z, where x/y is guaranteed to be evaluated at least once in the loop, z=1/y, and the values of y and z are known to have constant values during execution of the loop.
+
+-fsingle Causes the compiler to evaluate float expressions as single precision rather than double precision.
+
+-nofstore disables the following:
+Causes the compiler to convert the value of a floating-point expression or function to the type on the left-hand side of an assignment, when that expression or function is assigned to a variable, or when the expression is cast to a shorter floating-point type, rather than leaving the value in a register. Due to rounding and truncation, the results might be different from those that are generated from the register value.
+
+-xalias_level=basic 
+For example, at the -xalias_level=basic level, the compiler assumes that a pointer variable of type int * is not going to access a float object. Therefore the compiler can safely perform optimizations that assume a pointer of type float * will not alias the same memory that is referenced with a pointer of type int *.
+
+-xbuiltin allows the compiler to use builtin functions
+ See the er_src(1) man page for an explanation of how to read compiler commentary in object files to determine the functions for which the compiler actually makes a substitution.
+ 
+-xlibmil seems to be doing the same as the above but probably affects other functions
+
+-xlibmopt
+Enables the compiler to use a library of optimized math routines. You must use default rounding mode by specifying -fround=nearest when you use this option.
+The math routine library is optimized for performance and usually generates faster code. The results may be slightly different from those produced by the normal math library. If so, they usually differ in the last bit.
+
+-xmemalign=8s (only relevant for SPARC)
+Use the -xmemalign option to control the assumptions that the compiler makes about the alignment of data. By controlling the code generated for potentially misaligned memory accesses and by controlling program behavior in the event of a misaligned access, you can more easily port your code to the SPARC platform.
+
+-xO5
+Highest optimizations
+
+-xregs=frameptr
+Specifies the usage of registers for the generated code.
+frameptr allows the compiller to use the frame pointer register to contain other types of data
+
+With -xregs=framptr the compiler is free to use the frame-pointer register to improve program performance. However, some features of the debugger and performance measurement tools might be limited as a result. Stack tracing, debuggers, and performance anayzers cannot report on functions compiled with —xregs=frameptr
+
+-xtarget 
+Specifies the target system for instruction set and optimization. 
+
+we should also see if we can get the compiler to do the optimizations covered in class
