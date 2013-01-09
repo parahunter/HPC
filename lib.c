@@ -1,4 +1,5 @@
 #include <sunperf.h>
+#include <stdio.h>
 
 void print(int r, int c, double* m)
 {
