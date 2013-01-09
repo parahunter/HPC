@@ -1,0 +1,15 @@
+\contentsline {chapter}{\numberline {1}Achnowledgements}{1}{chapter.1}
+\contentsline {chapter}{\numberline {2}Motivation}{3}{chapter.2}
+\contentsline {chapter}{\numberline {3}Implementation}{4}{chapter.3}
+\contentsline {section}{\numberline {3.1}Overall architecture}{4}{section.3.1}
+\contentsline {section}{\numberline {3.2}OBJ parser}{4}{section.3.2}
+\contentsline {section}{\numberline {3.3}Translucency}{5}{section.3.3}
+\contentsline {section}{\numberline {3.4}Color Randomization}{9}{section.3.4}
+\contentsline {section}{\numberline {3.5}Movement \& Animation}{12}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Initial position}{12}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.2}Drawing the jellyfish}{13}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.3}Movement and wobbling}{14}{subsection.3.5.3}
+\contentsline {section}{\numberline {3.6}Skybox}{15}{section.3.6}
+\contentsline {section}{\numberline {3.7}Post Processing}{15}{section.3.7}
+\contentsline {chapter}{\numberline {4}Result}{16}{chapter.4}
+\contentsline {chapter}{\numberline {5}Conclusion}{17}{chapter.5}
