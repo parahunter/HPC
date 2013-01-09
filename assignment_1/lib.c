@@ -40,8 +40,7 @@ void matmult_kmn(int m,int n,int k,double *A,double *B,double *C)
   }
   for(int l=0; l<k; l++)
     for(int j=0; j<m; j++)
-      for(int i = 0; i<n; i++)  
-
+      for(int i = 0; i<n; i++)
         C[j*n+i]+=A[j*k+l]*B[l*n+i];
 }
 void matmult_knm(int m,int n,int k,double *A,double *B,double *C)
@@ -80,6 +79,31 @@ void matmult_nmk(int m,int n,int k,double *A,double *B,double *C)
       }
     }
 }
+void matmult_nkm(int m,int n,int k,double *A,double *B,double *C)
+{
+  int nm = n*m;
+  for(int i = 0; i<nm; i++)  
+  {
+    C[i]=0;
+  }
+
+  for(int i = 0; i<n; i++)  
+    for(int l=0; l<k; l++)
+      for(int j=0; j<m; j++)
+        C[j*n+i]+=A[j*k+l]*B[l*n+i];
+}
+void matmult_mkn(int m,int n,int k,double *A,double *B,double *C)
+{
+  int nm = n*m;
+  for(int i = 0; i<nm; i++)  
+  {
+    C[i]=0;
+  }
+  for(int j=0; j<m; j++)
+    for(int l=0; l<k; l++)
+      for(int i = 0; i<n; i++)  
+        C[j*n+i]+=A[j*k+l]*B[l*n+i];
+}
 void matmult_nat(int m,int n,int k,double *A,double *B,double *C)
 {
   for(int j=0; j<m; j++)
@@ -102,13 +126,13 @@ void matmult_blk_internal(int m,int n,int k, int sm,int sn,int sk,double *A,doub
   int snbs = sn*bs;
   int skbs = sk*bs;
   for(int j=smbs; j<mmin; j++)
-    for(int i = snbs; i<nmin; i++)  
-      for(int l=skbs; l<kmin; l++)
+    for(int l=skbs; l<kmin; l++)
+      for(int i = snbs; i<nmin; i++)  
         C[j*n+i]+=A[j*k+l]*B[l*n+i];
 }
 void matmult_blk(int m,int n,int k,double *A,double *B,double *C, int bs)
 {
-  bs=50;
+  //bs=50;
   int nm = n*m;
   for(int i = 0; i<nm; i++)  
   {
@@ -118,11 +142,7 @@ void matmult_blk(int m,int n,int k,double *A,double *B,double *C, int bs)
   int n_bs = n/bs;
   int k_bs = k/bs;
   for(int j=0; j<=m_bs; j++)
-    for(int i = 0; i<=n_bs; i++)  
-    {
-      for(int l=0; l<=k_bs; l++)
-      {
+    for(int l=0; l<=k_bs; l++)
+      for(int i = 0; i<=n_bs; i++)    
         matmult_blk_internal(m,n,k,j,i,l,A,B,C,bs);
-      }
-    }
 }

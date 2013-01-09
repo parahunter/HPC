@@ -2,7 +2,7 @@ TARGET	= libmatmult.so
 LIBSRCS	= 
 LIBOBJS	= lib.o
 
-OPT	= -g -fast
+OPT	= -g -fast -fsimple=1
 PIC	= -fPIC
 
 CC	= suncc
