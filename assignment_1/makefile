@@ -2,6 +2,8 @@ TARGET	= libmatmult.so
 LIBSRCS	= 
 LIBOBJS	= lib.o
 
+# -fast -fsimple -fns -xarch=generic64 (not supported in linux)
+
 OPT	= -g -fast -xarch=generic
 PIC	= -fPIC
 
