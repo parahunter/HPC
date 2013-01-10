@@ -1,0 +1,396 @@
+Thu Jan 10 10:29:22 CET 2013
+[27, 37, 53, 74, 105, 148, 210, 296]
+Tests running...
+Testing matmult_lib(), 1 time(s), 16 kB memory.
+Result: 
+    17.086   4424.697 0 # matmult_lib
+
+	Memory size: 17.086
+	MFLOPS     : 4424.697
+	Correct
+Testing matmult_nmk(), 1 time(s), 16 kB memory.
+Result: 
+    17.086   1688.036 0 # matmult_nmk
+
+	Memory size: 17.086
+	MFLOPS     : 1688.036
+	Correct
+Testing matmult_nkm(), 1 time(s), 16 kB memory.
+Result: 
+    17.086   1482.189 0 # matmult_nkm
+
+	Memory size: 17.086
+	MFLOPS     : 1482.189
+	Correct
+Testing matmult_knm(), 1 time(s), 16 kB memory.
+Result: 
+    17.086   1464.084 0 # matmult_knm
+
+	Memory size: 17.086
+	MFLOPS     : 1464.084
+	Correct
+Testing matmult_kmn(), 1 time(s), 16 kB memory.
+Result: 
+    17.086   1829.872 0 # matmult_kmn
+
+	Memory size: 17.086
+	MFLOPS     : 1829.872
+	Correct
+Testing matmult_mnk(), 1 time(s), 16 kB memory.
+Result: 
+    17.086   1734.624 0 # matmult_mnk
+
+	Memory size: 17.086
+	MFLOPS     : 1734.624
+	Correct
+Testing matmult_mkn(), 1 time(s), 16 kB memory.
+Result: 
+    17.086   1813.420 0 # matmult_mkn
+
+	Memory size: 17.086
+	MFLOPS     : 1813.420
+	Correct
+Testing matmult_lib(), 1 time(s), 32 kB memory.
+Result: 
+    32.086   6379.939 0 # matmult_lib
+
+	Memory size: 32.086
+	MFLOPS     : 6379.939
+	Correct
+Testing matmult_nmk(), 1 time(s), 32 kB memory.
+Result: 
+    32.086   1816.290 0 # matmult_nmk
+
+	Memory size: 32.086
+	MFLOPS     : 1816.290
+	Correct
+Testing matmult_nkm(), 1 time(s), 32 kB memory.
+Result: 
+    32.086   1554.259 0 # matmult_nkm
+
+	Memory size: 32.086
+	MFLOPS     : 1554.259
+	Correct
+Testing matmult_knm(), 1 time(s), 32 kB memory.
+Result: 
+    32.086   1541.024 0 # matmult_knm
+
+	Memory size: 32.086
+	MFLOPS     : 1541.024
+	Correct
+Testing matmult_kmn(), 1 time(s), 32 kB memory.
+Result: 
+    32.086   2085.816 0 # matmult_kmn
+
+	Memory size: 32.086
+	MFLOPS     : 2085.816
+	Correct
+Testing matmult_mnk(), 1 time(s), 32 kB memory.
+Result: 
+    32.086   1818.552 0 # matmult_mnk
+
+	Memory size: 32.086
+	MFLOPS     : 1818.552
+	Correct
+Testing matmult_mkn(), 1 time(s), 32 kB memory.
+Result: 
+    32.086   2055.362 0 # matmult_mkn
+
+	Memory size: 32.086
+	MFLOPS     : 2055.362
+	Correct
+Testing matmult_lib(), 1 time(s), 64 kB memory.
+Result: 
+    65.836   7294.149 0 # matmult_lib
+
+	Memory size: 65.836
+	MFLOPS     : 7294.149
+	Correct
+Testing matmult_nmk(), 1 time(s), 64 kB memory.
+Result: 
+    65.836   1771.117 0 # matmult_nmk
+
+	Memory size: 65.836
+	MFLOPS     : 1771.117
+	Correct
+Testing matmult_nkm(), 1 time(s), 64 kB memory.
+Result: 
+    65.836   1547.147 0 # matmult_nkm
+
+	Memory size: 65.836
+	MFLOPS     : 1547.147
+	Correct
+Testing matmult_knm(), 1 time(s), 64 kB memory.
+Result: 
+    65.836   1542.483 0 # matmult_knm
+
+	Memory size: 65.836
+	MFLOPS     : 1542.483
+	Correct
+Testing matmult_kmn(), 1 time(s), 64 kB memory.
+Result: 
+    65.836   2288.817 0 # matmult_kmn
+
+	Memory size: 65.836
+	MFLOPS     : 2288.817
+	Correct
+Testing matmult_mnk(), 1 time(s), 64 kB memory.
+Result: 
+    65.836   1729.141 0 # matmult_mnk
+
+	Memory size: 65.836
+	MFLOPS     : 1729.141
+	Correct
+Testing matmult_mkn(), 1 time(s), 64 kB memory.
+Result: 
+    65.836   2217.170 0 # matmult_mkn
+
+	Memory size: 65.836
+	MFLOPS     : 2217.170
+	Correct
+Testing matmult_lib(), 1 time(s), 128 kB memory.
+Result: 
+   128.344   7599.814 0 # matmult_lib
+
+	Memory size: 128.344
+	MFLOPS     : 7599.814
+	Correct
+Testing matmult_nmk(), 1 time(s), 128 kB memory.
+Result: 
+   128.344   1729.453 0 # matmult_nmk
+
+	Memory size: 128.344
+	MFLOPS     : 1729.453
+	Correct
+Testing matmult_nkm(), 1 time(s), 128 kB memory.
+Result: 
+   128.344   1500.407 0 # matmult_nkm
+
+	Memory size: 128.344
+	MFLOPS     : 1500.407
+	Correct
+Testing matmult_knm(), 1 time(s), 128 kB memory.
+Result: 
+   128.344   1500.678 0 # matmult_knm
+
+	Memory size: 128.344
+	MFLOPS     : 1500.678
+	Correct
+Testing matmult_kmn(), 1 time(s), 128 kB memory.
+Result: 
+   128.344   2547.587 0 # matmult_kmn
+
+	Memory size: 128.344
+	MFLOPS     : 2547.587
+	Correct
+Testing matmult_mnk(), 1 time(s), 128 kB memory.
+Result: 
+   128.344   1666.519 0 # matmult_mnk
+
+	Memory size: 128.344
+	MFLOPS     : 1666.519
+	Correct
+Testing matmult_mkn(), 1 time(s), 128 kB memory.
+Result: 
+   128.344   2485.734 0 # matmult_mkn
+
+	Memory size: 128.344
+	MFLOPS     : 2485.734
+	Correct
+Testing matmult_lib(), 1 time(s), 256 kB memory.
+Result: 
+   258.398   7915.176 0 # matmult_lib
+
+	Memory size: 258.398
+	MFLOPS     : 7915.176
+	Correct
+Testing matmult_nmk(), 1 time(s), 256 kB memory.
+Result: 
+   258.398   1648.381 0 # matmult_nmk
+
+	Memory size: 258.398
+	MFLOPS     : 1648.381
+	Correct
+Testing matmult_nkm(), 1 time(s), 256 kB memory.
+Result: 
+   258.398   1253.866 0 # matmult_nkm
+
+	Memory size: 258.398
+	MFLOPS     : 1253.866
+	Correct
+Testing matmult_knm(), 1 time(s), 256 kB memory.
+Result: 
+   258.398   1293.559 0 # matmult_knm
+
+	Memory size: 258.398
+	MFLOPS     : 1293.559
+	Correct
+Testing matmult_kmn(), 1 time(s), 256 kB memory.
+Result: 
+   258.398   2605.727 0 # matmult_kmn
+
+	Memory size: 258.398
+	MFLOPS     : 2605.727
+	Correct
+Testing matmult_mnk(), 1 time(s), 256 kB memory.
+Result: 
+   258.398   1658.962 0 # matmult_mnk
+
+	Memory size: 258.398
+	MFLOPS     : 1658.962
+	Correct
+Testing matmult_mkn(), 1 time(s), 256 kB memory.
+Result: 
+   258.398   2559.431 0 # matmult_mkn
+
+	Memory size: 258.398
+	MFLOPS     : 2559.431
+	Correct
+Testing matmult_lib(), 1 time(s), 512 kB memory.
+Result: 
+   513.375   8770.702 0 # matmult_lib
+
+	Memory size: 513.375
+	MFLOPS     : 8770.702
+	Correct
+Testing matmult_nmk(), 1 time(s), 512 kB memory.
+Result: 
+   513.375   1611.959 0 # matmult_nmk
+
+	Memory size: 513.375
+	MFLOPS     : 1611.959
+	Correct
+Testing matmult_nkm(), 1 time(s), 512 kB memory.
+Result: 
+   513.375   1153.869 0 # matmult_nkm
+
+	Memory size: 513.375
+	MFLOPS     : 1153.869
+	Correct
+Testing matmult_knm(), 1 time(s), 512 kB memory.
+Result: 
+   513.375   1144.082 0 # matmult_knm
+
+	Memory size: 513.375
+	MFLOPS     : 1144.082
+	Correct
+Testing matmult_kmn(), 1 time(s), 512 kB memory.
+Result: 
+   513.375   2720.451 0 # matmult_kmn
+
+	Memory size: 513.375
+	MFLOPS     : 2720.451
+	Correct
+Testing matmult_mnk(), 1 time(s), 512 kB memory.
+Result: 
+   513.375   1600.088 0 # matmult_mnk
+
+	Memory size: 513.375
+	MFLOPS     : 1600.088
+	Correct
+Testing matmult_mkn(), 1 time(s), 512 kB memory.
+Result: 
+   513.375   2767.066 0 # matmult_mkn
+
+	Memory size: 513.375
+	MFLOPS     : 2767.066
+	Correct
+Testing matmult_lib(), 1 time(s), 1024 kB memory.
+Result: 
+  1033.594   8256.565 0 # matmult_lib
+
+	Memory size: 1033.594
+	MFLOPS     : 8256.565
+	Correct
+Testing matmult_nmk(), 1 time(s), 1024 kB memory.
+Result: 
+  1033.594   1499.011 0 # matmult_nmk
+
+	Memory size: 1033.594
+	MFLOPS     : 1499.011
+	Correct
+Testing matmult_nkm(), 1 time(s), 1024 kB memory.
+Result: 
+  1033.594   1033.257 0 # matmult_nkm
+
+	Memory size: 1033.594
+	MFLOPS     : 1033.257
+	Correct
+Testing matmult_knm(), 1 time(s), 1024 kB memory.
+Result: 
+  1033.594   1032.913 0 # matmult_knm
+
+	Memory size: 1033.594
+	MFLOPS     : 1032.913
+	Correct
+Testing matmult_kmn(), 1 time(s), 1024 kB memory.
+Result: 
+  1033.594   2510.689 0 # matmult_kmn
+
+	Memory size: 1033.594
+	MFLOPS     : 2510.689
+	Correct
+Testing matmult_mnk(), 1 time(s), 1024 kB memory.
+Result: 
+  1033.594   1304.738 0 # matmult_mnk
+
+	Memory size: 1033.594
+	MFLOPS     : 1304.738
+	Correct
+Testing matmult_mkn(), 1 time(s), 1024 kB memory.
+Result: 
+  1033.594   2683.415 0 # matmult_mkn
+
+	Memory size: 1033.594
+	MFLOPS     : 2683.415
+	Correct
+Testing matmult_lib(), 1 time(s), 2048 kB memory.
+Result: 
+  2053.500   8343.783 0 # matmult_lib
+
+	Memory size: 2053.500
+	MFLOPS     : 8343.783
+	Correct
+Testing matmult_nmk(), 1 time(s), 2048 kB memory.
+Result: 
+  2053.500   1398.802 0 # matmult_nmk
+
+	Memory size: 2053.500
+	MFLOPS     : 1398.802
+	Correct
+Testing matmult_nkm(), 1 time(s), 2048 kB memory.
+Result: 
+  2053.500    521.795 0 # matmult_nkm
+
+	Memory size: 2053.500
+	MFLOPS     : 521.795
+	Correct
+Testing matmult_knm(), 1 time(s), 2048 kB memory.
+Result: 
+  2053.500    525.719 0 # matmult_knm
+
+	Memory size: 2053.500
+	MFLOPS     : 525.719
+	Correct
+Testing matmult_kmn(), 1 time(s), 2048 kB memory.
+Result: 
+  2053.500   2611.870 0 # matmult_kmn
+
+	Memory size: 2053.500
+	MFLOPS     : 2611.870
+	Correct
+Testing matmult_mnk(), 1 time(s), 2048 kB memory.
+Result: 
+  2053.500   1331.055 0 # matmult_mnk
+
+	Memory size: 2053.500
+	MFLOPS     : 1331.055
+	Correct
+Testing matmult_mkn(), 1 time(s), 2048 kB memory.
+Result: 
+  2053.500   2896.398 0 # matmult_mkn
+
+	Memory size: 2053.500
+	MFLOPS     : 2896.398
+	Correct
+Thu Jan 10 10:32:12 CET 2013

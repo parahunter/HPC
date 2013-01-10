@@ -1,0 +1,6 @@
+id: cannot find name for group ID 2012
+Failed to initialize wxWidgets.
+"./gnuplot_config.gp", line 159: warning: Warning - difficulty fitting plot titles into key
+"./gnuplot_config.gp", line 159: warning: Too many axis ticks requested (>9)
+"./gnuplot_config.gp", line 159: warning: Too many axis ticks requested (>9)
+"./gnuplot_config.gp", line 159: warning: Too many axis ticks requested (>7)

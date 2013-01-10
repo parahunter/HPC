@@ -150,7 +150,7 @@ set ylabel 'Performances (MFlops/s)'
 set logscale x
 set xtics 4,2,2048
 set title 'Performances of FOR loops permutation'
-plot "plotData.dat" using 1:2 title "nat" w lp, \
+plot "plotData.dat" using 1:2 title "lib" w lp, \
 "plotData.dat" using 1:3 title "nmk" w lp, \
 "plotData.dat" using 1:4 title "nkm" w lp, \
 "plotData.dat" using 1:5 title "knm" w lp, \
