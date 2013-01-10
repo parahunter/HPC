@@ -52,6 +52,7 @@ def main():
 		fi = open(filename,"a+")
 		fi.write("\n")
 		fi.close()
+
 	call("rm plotData.dat", shell=True)
 	call(("cp %s plotData.dat" % filename), shell=True)
 	call("gnuplot \"./gnuplot_config.gp\"", shell=True)
