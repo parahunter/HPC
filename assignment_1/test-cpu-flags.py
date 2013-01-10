@@ -5,25 +5,30 @@ import math
 from subprocess import Popen, PIPE, call
 import datetime
 
-memory_approx =   [(x) for x in [64, 128]] #, 4096, 8192, 16384]] 
+memory_approx =   [(x) for x in [16, 32, 64, 128, 256 , 512, 1024, 2048]]
 #memory_approx =   [(x) for x in [16, 32, 64, 128, 256 , 512]] #, 4096, 8192, 16384]] 
 #memory_approx =   [(x) for x in [4, 8, 16, 32, 64, 128, 256 , 512, 1024, 2048]] #, 4096, 8192, 16384]] 
 #implementation = ["nat","nmk","nkm","knm","kmn","mnk","mkn"] # "blk"] (when ready)
 implementation = ["nat","nmk","nkm","knm","kmn","mnk","mkn"] # "blk"] (when ready)
-times = 1
+times = 10
 
-compiler_options = ["-fast-restrict"]
+compiler_options = ["","-fast","-fast-xrestrict","-fns","-fsimple"]
+
+#loop through all compiler options
+#build program with those options
+#generate a set of data files with those options
+#plot them with a config file
 
 def main():
 	for option in compiler_options:
 		call("make clean", shell=True)
 		call("make DRY=-xdryrun | tee > makeinfo.txt", shell=True)
 		call("make FLAGS=" + option , shell=True)
-	
+		
 		ns = [(int(math.ceil(math.sqrt(x*1024/(3*8))))) for x in memory_approx]
 		print ns
 		now = datetime.datetime.now()
-		filename = "results_%s.dat" % (now.strftime("%Y-%m-%d_%H-%M"))
+		filename = "results"+option+".dat"
 		print "Tests running..."
 		for i in range(len(memory_approx)):
 			fi = open(filename,"a+")
@@ -53,9 +58,10 @@ def main():
 			fi = open(filename,"a+")
 			fi.write("\n")
 			fi.close()
-		call("rm plotData.dat", shell=True)
-		call(("cp %s plotData.dat" % filename), shell=True)
-		call("gnuplot \"./flag-test/gnuplot-cpu-flags" + option + ".gp\"", shell=True)
-		call("lscpu > cpuinfo.txt", shell=True)
+
+	#call("rm plotData.dat", shell=True)
+	call(("cp " + filename + " flag-test/" + filename), shell=True)
+	call("gnuplot \"./flag-test/gnuplot_config_cpu_flag_test.gp\"", shell=True)
+	call("lscpu > cpuinfo.txt", shell=True)
 if __name__ == "__main__":
 	main()
