@@ -12,9 +12,9 @@ times = 1
 def main():
 
 	call("make clean", shell=True)
-	call("make", shell=True)
 	call("make DRY=-xdryrun > makeinfo.txt", shell=True)
-
+	call("make", shell=True)
+	
 	ns = [(int(math.ceil(math.sqrt(x*1024/(3*8))))) for x in memory_approx]
 	print ns
 	now = datetime.datetime.now()
