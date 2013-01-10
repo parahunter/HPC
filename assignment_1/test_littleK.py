@@ -10,12 +10,12 @@ implementation = ["nat","nmk","nkm","knm","kmn","mnk","mkn"] # "blk"] (when read
 times = 1
  
 def main():
-
 	call("make clean", shell=True)
 	call("make", shell=True)
 	call("make DRY=-xdryrun > makeinfo.txt", shell=True)
-
 	ns = [(int(math.ceil(math.sqrt(x*1024/(3*8))))) for x in memory_approx]
+	littlek=4;
+	ns = [(int(math.ceil(math.sqrt(littlek*littlek+x*1024/8))-littlek)) for x in memory_approx]
 	print ns
 	now = datetime.datetime.now()
 	filename = "results_%s.dat" % (now.strftime("%Y-%m-%d_%H-%M"))
@@ -26,7 +26,7 @@ def main():
 		fi.close()
 		for test in implementation:
 			print "Testing matmult_%s(), %d time(s), %d kB memory." % (test,times, memory_approx[i])
-			process = Popen(("./matmult_f.studio %s %d %d %d" % (test,ns[i],ns[i],ns[i]+1)).split() ,stdout= PIPE,bufsize=-1) 
+			process = Popen(("./matmult_f.studio %s %d %d %d" % (test,ns[i],ns[i],littlek)).split() ,stdout= PIPE,bufsize=-1) 
 			(stdout,stderr) = process.communicate()
 			process.wait()
 			st = re.sub(' +',' ', stdout).split(" ")[1:]

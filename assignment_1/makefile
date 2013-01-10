@@ -4,11 +4,12 @@ LIBOBJS	= lib.o
 
 # -fast -fsimple -fns -xarch=generic64 (not supported in linux)
 
-OPT	= -g -fast -xarch=generic
+OPT	= -g -fast
 PIC	= -fPIC
+DRY = 
 
 CC	= suncc
-CFLAGS= $(OPT) $(PIC) $(XOPTS)
+CFLAGS= $(OPT) $(PIC) $(XOPTS) $(DRY)
 
 SOFLAGS = -shared 
 XLIBS	= -xlic_lib=sunperf
