@@ -1,1 +1,5 @@
- 
+The matrix multiplication is a critical operation in computer science, both because it’s the base of several practical problems and because it’s still relatively expensive.
+This operation, in fact, is really the fundamental brick of several interesting problems, from the resolution of big linear systems, often applied to physics, to resolution of discrete Fourier transforms, used for example to DNA splicing problems.
+On the main challenges of this operation isn’t related to the pure computational power, but with the amount of data that it requires: nowadays, as CPU/GPU evolved and still evolves faster than the memory chips, the real challenge isn’t compute the result in a short time, but making the computational unit able to produce that result. In other words, it’s more expensive bringing the right data at the right time, to the right chip, than to actually produce the result.
+Algorithms in general nowadays, are so much affected by this behaviour, that the fastest ones are the algorithms that make a better usage of the caches.
+From this point of view, matrix multiplication is considered a good example of what a typical algorithm should look like these days and it’s used as a base to test the ability of high performances computers to deliver outcomes. 

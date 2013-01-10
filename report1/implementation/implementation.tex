@@ -1,2 +1,95 @@
-- write something about test scripts
+\section{Basic matrix multiplication}
+The basic matrix multiplication algorithm follows the most standard n^3 implementation:
 
+
+void matmult_nat(int m,int n,int k,double *A,double *B,double *C)
+{
+  int nm = n*m;
+  for(int i = 0; i<nm; i++)  
+  {
+    C[i]=0;
+  }
+
+  for(int i = 0; i<n; i++)  
+    for(int l=0; l<k; l++)
+      for(int j=0; j<m; j++)
+        C[j*n+i]+=A[j*k+l]*B[l*n+i];
+}
+
+
+It’s important to note that the C matrix initialization has been moved outside the main loop, in a separate cycle. This doesn’t change the code complexity, but it helps to recognize that the core of the multiplication algorithm is completely independent from the order of the 3 nested loops that wrap it, so they can be reordered in any possible permutation (6 different ways).
+
+In order to define with of the 6 permutations is the best, it’s important to understand that the 3 different matrices are actually linear array accessed by an index in the form:
+
+X[i*c+j] with c constant, i and j loop variables.
+
+The best performances will be reached when the matrix X will be read/written sequentially, so when it’ll be wrapped by an external loop on i and an internal loop on j. We can express this with the dependency i => j.
+If we define the dependency graph for all the 3 matrices, we get:
+
+C[j*n+i] : j => i : m => n
+A[j*k+l] : j => l : m => k
+B[l*n+i] : l => i : k => n
+
+There is only 1 combination that satisfied all these constraints, and that is mkn (external to internal). We expect the best performances with this combination.
+
+\section{Blocked matrix algorithm}
+
+In literature, it’s suggested to use a “block version” of the naive algorithm to improve data locality: this approach intuitively do a better usage of the cache and improve the overall performances.
+The idea behind the algorithm is to split both A and B in squared blocks, small enough so the cache L1 can store 3 of them. In this way 2 blocks can be multiplied using the naive algorithm with high performances.
+Externally, other 3 nested loops will apply the same naive algorithm to combine the blocks:
+
+void matmult_blk_internal(int m,int n,int k, int sm,int sn,int sk,double *A,double *B,double *C, int bs)
+{
+  int mmin = min(m,(sm+1)*bs);
+  int nmin = min(n,(sn+1)*bs);
+  int kmin = min(k,(sk+1)*bs);
+  int smbs = sm*bs;
+  int snbs = sn*bs;
+  int skbs = sk*bs;
+
+		  for(int i = snbs; i < nmin; i++)
+    for(int l = skbs; l < kmin; l++)
+      for(int j = smbs; j < mmin; j++)
+  
+        C[j*n+i] += A[j*k+l] * B[l*n+i];
+}
+
+void matmult_blk(int m,int n,int k,double *A,double *B,double *C, int bs)
+{
+  //bs=50;
+  int nm = n*m;
+  for(int i = 0; i < nm; i++)  
+  {
+    C[i] = 0;
+  }
+  int m_bs = m/bs;
+  int n_bs = n/bs;
+  int k_bs = k/bs;
+
+  for(int j = 0; j <= m_bs; j++)
+    for(int l = 0; l <= k_bs; l++)
+      for(int i = 0; i <= n_bs; i++)    
+        matmult_blk_internal(m,n,k,j,i,l,A,B,C,bs);
+}
+
+
+This approach maintain the, not only the same complexity of the naive algorithm, but also the exact same number of floating point operation (the only overhead is on integers), and the same numerical precision of the previous code. The proof is left, but the reader can refer to the literature to further details.
+
+At this point, one important detail, is making sure that the compiler will inline the internal function in order to gain the best from the method. From our test, the most common optimization settings (-fast) included that. 
+
+
+
+\section{Scripts and tests}
+
+In order to test our results, a set of python scripts have been developed.
+They automatically takes care of:
+\begin{itemize}
+\item rebuilding the library
+\item executing the tests
+\item store in a file the compiler option that has been used
+\item store in a file the description of the machine used
+\item store the data in a dat file
+\item generating a eps plot, using a predefined template.
+\end{itemsize}
+
+Each test set has been run several time to assure the numerical stability of the results, before selecting an execution as a “final”
