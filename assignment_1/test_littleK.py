@@ -11,8 +11,9 @@ times = 1
  
 def main():
 	call("make clean", shell=True)
-	call("make", shell=True)
 	call("make DRY=-xdryrun > makeinfo.txt", shell=True)
+	call("make", shell=True)
+
 	ns = [(int(math.ceil(math.sqrt(x*1024/(3*8))))) for x in memory_approx]
 	littlek=4;
 	ns = [(int(math.ceil(math.sqrt(littlek*littlek+x*1024/8))-littlek)) for x in memory_approx]
