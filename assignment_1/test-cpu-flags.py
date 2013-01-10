@@ -5,14 +5,15 @@ import math
 from subprocess import Popen, PIPE, call
 import datetime
 
-memory_approx =   [(x) for x in [16, 32, 64, 128, 256 , 512, 1024, 2048]]
+memory_approx =   [(x) for x in [4, 8, 16, 32, 64, 128, 256 , 512, 1024, 2048]]
 #memory_approx =   [(x) for x in [16, 32, 64, 128, 256 , 512]] #, 4096, 8192, 16384]] 
 #memory_approx =   [(x) for x in [4, 8, 16, 32, 64, 128, 256 , 512, 1024, 2048]] #, 4096, 8192, 16384]] 
 #implementation = ["nat","nmk","nkm","knm","kmn","mnk","mkn"] # "blk"] (when ready)
 implementation = ["mkn"] # "blk"] (when ready)
 times = 1
 
-compiler_options = ["","-fast","-fast-xrestrict","-fns","-fsimple"]
+# intersting flags -xpentium 
+compiler_options = ["","-fast","-xO1","-xO2", "-xO3","-xO4","-xO5","-fast -xO3"]
 
 #loop through all compiler options
 #build program with those options
@@ -23,16 +24,17 @@ def main():
 	for option in compiler_options:
 		call("make clean", shell=True)
 		call("make DRY=-xdryrun | tee > makeinfo.txt", shell=True)
-		call("make FLAGS=" + option , shell=True)
+		call("make FLAGS=\" " + option + "\"", shell=True)
 		
 		ns = [(int(math.ceil(math.sqrt(x*1024/(3*8))))) for x in memory_approx]
 		print ns
 		now = datetime.datetime.now()
-		filename = "results"+option+".dat"
+		filename = "results" + option.replace(" ", "") + ".dat"
+		print "current filename " + filename
 		print "Tests running..."
 		for i in range(len(memory_approx)):
 			fi = open(filename,"a+")
-			fi.write(str(memory_approx[i]))
+			#fi.write(str(memory_approx[i]))
 			fi.close()
 			for test in implementation:
 				print "Testing matmult_%s(), %d time(s), %d kB memory." % (test,times, memory_approx[i])
@@ -50,8 +52,7 @@ def main():
 				print "\tMemory size: %s" % st[0]
 				print "\tMFLOPS     : %s" % st[1]
 				print "\t", "Correct" if (st[2] == "0") else "Incorrect (error %s)" % st[2]
-
-				res = "\t" + st[1]
+				res = st[0] + "\t" + st[1]
 				fi = open(filename,"a+")
 				fi.write(res)
 				fi.close()
@@ -59,8 +60,9 @@ def main():
 			fi.write("\n")
 			fi.close()
 
-	#call("rm plotData.dat", shell=True)
-	call(("cp " + filename + " flag-test/" + filename), shell=True)
+		call(("cp " + filename + " flag-test/" + filename), shell=True)
+		call("rm " + filename, shell=True)		
+
 	call("gnuplot \"./flag-test/gnuplot_config_cpu_flag_test.gp\"", shell=True)
 	call("lscpu > cpuinfo.txt", shell=True)
 if __name__ == "__main__":

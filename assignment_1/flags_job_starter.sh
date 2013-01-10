@@ -5,7 +5,6 @@
 #PBS -l walltime=00:10:00
 date 
 
-
 #cd $PBS_O_WORKDIR
 
 python ./test-cpu-flags.py

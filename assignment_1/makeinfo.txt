@@ -1,2 +1,2 @@
-suncc -g -fPIC  -xdryrun    -c -o lib.o lib.c
-suncc  -g -fPIC  -xdryrun  -o libmatmult.so -shared  lib.o -xlic_lib=sunperf
+suncc -g -xchip=generic -fPIC  -xdryrun    -c -o lib.o lib.c
+suncc  -g -xchip=generic -fPIC  -xdryrun  -o libmatmult.so -shared  lib.o -xlic_lib=sunperf

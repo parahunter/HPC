@@ -150,9 +150,14 @@ set ylabel 'Performances (MFlops/s)'
 set logscale x
 set xtics 4,2,2048
 set title 'Performances of FOR loops permutation'
-plot "results-fast-xrestrict.dat" using 1:2 title "-fast-xrestrict" w lp, \
-"results-fast.dat" using 1:2 title "-fast" w lp, \
-"results-fns.dat" using 1:2 title "-fns" w lp
+plot "flag-test/results-fast.dat" using 1:2 title "-fast" w lp, \
+"flag-test/results.dat" using 1:2 title "no flag" w lp, \
+"flag-test/results-xO1.dat" using 1:2 title "-xO1" w lp, \
+"flag-test/results-xO2.dat" using 1:2 title "-xO2" w lp, \
+"flag-test/results-xO3.dat" using 1:2 title "-xO3" w lp, \
+"flag-test/results-xO4.dat" using 1:2 title "-xO4" w lp, \
+"flag-test/results-xO5.dat" using 1:2 title "-xO5" w lp, \
+"flag-test/results-fast-xO3.dat" using 1:2 title "-fast-xO3" w lp
 set terminal postscript eps enhanced color
 set output "flag-test/flag-test-plot.eps"
 replot
