@@ -128,9 +128,10 @@ void matmult_blk_internal(int m,int n,int k, int sm,int sn,int sk,double *A,doub
   int snbs = sn*bs;
   int skbs = sk*bs;
 
-  for(int j = smbs; j < mmin; j++)
+		  for(int i = snbs; i < nmin; i++)
     for(int l = skbs; l < kmin; l++)
-      for(int i = snbs; i < nmin; i++)  
+      for(int j = smbs; j < mmin; j++)
+  
         C[j*n+i] += A[j*k+l] * B[l*n+i];
 }
 
