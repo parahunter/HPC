@@ -9,8 +9,8 @@ memory_approx =   [(x) for x in [16, 32, 64, 128, 256 , 512, 1024, 2048]]
 #memory_approx =   [(x) for x in [16, 32, 64, 128, 256 , 512]] #, 4096, 8192, 16384]] 
 #memory_approx =   [(x) for x in [4, 8, 16, 32, 64, 128, 256 , 512, 1024, 2048]] #, 4096, 8192, 16384]] 
 #implementation = ["nat","nmk","nkm","knm","kmn","mnk","mkn"] # "blk"] (when ready)
-implementation = ["nat","nmk","nkm","knm","kmn","mnk","mkn"] # "blk"] (when ready)
-times = 10
+implementation = ["mkn"] # "blk"] (when ready)
+times = 1
 
 compiler_options = ["","-fast","-fast-xrestrict","-fns","-fsimple"]
 
