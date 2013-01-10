@@ -6,7 +6,7 @@
 
 date 
 
-python ./test.py
+python ./test_littleN.py
 
 date
 exit 0
