@@ -1,1 +1,43 @@
+\section{Compiler parameters}
+
+//TODO Alexander
  
+\section{Comparison against dgemm}
+
+Against the dgemm library function, even with the same compiling options, the implementation provided of the matmult\_nat() method has been proven poor, according to the graph shown in Figure \ref{fig:natdgemmcomp}. The figure shown that, for every possible permutation of the cycle order (including so the naive implementation), dgemm outnumbers it.
+
+//TODO figure
+
+The reason for that ... (investigation required)
+
+\section{Permutations of m, k, n and performance}
+The three cycles performed in the naive algorithm can be rearrenged in six different ways: there are in fact six possible permutations of the three letters. The performance results provided by the execution of the six algorithms on some standards memory footprints are provided in Figure \ref{fig:permutations}. The test was made on the product of square matrices $nxnxn$, where $n$ was calculated using the following formula, to relate it to the memory footprint:
+$$
+n = \sqrt{\frac{F_byte}{8 \cdot 3} }
+$$
+
+//TODO figure
+
+The best results of the graph are the ones where the most internal cycle is cycled over $[1,n]$, and in particular the best implementation has been proved matmult\_mkn, followed by kmn. The worst ones, instead, have been proved nkm and knm, the ones with the most internal cycle in m.
+
+The explanation of this behaviour is that mkn is the best implementation because is the one that causes the less cache misses. If the most internal variable looped is n, in fact, each time we start reading an element from matrices B and C, that have both n columns, all the row is read. This causes less misses in the cache, leading to a better perfomance for both the mkn and kmn bheviours. Since the A matrix has k columns, also if we loop through k before looping though m we got a better performance, for the same reason. This explains why mkn is slighly better that  the kmn implementation.
+
+The worst case scenarios, instead, do the opposite: they privilegiate columns over rows, resulting in a better performance if the matrix was stored column-wise, like in Fortran, but leading to disastruous results in C, where the rowmajor order is preferable.
+
+To verificate our assumption, we checked the number of cache misses for both the best and the worst implementation, resulting in the following table:
+
+\section{Performance of n,k,m implementations with different sizes}
+The results and conclusions presented in the previous section held keeping in mind that the matrices we tested were square ones, where $n=m=k$. We repeated the same tests for some odd-sized matrices, i.e. where one of the value was kept very low. The other two values were raised accordingly, in order to maintain the same memory footprint.The results we came up with are really interesting, and are presented in the three Figures ABC. The smallest valuse has always been kept to four elements.
+
+//ABC
+
+For small m and n the change is almost irrelevant. Surprisingly, for small ks, there is a drop in performance of the ones that before where the most performant results: mkn and kmn. This happens because... (can't recall why)
+
+//image/scheme to explain
+
+\section{Blocked Matrix performance}
+
+
+beating compiler
+
+
