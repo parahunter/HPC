@@ -1,3 +1,50 @@
  - stuff from lscpu
  - compiler and libraries used. version numbers to
+
+\subsecion{Hardware} 
  
+To perform the test, it has been used the DTU HPC facility, in particular a Intel Xeon X5550 @ 2.67 GHz.
+
+More technical specification are listed below, in particular please note the cache size, 32 KB L1 and 256 KB L2, and the current CPU speed during the tests, reduced at 1.6 GHz.
+
+DTU provides also some AMD Opteron 6168 machines (technical specifications are listed below as well), but if not different specified, the Intel Xeon X5550 is used.
+ 
+\begin{tabular}{ l l }
+\hline
+Architecture:          & x86_64\\ \hline
+CPU op-mode(s):        & 32-bit, 64-bit\\ \hline
+Byte Order:            & Little Endian\\ \hline
+CPU(s):                & 8\\ \hline
+On-line CPU(s) list:   & 0-7\\ \hline
+Thread(s) per core:    & 1\\ \hline
+Core(s) per socket:    & 4\\ \hline
+CPU socket(s):         & 2\\ \hline
+NUMA node(s):          & 2\\ \hline
+Vendor ID:             & GenuineIntel\\ \hline
+CPU family:            & 6\\ \hline
+Model:                 & 26\\ \hline
+Stepping:              & 5\\ \hline
+CPU MHz:               & 1600.000\\ \hline
+BogoMIPS:              & 5332.58\\ \hline
+Virtualization:        & VT-x\\ \hline
+L1d cache:             & 32K\\ \hline
+L1i cache:             & 32K\\ \hline
+L2 cache:              & 256K\\ \hline
+L3 cache:              & 8192K\\ \hline
+NUMA node0 CPU(s):     & 4-7\\ \hline
+NUMA node1 CPU(s):     & 0-3\\ \hline
+\end{tabular}
+
+From now on we’ll refer to the Intel Xeon X5550 also as ‘the Intel’ or ‘the Xeon’, while we’ll refer to the AMD Opteron 6168 as ‘the AMD’.
+
+\subsecion{Compiler} 
+
+The compiler that has been used is Sun Compiler 5.12 
+
+\begin{lstlisting}
+suncc -g -fast -fPIC  -c -o lib.o lib.c
+\end{lstlisting}
+
+Please note that, although DTU provides some AMD machines as well, it is necessary to compile in the Intel machine, as the compiler is affected by some bugs. If it runs on AMD cpu, it will cause ‘Segmentation Fault’ on the final application.
+
+Additionally it has been used the Oracle Solaris Studio Performances Analyzer 7.9 to profile the code. This software, that will be referred as “the Analyzer” from now on, it has been run over the AMD platform as it has a better support for hardware counters.
