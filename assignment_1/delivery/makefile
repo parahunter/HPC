@@ -2,15 +2,12 @@ TARGET	= libmatmult.so
 LIBSRCS	= 
 LIBOBJS	= lib.o
 
-# -fast -fsimple -fns -xarch=generic64 (not supported in linux)
 OPT	= -g -fast
 
 PIC	= -fPIC
-DRY = 
-FLAGS = 
 
 CC	= suncc
-CFLAGS= $(OPT) $(PIC) $(XOPTS) $(DRY) $(FLAGS)
+CFLAGS= $(OPT) $(PIC) $(XOPTS)
 
 SOFLAGS = -shared 
 XLIBS	= -xlic_lib=sunperf
