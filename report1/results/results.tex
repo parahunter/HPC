@@ -1,7 +1,8 @@
- 
+In this section we present the results we came up during the tests altogether with the conclusions, in order to provide a better overview of the tests that have been performed. 
+
 \section{Comparison against dgemm}
 
-Against the dgemm library function, even with the same compiling options, the implementation provided of the matmult\_nat() method has been proven poor, according to the graph shown in Figure \ref{fig:natdgemmcomp}. The figure shown that, for every possible permutation of the cycle order (including so the naive implementation), dgemm outnumbers it.
+Against the $dgemm()$ library function, even with the same compiling options, the implementation provided of the $matmult\_nat()$ method has been proven poor, according to the graph shown in Figure \ref{fig:natdgemmcomp}. The figure shown that, for every possible permutation of the cycle order (including so the naive implementation), dgemm outnumbers it.
 
 \begin{figure}[here]
 \centering
@@ -10,8 +11,7 @@ Against the dgemm library function, even with the same compiling options, the im
 \label{fig:natdgemmcomp}
 \end{figure}
 
-
-The reason for that ... (investigation required)
+The reason for that is that the $dgemm()$ library has been a lot of years in the industry, and has received a lot of performance improvements during the years. In addition, the library makes use of some inline assembly codes that boost its performance even more.
 
 \section{Permutations of m, k, n and performance}
 The three cycles performed in the naive algorithm can be rearrenged in six different ways: there are in fact six possible permutations of the three letters. The performance results provided by the execution of the six algorithms on some standards memory footprints are provided in Figure \ref{fig:permutations}. The test was made on the product of square matrices $nxnxn$, where $n$ was calculated using the following formula, to relate it to the memory footprint:
@@ -23,7 +23,6 @@ The three cycles performed in the naive algorithm can be rearrenged in six diffe
 \label{fig:permutations}
 \end{figure}
 
-
 $$
 n = \sqrt{\frac{F_{byte}}{8 \cdot 3} }
 $$
@@ -34,7 +33,19 @@ The result was what we expected in the Theory section. As a recall, the explanat
 
 The worst case scenarios  $n-k-m$ and $k-n-m$, instead, do the opposite: they privilegiate columns over rows, resulting in a better performance if the matrix was stored column-wise, like in Fortran, but leading to disastruous results in C, where the most performant is the rowmajor order.
 
-To verificate our assumption, we checked the number of cache misses for both the best and the worst implementation, resulting in the following table:
+To verificate our assumption, we checked the number of cache misses for both the best and the worst implementation, resulting in:
+
+\vspace{10pt} 
+\begin{tabular}{ l l l}
+\hline
+ & knm& mkn\\ \hline
+MFlops:        &  440.342& 1548.554 \\ \hline
+Misses in L1-Data:     & 3 969 996 464 & 2 239 998 044 \\ \hline
+Misses in L2-Data:     & 99 000 394 & 102 000 309\\ \hline
+
+\end{tabular}
+
+\vspace{10pt} 
 
 That confirmed our assumptions, seeing that the best implementation has fewer cache misses that the worst one.
 
@@ -50,8 +61,24 @@ The results and conclusions presented in the previous section held keeping in mi
 
 We can see that the performances of the two best version in the square case are dropped dramatically, especially for little memory footprints. Since the test is on the AMD processor, we are able do see a drop in the performance due to the filling up of the L1 cache around $128kB$ (the cache is actually 64K, but it seems a little larger due to prefetch). For matrix sizes, we can see that the results of the cache analysis still confirm our previous assumptions of $m-k-n$ being faster than $knm$, as shown in the following table:
 
+
+\vspace{10pt} 
+\begin{tabular}{ l l l}
+\hline
+ & knm& mkn\\ \hline
+MFlops:        &  474.607& 741.996 \\ \hline
+Misses in L1-Data:     & 2 419 072 580 & 6 600 200 \\ \hline
+Misses in L2-Data:     & 272 000 807 & 164 000 494\\ \hline
+
+\end{tabular}
+
+\vspace{10pt} 
+
+As a side note, even the $dgemm()$ library drops its performances roughly from 8GFlops to 2 GFlops, as it is optimized for square memory sizes.
+
+\clearpage
 \section{Blocked Matrix performance}
-We recall that the blocked version, introduced in section //TODO, uses the best algorithm for naive multiplication, mkn, in its inner loop. We experimented the block size against the MFLOPs generated for a generally big square matrix (with 2048kB memory footprint). The results are reported in Figure //TODO (green line). The performances of the algorithm increased at the rising of the block size. This means that the optimum is the highes possible value of the block size, i.e. the matrix itself. In conclusion, the blocking algorithm is useless, because it will be always beaten by the nkm algorithm. 
+We recall that the blocked version, introduced in section Implementation, uses the best algorithm for naive multiplication, $m-k-n$, in its inner loop. We experimented the block size against the MFLOPs generated for a generally big square matrix (with $2048kB$ memory footprint). The results are reported in Figure \ref{lowk} (green line). The performances of the algorithm increased at the rising of the block size. This means that the optimum is the highest possible value of the block size, i.e. the matrix itself. In conclusion, the blocking algorithm can not really improve performance, because it will be always beaten by the $m-k-n$ algorithm. 
 
 \begin{figure}[here]
 \centering
@@ -60,14 +87,14 @@ We recall that the blocked version, introduced in section //TODO, uses the best 
 \label{fig:lowk}
 \end{figure}
 
-To find an approximate optimum for the block size, it was necessary to substitute the algorithm in the inner loop with the worst one (knm). Repeating the test, the data showed a plateau curve, having its maximum in the range 27-37. After 40, the performances start to decrease, because the L1d cache starts to fill up. At 40, in fact, we have an estimated data cache size of $3 \cdot 40^2 \cdot 8 = 37.5kB$, which is sligthly higher than the l1d cache size ($32kB$) due to the prefetching effect.  
+To find an approximate optimum for the block size, it was necessary to substitute the algorithm in the inner loop with the worst one ($k-n-m$). Repeating the test, the data showed a plateau curve, reaching its maximum in the range 27-37. After 40, the performances start to decrease, because the L1d cache starts to fill up. At 40, in fact, we have an estimated data cache size of $3 \cdot 40^2 \cdot 8 = 37.5kB$, which is sligthly higher than the L1-data cache size ($32kB$) due to the prefetching effect.  
 
 \begin{figure}[here]
 \centering
 \includegraphics[width=\textwidth]{results/3way.eps}
-\caption{Comarison between $dgemm()$, the best blocked version and the $m-k-n$ Implementation.}
+\caption{Comparison between $dgemm()$, the best blocked version and the $m-k-n$ Implementation.}
 \label{fig:3way}
 \end{figure}
-
+\clearpage
 \input{results/compiler.tex}
 
