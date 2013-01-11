@@ -1,14 +1,16 @@
 \BOOKMARK [0][-]{chapter.1}{Summary}{}% 1
 \BOOKMARK [0][-]{chapter.2}{Problem Statement}{}% 2
 \BOOKMARK [0][-]{chapter.3}{Description of Hardware and Software Used}{}% 3
-\BOOKMARK [0][-]{chapter.4}{Implementation}{}% 4
-\BOOKMARK [1][-]{section.4.1}{Basic matrix multiplication}{chapter.4}% 5
-\BOOKMARK [1][-]{section.4.2}{Blocked matrix algorithm}{chapter.4}% 6
-\BOOKMARK [1][-]{section.4.3}{Scripts and tests}{chapter.4}% 7
-\BOOKMARK [0][-]{chapter.5}{Results}{}% 8
-\BOOKMARK [1][-]{section.5.1}{Compiler parameters}{chapter.5}% 9
-\BOOKMARK [1][-]{section.5.2}{Comparison against dgemm}{chapter.5}% 10
-\BOOKMARK [1][-]{section.5.3}{Permutations of m, k, n and performance}{chapter.5}% 11
-\BOOKMARK [1][-]{section.5.4}{Performance of n,k,m implementations with different sizes}{chapter.5}% 12
-\BOOKMARK [1][-]{section.5.5}{Blocked Matrix performance}{chapter.5}% 13
-\BOOKMARK [0][-]{chapter.6}{Conclusion}{}% 14
+\BOOKMARK [1][-]{section.3.1}{Loop Optimization Techniques}{chapter.3}% 4
+\BOOKMARK [1][-]{section.3.2}{Loop Blocking}{chapter.3}% 5
+\BOOKMARK [0][-]{chapter.4}{Implementation}{}% 6
+\BOOKMARK [1][-]{section.4.1}{Basic matrix multiplication}{chapter.4}% 7
+\BOOKMARK [1][-]{section.4.2}{Blocked matrix algorithm}{chapter.4}% 8
+\BOOKMARK [1][-]{section.4.3}{Scripts and tests}{chapter.4}% 9
+\BOOKMARK [0][-]{chapter.5}{Results}{}% 10
+\BOOKMARK [1][-]{section.5.1}{Compiler parameters}{chapter.5}% 11
+\BOOKMARK [1][-]{section.5.2}{Comparison against dgemm}{chapter.5}% 12
+\BOOKMARK [1][-]{section.5.3}{Permutations of m, k, n and performance}{chapter.5}% 13
+\BOOKMARK [1][-]{section.5.4}{Performance of n,k,m implementations with different sizes}{chapter.5}% 14
+\BOOKMARK [1][-]{section.5.5}{Blocked Matrix performance}{chapter.5}% 15
+\BOOKMARK [0][-]{chapter.6}{Conclusion}{}% 16
