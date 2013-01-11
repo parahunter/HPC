@@ -1,0 +1,2 @@
+suncc -g -fast -xrestrict -fPIC  -xdryrun    -c -o lib.o lib.c
+suncc  -g -fast -xrestrict -fPIC  -xdryrun  -o libmatmult.so -shared  lib.o -xlic_lib=sunperf

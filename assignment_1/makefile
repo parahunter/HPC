@@ -3,7 +3,7 @@ LIBSRCS	=
 LIBOBJS	= lib.o
 
 # -fast -fsimple -fns -xarch=generic64 (not supported in linux)
-OPT	= -g -xchip=generic
+OPT	= -g -fast -xrestrict
 PIC	= -fPIC
 DRY = 
 FLAGS = 
