@@ -1,7 +1,7 @@
 \section{Basic matrix multiplication}
-The basic matrix multiplication algorithm follows the most standard n^3 implementation:
+The basic matrix multiplication algorithm follows the most standard $n^3$ implementation:
 
-
+\begin{lstlisting}
 void matmult_nat(int m,int n,int k,double *A,double *B,double *C)
 {
   int nm = n*m;
@@ -15,7 +15,7 @@ void matmult_nat(int m,int n,int k,double *A,double *B,double *C)
       for(int j=0; j<m; j++)
         C[j*n+i]+=A[j*k+l]*B[l*n+i];
 }
-
+\end{lstlisting}
 
 It’s important to note that the C matrix initialization has been moved outside the main loop, in a separate cycle. This doesn’t change the code complexity, but it helps to recognize that the core of the multiplication algorithm is completely independent from the order of the 3 nested loops that wrap it, so they can be reordered in any possible permutation (6 different ways).
 
@@ -26,10 +26,15 @@ X[i*c+j] with c constant, i and j loop variables.
 The best performances will be reached when the matrix X will be read/written sequentially, so when it’ll be wrapped by an external loop on i and an internal loop on j. We can express this with the dependency i => j.
 If we define the dependency graph for all the 3 matrices, we get:
 
-C[j*n+i] : j => i : m => n
-A[j*k+l] : j => l : m => k
+$$
+C[j*n+i] : j => i : m => n 
+$$
+$$
+A[j*k+l] : j => l : m => k 
+$$
+$$
 B[l*n+i] : l => i : k => n
-
+$$
 There is only 1 combination that satisfied all these constraints, and that is mkn (external to internal). We expect the best performances with this combination.
 
 \section{Blocked matrix algorithm}
@@ -38,6 +43,7 @@ In literature, it’s suggested to use a “block version” of the naive algori
 The idea behind the algorithm is to split both A and B in squared blocks, small enough so the cache L1 can store 3 of them. In this way 2 blocks can be multiplied using the naive algorithm with high performances.
 Externally, other 3 nested loops will apply the same naive algorithm to combine the blocks:
 
+\begin{lstlisting}
 void matmult_blk_internal(int m,int n,int k, int sm,int sn,int sk,double *A,double *B,double *C, int bs)
 {
   int mmin = min(m,(sm+1)*bs);
@@ -71,7 +77,7 @@ void matmult_blk(int m,int n,int k,double *A,double *B,double *C, int bs)
       for(int i = 0; i <= n_bs; i++)    
         matmult_blk_internal(m,n,k,j,i,l,A,B,C,bs);
 }
-
+\end{lstlisting}
 
 This approach maintain the, not only the same complexity of the naive algorithm, but also the exact same number of floating point operation (the only overhead is on integers), and the same numerical precision of the previous code. The proof is left, but the reader can refer to the literature to further details.
 
@@ -90,6 +96,6 @@ They automatically takes care of:
 \item store in a file the description of the machine used
 \item store the data in a dat file
 \item generating a eps plot, using a predefined template.
-\end{itemsize}
+\end{itemize}
 
 Each test set has been run several time to assure the numerical stability of the results, before selecting an execution as a “final”

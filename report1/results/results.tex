@@ -13,7 +13,7 @@ The reason for that ... (investigation required)
 \section{Permutations of m, k, n and performance}
 The three cycles performed in the naive algorithm can be rearrenged in six different ways: there are in fact six possible permutations of the three letters. The performance results provided by the execution of the six algorithms on some standards memory footprints are provided in Figure \ref{fig:permutations}. The test was made on the product of square matrices $nxnxn$, where $n$ was calculated using the following formula, to relate it to the memory footprint:
 $$
-n = \sqrt{\frac{F_byte}{8 \cdot 3} }
+n = \sqrt{\frac{F_{byte}}{8 \cdot 3} }
 $$
 
 //TODO figure
@@ -31,13 +31,14 @@ The results and conclusions presented in the previous section held keeping in mi
 
 //ABC
 
-For small m and n the change is almost irrelevant. Surprisingly, for small ks, there is a drop in performance of the ones that before where the most performant results: mkn and kmn. This happens because... (can't recall why)
+For small m and n the change is almost irrelevant. Surprisingly, for small ks, there is a drop in performance of the ones that before where the most performant results: mkn and kmn. This happens because 
 
 //image/scheme to explain
 
 \section{Blocked Matrix performance}
+We recall that the blocked version, introduced in section //TODO, uses the best algorithm for naive multiplication, mkn, in its inner loop. We experimented the block size against the MFLOPs generated for a generally big square matrix (with 2048kB memory footprint). The results are reported in Figure //TODO (green line). The performances of the algorithm increased at the rising of the block size. This means that the optimum is the highes possible value of the block size, i.e. the matrix itself. In conclusion, the blocking algorithm is useless, because it will be always beaten by the nkm algorithm. 
 
+To find an approximate optimum for the block size, it was necessary to substitute the algorithm in the inner loop with the worst one (knm). Repeating the test, the data showed a plateau curve, having its maximum in the range 27-37. After 40, the performances start to decrease, because the L1d cache starts to fill up. At 40, in fact, we have an estimated data cache size of $3 \cdot 40^2 \cdot 8 = 37.5kB$, which is sligthly higher than the l1d cache size ($32kB$) due to the prefetching effect.  
 
-beating compiler
 
 
