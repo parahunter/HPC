@@ -10,9 +10,9 @@ implementation = ["nat","nmk","nkm","knm","kmn","mnk","mkn"] # "blk"] (when read
 times = 1
  
 def main():
-	call("make clean", shell=True)
-	call("make DRY=-xdryrun | tee > makeinfo.txt", shell=True)
-	call("make", shell=True)
+	#call("make clean", shell=True)
+	#call("make DRY=-xdryrun | tee > makeinfo.txt", shell=True)
+	#call("make", shell=True)
 
 	ns = [(int(math.ceil(math.sqrt(x*1024/(3*8))))) for x in memory_approx]
 	littlek=4;

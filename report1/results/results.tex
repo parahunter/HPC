@@ -1,6 +1,3 @@
-\section{Compiler parameters}
-
-//TODO Alexander
  
 \section{Comparison against dgemm}
 
@@ -40,5 +37,8 @@ We recall that the blocked version, introduced in section //TODO, uses the best 
 
 To find an approximate optimum for the block size, it was necessary to substitute the algorithm in the inner loop with the worst one (knm). Repeating the test, the data showed a plateau curve, having its maximum in the range 27-37. After 40, the performances start to decrease, because the L1d cache starts to fill up. At 40, in fact, we have an estimated data cache size of $3 \cdot 40^2 \cdot 8 = 37.5kB$, which is sligthly higher than the l1d cache size ($32kB$) due to the prefetching effect.  
 
+\section{Compiler parameters}
+
+//TODO Alexander
 
 

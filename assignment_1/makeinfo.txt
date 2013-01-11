@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 suncc -g  -fPIC  -xdryrun    -c -o lib.o lib.c
 suncc  -g  -fPIC  -xdryrun  -o libmatmult.so -shared  lib.o -xlic_lib=sunperf
+=======
+suncc -g -fast -fPIC  -xdryrun    -c -o lib.o lib.c
+suncc  -g -fast -fPIC  -xdryrun  -o libmatmult.so -shared  lib.o -xlic_lib=sunperf
+>>>>>>> 43fdb43008c6d76c2a583ba0652fa9d5e367041c
