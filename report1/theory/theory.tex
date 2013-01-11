@@ -1,5 +1,22 @@
-The matrix multiplication is a critical operation in computer science, both because it’s the base of several practical problems and because it’s still relatively expensive.
+The matrix multiplication is a critical operation in computer science, both because it is the base of several practical problems and because it is still relatively expensive. \\
 This operation, in fact, is really the fundamental brick of several interesting problems, from the resolution of big linear systems, often applied to physics, to resolution of discrete Fourier transforms, used for example to DNA splicing problems.
-On the main challenges of this operation isn’t related to the pure computational power, but with the amount of data that it requires: nowadays, as CPU/GPU evolved and still evolves faster than the memory chips, the real challenge isn’t compute the result in a short time, but making the computational unit able to produce that result. In other words, it’s more expensive bringing the right data at the right time, to the right chip, than to actually produce the result.
+On the main challenges of this operation is not related to the pure computational power, but with the amount of data that it requires: nowadays, as CPU/GPU evolved and still evolves faster than the memory chips, the real challenge is not to compute the result in a short time, but making the computational unit able to produce that result. In other words, it is more expensive bringing the right data at the right time, to the right chip, than to actually produce the result. \\
 Algorithms in general nowadays, are so much affected by this behaviour, that the fastest ones are the algorithms that make a better usage of the caches.
-From this point of view, matrix multiplication is considered a good example of what a typical algorithm should look like these days and it’s used as a base to test the ability of high performances computers to deliver outcomes. 
+From this point of view, matrix multiplication is considered a good example of what a typical algorithm should look like these days. It is therefore used as a base to test the ability of high performances computers to deliver outcomes. 
+\\\\
+\section{Loop Optimization Techniques}
+Since scientific computing often requires the looping over large data sets there has been developed multiple optimization strategies that targets different areas. These areas are:
+\\\\
+\textbf{spatial locality}\\
+Reuse all the data fetched in a single cache line. Optimization techniques that leads to this is blocking
+Reuse data in previously fetched cache lines. Optimization techniques that leads to this is blocking
+\textbf{loop overhead}\\ 
+
+\textbf{Vectorization}\\
+Modern CPU's contain units that can do floating point operations on more than one value at a time. If a loop is organised in a proper way and if the results calculated in the loop is not dependent upon each other it can be recognized by the compiler and assembler code will be generated that takes advantage of these units.
+\\\\
+Since loop blocking will be used later in this report we will cover it in more detail here.
+\section{Loop Blocking}
+A common technique to improve temporal and spatial locality at the cost of loop  
+
+
