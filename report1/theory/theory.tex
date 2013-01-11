@@ -17,6 +17,8 @@ Modern CPU's contain units that can do floating point operations on more than on
 \\\\
 Since loop blocking will be used later in this report we will cover it in more detail here.
 \section{Loop Blocking}
-A common technique to improve temporal and spatial locality at the cost of loop  
+A common technique to improve temporal and spatial locality at the cost of loop overhead is blocking. This technique takes a multi dimensional array and splits the computation on it up into smaller blocks. The size of the block is chosen to fit inside the cache size. This ensures that the cache is only filled with data that will be used in the current computations and later implementations. Blocking is implemented by having a set of loops that iterates over the blocks and then have a second set of loops inside the first set that iterates over each element. An implementation of this in FORTRAN is shown below:
+\begin{lstlisting}
 
-
+\end{lstlisting}
+Blocking is a powerful technique to improve memory use and data reuse but also has its disadvantages. The optimal block size is dependent on the CPU the code is being run on and on what data the algorithm is being used on. 
