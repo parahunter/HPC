@@ -13,7 +13,7 @@ implementation = ["mkn"] # "blk"] (when ready)
 times = 1
 
 # intersting flags -xpentium 
-compiler_options = ["","-fast","-xO1","-xO2", "-xO3","-xO4","-xO5","-fast -xO3"]
+compiler_options = ["","-fast","-xO1","-xO2", "-xO3","-xO4","-xO5","-fast -xO3", "-fast -xO5 -xrestrict", "-fast -xO3 -xrestrict"]
 
 #loop through all compiler options
 #build program with those options
