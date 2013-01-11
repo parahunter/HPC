@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2011.11.15)  11 JAN 2013 15:19
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2011.11.15)  11 JAN 2013 15:23
 entering extended mode
 **C:/Users/Alessandro/Documents/GitHub/HPC/report1/report.tex
 (C:/Users/Alessandro/Documents/GitHub/HPC/report1/report.tex
@@ -727,18 +727,77 @@ LaTeX Warning: `h' float specifier changed to `ht'.
  <C:/Users/Alessandro/Documents/GitHub/HPC/report1/results/blkwrong-eps-convert
 ed-to.pdf>] [13 <C:/Users/Alessandro/Documents/GitHub/HPC/report1/results/3way-
 eps-converted-to.pdf>]
-(C:\Users\Alessandro\Documents\GitHub\HPC\report1\results/compiler.tex))
+(C:\Users\Alessandro\Documents\GitHub\HPC\report1\results/compiler.tex
+Package epstopdf Info: Source file: <results/flag-test-plot-intel.eps>
+(epstopdf)                    date: 2013-01-11 13:42:44
+(epstopdf)                    size: 27854 bytes
+(epstopdf)             Output file: <results/flag-test-plot-intel-eps-converted
+-to.pdf>
+(epstopdf)                    date: 2013-01-11 15:23:37
+(epstopdf)                    size: 7765 bytes
+(epstopdf)             Command: <epstopdf --outfile=results/flag-test-plot-inte
+l-eps-converted-to.pdf results/flag-test-plot-intel.eps>
+(epstopdf)             \includegraphics on input line 12.
+Package epstopdf Info: Output file is already uptodate.
+
+<results/flag-test-plot-intel-eps-converted-to.pdf, id=252, 361.35pt x 252.945p
+t>
+File: results/flag-test-plot-intel-eps-converted-to.pdf Graphic file (type pdf)
+
+ <use results/flag-test-plot-intel-eps-converted-to.pdf>
+Package pdftex.def Info: results/flag-test-plot-intel-eps-converted-to.pdf used
+ on input line 12.
+(pdftex.def)             Requested size: 362.37569pt x 253.66612pt.
+Package epstopdf Info: Source file: <results/flag-test-plot-amd.eps>
+(epstopdf)                    date: 2013-01-11 13:42:44
+(epstopdf)                    size: 26921 bytes
+(epstopdf)             Output file: <results/flag-test-plot-amd-eps-converted-t
+o.pdf>
+(epstopdf)                    date: 2013-01-11 15:23:37
+(epstopdf)                    size: 7205 bytes
+(epstopdf)             Command: <epstopdf --outfile=results/flag-test-plot-amd-
+eps-converted-to.pdf results/flag-test-plot-amd.eps>
+(epstopdf)             \includegraphics on input line 18.
+Package epstopdf Info: Output file is already uptodate.
+
+<results/flag-test-plot-amd-eps-converted-to.pdf, id=253, 361.35pt x 252.945pt>
+File: results/flag-test-plot-amd-eps-converted-to.pdf Graphic file (type pdf)
+<use results/flag-test-plot-amd-eps-converted-to.pdf>
+Package pdftex.def Info: results/flag-test-plot-amd-eps-converted-to.pdf used o
+n input line 18.
+(pdftex.def)             Requested size: 362.37569pt x 253.66612pt.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 9--100
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--100
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--100
+
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+)
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 85.
+ [14
 
-[14
-
-]
+ <C:/Users/Alessandro/Documents/GitHub/HPC/report1/results/flag-test-plot-intel
+-eps-converted-to.pdf>] [15 <C:/Users/Alessandro/Documents/GitHub/HPC/report1/r
+esults/flag-test-plot-amd-eps-converted-to.pdf>]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 85.
- (C:\Users\Alessandro\Documents\GitHub\HPC\report1\report.aux)
+
+(C:\Users\Alessandro\Documents\GitHub\HPC\report1\report.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 85.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 85.
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 30DEE4C4A0183666B2BDD78311DBABD8;1386.
+(rerunfilecheck)             Checksum: CCC00CE59F832E0AEE85A43D6C54877F;1376.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -751,10 +810,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 9891 strings out of 494045
- 147189 string characters out of 3148371
- 508113 words of memory out of 3000000
- 12929 multiletter control sequences out of 15000+200000
+ 9906 strings out of 494045
+ 147736 string characters out of 3148371
+ 508289 words of memory out of 3000000
+ 12939 multiletter control sequences out of 15000+200000
  10460 words of font info for 38 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
  37i,7n,58p,810b,1709s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -768,9 +827,9 @@ e1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
 /cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10
 .pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:
 /Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on report.pdf (14 pages, 288162 bytes).
+Output written on report.pdf (15 pages, 302558 bytes).
 PDF statistics:
- 311 PDF objects out of 1000 (max. 8388607)
- 95 named destinations out of 1000 (max. 500000)
- 188 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 331 PDF objects out of 1000 (max. 8388607)
+ 98 named destinations out of 1000 (max. 500000)
+ 198 words of extra memory for PDF output out of 10000 (max. 10000000)
 
