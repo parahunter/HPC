@@ -48,40 +48,38 @@ tabsize=2}
 \usepackage{float}
 \usepackage{titlesec}	
 
-\titlespacing*{\chapter}{0pt}{-10pt}{20pt}
-\titleformat{\chapter}[display]{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\section}{0pt}{0pt}{20pt}
 
 \setlength{\intextsep}{0pt} %to make wrapfigures beautiful
 \setlength{\oddsidemargin}{0.5cm}
 \setlength{\evensidemargin}{-0.5cm}
 \begin{document}
 
+
 \input{front/front.tex}
 
-\chapter{Summary}
+
+\tableofcontents
+\clearpage
+\chapter{Assignment 1}
+
+\section{Summary}
 \input{summary/summary.tex}
 
-\chapter{Problem Statement}
+\section{Problem Statement}
 \input{problemStatement/problemStatement.tex} 
 
-\chapter{Description of Hardware and Software Used}
+\section{Description of Hardware and Software Used}
 \input{descriptionOfHardware/descriptionOfHardware.tex}
 
-\chapter*{Theory}
+\section{Theory}
 \input{theory/theory.tex}
 
-\chapter{Implementation}
+\section{Implementation}
 \input{implementation/implementation.tex}
 
-\chapter{Results}
+\section{Results and Conclusions}
 \input{results/results.tex}
 
-\chapter{Conclusion}
-\input{conclusion/conclusion.tex}
-
-%\chapter{Exercise 12}
-%\input{12/exercise12.tex}
-\bibliographystyle{siam}
-\bibliography{Bibliography}
 %\appendix
 \end{document}

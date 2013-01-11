@@ -4,7 +4,7 @@ On the main challenges of this operation is not related to the pure computationa
 Algorithms in general nowadays, are so much affected by this behaviour, that the fastest ones are the algorithms that make a better usage of the caches.
 From this point of view, matrix multiplication is considered a good example of what a typical algorithm should look like these days. It is therefore used as a base to test the ability of high performances computers to deliver outcomes. 
 \\\\
-\section{Loop Optimization Techniques}
+\subsection{Loop Optimization Techniques}
 Since scientific computing often requires the looping over large data sets there has been developed multiple optimization strategies that targets different areas. These areas are:
 \\\\
 \textbf{Spatial locality}\\
@@ -20,7 +20,7 @@ This is the overhead of running the loop in the first place. This happens when t
 Modern CPU's contain units that can do floating point operations on more than one value at a time. If a loop is organised in a proper way and if the results calculated in the loop is not dependent upon each other it can be recognized by the compiler and assembler code will be generated that takes advantage of these units. Loop fission can help the compiler to do this. 
 \\\\
 Since loop blocking will be used later in this report we will cover it in more detail here.
-\section{Loop Blocking}
+\subsection{Loop Blocking}
 A common technique to improve temporal and spatial locality at the cost of loop overhead is blocking. This technique takes a multi dimensional array and splits the computation on it up into smaller blocks. The size of the block is chosen to fit inside the cache size. This ensures that the cache is only filled with data that will be used in the current computations and later implementations. Blocking is implemented by having a set of loops that iterates over the blocks and then have a second set of loops inside the first set that iterates over each element. An implementation of this that calculates the transpose of matrix in C is shown below: 
 \begin{lstlisting}
 for(int i = 0 ; i < n ; n += nbi)

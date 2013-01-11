@@ -1,6 +1,6 @@
 In this section we present the results we came up during the tests altogether with the conclusions, in order to provide a better overview of the tests that have been performed. 
 
-\section{Comparison against dgemm}
+\subsection{Comparison against dgemm}
 
 Against the $dgemm()$ library function, even with the same compiling options, the implementation provided of the $matmult\_nat()$ method has been proven poor, according to the graph shown in Figure \ref{fig:natdgemmcomp}. The figure shown that, for every possible permutation of the cycle order (including so the naive implementation), dgemm outnumbers it.
 
@@ -13,7 +13,7 @@ Against the $dgemm()$ library function, even with the same compiling options, th
 
 The reason for that is that the $dgemm()$ library has been a lot of years in the industry, and has received a lot of performance improvements during the years. In addition, the library makes use of some inline assembly codes that boost its performance even more.
 
-\section{Permutations of m, k, n and performance}
+\subsection{Permutations of m, k, n and performance}
 The three cycles performed in the naive algorithm can be rearrenged in six different ways: there are in fact six possible permutations of the three letters. The performance results provided by the execution of the six algorithms on some standards memory footprints are provided in Figure \ref{fig:permutations}. The test was made on the product of square matrices $nxnxn$, where $n$ was calculated using the following formula, to relate it to the memory footprint:
 
 \begin{figure}[here]
@@ -49,7 +49,7 @@ Misses in L2-Data:     & 99 000 394 & 102 000 309\\ \hline
 
 That confirmed our assumptions, seeing that the best implementation has fewer cache misses that the worst one.
 
-\section{Performance of n,k,m implementations with different sizes}
+\subsection{Performance of n,k,m implementations with different sizes}
 The results and conclusions presented in the previous section held keeping in mind that the matrices we tested were square ones, where $n=m=k$. We repeated the same tests for some odd-sized matrices, i.e. where one of the three dimensions $n$,$m$,$k$ was kept at a low value (in these tests 4 elements). The other two values were raised accordingly, in order to maintain the same memory footprint and have meaningful results. The results we came up for n and am were pretty much the same, but we k we found some different results, which are presented on Figure \ref{fig:lowk}.
 
 \begin{figure}[here]
@@ -77,7 +77,7 @@ Misses in L2-Data:     & 272 000 807 & 164 000 494\\ \hline
 As a side note, even the $dgemm()$ library drops its performances roughly from 8GFlops to 2 GFlops, as it is optimized for square memory sizes.
 
 \clearpage
-\section{Blocked Matrix performance}
+\subsection{Blocked Matrix performance}
 We recall that the blocked version, introduced in section Implementation, uses the best algorithm for naive multiplication, $m-k-n$, in its inner loop. We experimented the block size against the MFLOPs generated for a generally big square matrix (with $2048kB$ memory footprint). The results are reported in Figure \ref{lowk} (green line). The performances of the algorithm increased at the rising of the block size. This means that the optimum is the highest possible value of the block size, i.e. the matrix itself. In conclusion, the blocking algorithm can not really improve performance, because it will be always beaten by the $m-k-n$ algorithm. 
 
 \begin{figure}[here]
