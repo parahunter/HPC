@@ -1,11 +1,18 @@
 //jacobi sequential
 
-#include "../possion.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <time.h>
+#include <omp.h>
+
+#include "../possion.h"
+#include "image.c"
 
 int n = 0;
 double h;
 int iterations;
+int iterationsLeft;
 double errLimit;
 
 int realSize;
@@ -13,8 +20,7 @@ double* u1;
 double* u2;
 
 double threshold;
-int iterations;
-double time;
+int iterations = 0;
 
 char mode = 'i';
 
@@ -25,15 +31,15 @@ double updateMat(double* from, double* to)
 	{
 		for(int j = 1 ; j < realSize -1; j++)
 		{
-			double step = (from[i*realSize + j-1] + from[(i-1)*realSize + j] +
-						   from[i*realSize+j+1]   + from[(i+1)*realSize + j] +
-						   h*h * f(i,j,n) )*0.25;
+			double step = (from[i*realSize + j-1] + from[(i-1)*realSize + j] + from[i*realSize+j+1] + from[(i+1)*realSize + j] +  h*h * f(i,j,n) )*0.25;
 			
 			err += abs( step - to[i*realSize+j] );
 			//printf("step %f \n ", step);
 			to[i*realSize + j] = step;
 		}				
 	}	
+
+	iterations++;
 
 	return err;
 }
@@ -59,7 +65,7 @@ void swap(double** a, double** b)
 
 int main ( int argc, char *argv[] ) 
 {
-	
+	printf("Jacobi Sequential\n");
 	if(argc>=2)
 		n = atoi(argv[1]);
 	else
@@ -75,7 +81,7 @@ int main ( int argc, char *argv[] )
 		if(argv[2][0] == 'i')
 		{
 			mode = 'i';
-			iterations = atoi(argv[3]);
+			iterationsLeft = atoi(argv[3]);
 		}
 			else 
 		if(argv[2][0] == 'e')
@@ -85,22 +91,34 @@ int main ( int argc, char *argv[] )
 		}
 	}
 
+
+	double wt = omp_get_wtime();
+	clock_t t = clock();
+	double err;
+	
 	while(1)
 	{
-		double err =  updateMat(u1, u2);
-		printf("error %f \n", err);
+		err =  updateMat(u1, u2);
 
-		swap(&u1, &u2);
-
-		if(argc>=4)
-			if(argv[4][0] == 'p')
-				print();		
-
-		if(mode == 'i' && --iterations < 0)
+		swap(&u1, &u2);		
+		
+		if(mode == 'i' && --iterationsLeft <= 0)
 			break;
 		else if(mode == 'e' && err < errLimit)
 			break;
 	}	
+	wt = omp_get_wtime()-wt;
+	t = clock()-t;
+
+	printf("Thresold:\t%f\n",err);
+	printf("Iterations:\t%i\n",iterations);
+	printf("W Time:\t%f\n",wt);
+	printf("C Time:\t%f\n",((float)t)/CLOCKS_PER_SEC);
 	
+	writeImg (n+2, u1);
+
+	if(argc>=5 && argv[4][0] == 'p')
+		print();
+
 	return 0;
 }
