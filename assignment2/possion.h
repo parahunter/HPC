@@ -4,6 +4,25 @@
 const double wallVal = 20.0;
 const double radiatorVal = 200.0;
 
+
+
+int c(double a, int n)
+{
+	return (int)( 0.5 * (double)n + 0.5 * a * (double) n );
+}
+
+double f(int i, int j, int n)
+{
+	int realSize = n + 2;	
+
+	if(c(0,n) < i && i <= c(1.0/3.0,n)  && c(-2.0/3.0,n) < j && j <= c(-1.0/3.0,n) )
+		return radiatorVal;
+	else
+		return 0;
+
+}
+
+
 double* createMat(int n)
 {
 	double* result;
@@ -21,23 +40,11 @@ double* createMat(int n)
 		result[realSize * i] 				= wallVal;
 	}
 
+	for(int i=1; i<=n; i++)
+		for(int j=1; j<=n; j++)
+			result[i*realSize+j]=f(i,j,n);
+
 	return result;
-}
-
-int c(double a, int n)
-{
-	return (int)( 0.5 * (double)n + 0.5 * a * (double) n );
-}
-
-double f(int i, int j, int n)
-{
-	int realSize = n + 2;	
-
-	if(c(0,n) < i && i <= c(1.0/3.0,n)  && c(-2.0/3.0,n) < j && j <= c(-1.0/3.0,n) )
-		return radiatorVal;
-	else
-		return 0;
-
 }
 
 
