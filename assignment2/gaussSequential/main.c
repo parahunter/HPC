@@ -5,7 +5,6 @@
 #include <time.h>
 #include <omp.h>
 
-//#include "writepng.cc"
 #include "../possion.h"
 
 
@@ -34,7 +33,7 @@ double gaussStep()
 		for(int j=1; j<=n; j++)
 		{
 			double step = (u[i*nn+j+1]+u[i*nn+j-1]+
-				 u[(i+1)*nn+j]+u[(i-1)*nn+j] - h*h*f(i,j,n))*0.25;
+				 u[(i+1)*nn+j]+u[(i-1)*nn+j] + h*h*f(i,j,n))/4.0;
 			err += fabs(step-u[i*nn+j]);
 			u[i*nn+j]=step;
 		}
@@ -101,7 +100,8 @@ int main(int argc, char* argv[])
 	printf("Iterations:\t%i\n",lastIteration);
 	printf("W Time:\t%f\n",wt);
 	printf("C Time:\t%f\n",((float)t)/CLOCKS_PER_SEC);
-	//writeimg(n,u);
+	
+	//writepng("img.png", u, n+2, n+2);
 	if(argc>=5 && argv[4][0]=='p')
 		print(u);
 }
