@@ -2,8 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <time.h>
+#include <omp.h>
 
+//#include "writepng.cc"
 #include "../possion.h"
+
 
 int n, nn;
 double h;
@@ -23,15 +27,15 @@ void print(double *u)
 
 
 // Return: error!
-inline double gaussStep()
+double gaussStep()
 {
-	double err=0;
+	double err=0.0;
 	for(int i=1; i<=n; i++)
 		for(int j=1; j<=n; j++)
 		{
 			double step = (u[i*nn+j+1]+u[i*nn+j-1]+
 				 u[(i+1)*nn+j]+u[(i-1)*nn+j] - h*h*f(i,j,n))*0.25;
-			err += abs(step-u[i*nn+j]);
+			err += fabs(step-u[i*nn+j]);
 			u[i*nn+j]=step;
 		}
 	return err;
@@ -40,16 +44,16 @@ inline double gaussStep()
 double lastErr=0;
 int lastIteration=0;
 
-inline void gaussIterations(int iterations)
+void gaussIterations(int iterations)
 {
 	for(int i=0; i<iterations; i++)
 		lastErr=gaussStep();
 	lastIteration = iterations;
 }
-inline void gaussErr(double err)
+void gaussErr(double err)
 {
-	lastIteration=0;
-	while(gaussStep()<err) lastIteration++;
+	lastIteration=1;
+	while((lastErr = gaussStep())>err) lastIteration++;
 }
 int main(int argc, char* argv[])
 {
@@ -78,27 +82,26 @@ int main(int argc, char* argv[])
 	}
 
 	u=createMat(n);
+	double wt = omp_get_wtime();
+	clock_t t = clock();
 	if(mode=='i')
 	{
-		gaussIterations(iteration);
+		gaussIterations(iterations);
 	}
 	else
 	{
 		gaussErr(errLimit);
 	}
-
-	/*
-	for(int i=1; i<=n; i++)
-		for(int j=1; j<=n; j++)
-			u[i*nn+j]=f(i,j);
-*/
+	wt = omp_get_wtime()-wt;
+	t = clock()-t;
 
 	//output section
 	
 	printf("Thresold:\t%f\n",lastErr);
-	printf("Thresold:\t%f\n",lastErr);
-	
-	
-	if(argc>=4 && argv[3][0]=='p')
+	printf("Iterations:\t%i\n",lastIteration);
+	printf("W Time:\t%f\n",wt);
+	printf("C Time:\t%f\n",((float)t)/CLOCKS_PER_SEC);
+	//writeimg(n,u);
+	if(argc>=5 && argv[4][0]=='p')
 		print(u);
 }
