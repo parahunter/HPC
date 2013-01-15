@@ -2,9 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <time.h>
 #include <omp.h>
 
+//#include "writepng.cc"
 #include "../possion.h"
+
 
 int n, nn;
 double h;
@@ -79,7 +82,8 @@ int main(int argc, char* argv[])
 	}
 
 	u=createMat(n);
-	double t = omp_get_wtime();
+	double wt = omp_get_wtime();
+	clock_t t = clock();
 	if(mode=='i')
 	{
 		gaussIterations(iterations);
@@ -88,15 +92,16 @@ int main(int argc, char* argv[])
 	{
 		gaussErr(errLimit);
 	}
-	t = omp_get_wtime()-t;
-
+	wt = omp_get_wtime()-wt;
+	t = clock()-t;
 
 	//output section
 	
 	printf("Thresold:\t%f\n",lastErr);
 	printf("Iterations:\t%i\n",lastIteration);
-	printf("W Time:\t%f\n",t);
-	
+	printf("W Time:\t%f\n",wt);
+	printf("C Time:\t%f\n",((float)t)/CLOCKS_PER_SEC);
+	//writeimg(n,u);
 	if(argc>=5 && argv[4][0]=='p')
 		print(u);
 }

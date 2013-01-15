@@ -39,12 +39,21 @@ double* createMat(int n)
 		result[(realSize-1)*realSize + i] 	= wallVal;
 		result[realSize * i] 				= wallVal;
 	}
-
+/*
 	for(int i=1; i<=n; i++)
 		for(int j=1; j<=n; j++)
 			result[i*realSize+j]=f(i,j,n);
-
+*/
 	return result;
 }
+/*
+void writeimg(int n, double *u) {
+
+	for(int i = 0; i < (n+2)*(n+2); i++) {
+			u[i]=u[i]/200.0;
+	}
+  writepng("img.png", u, n, n);
+}*/
+
 
 
