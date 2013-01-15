@@ -1,1 +1,5 @@
- 
+The ultimate goal of the assignment is implementing a matrix multiplication algorithm, optimized for single CPU, single core machine. The focus is on how an existing code can be speeded up, without changing (too much) the total number of operations.
+
+An iterative process has been used to improve the code and, after every optimization, an automatic test session has been performed in order to verify the actual performances on different conditions. In some interesting case a profiling tool has been used to investigate in depth some specific behaviour.
+
+The results confirmed that the main bottleneck of the naive algorithm was the poor use of the cache, but they also saw that the best performances can be reach with code that leads to the right compiler optimizations, rather than with code that pretends to optimize everything itself. 

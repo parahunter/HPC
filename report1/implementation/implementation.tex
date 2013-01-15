@@ -1,4 +1,4 @@
-\section{Basic matrix multiplication}
+\subsection{Basic matrix multiplication}
 The basic matrix multiplication algorithm follows the most standard $n^3$ implementation:
 
 \begin{lstlisting}
@@ -37,7 +37,7 @@ B[l*n+i] : l => i : k => n
 $$
 There is only 1 combination that satisfied all these constraints, and that is mkn (external to internal). We expect the best performances with this combination.
 
-\section{Blocked matrix algorithm}
+\subsection{Blocked matrix algorithm}
 
 In literature, it’s suggested to use a “block version” of the naive algorithm to improve data locality: this approach intuitively do a better usage of the cache and improve the overall performances.
 The idea behind the algorithm is to split both A and B in squared blocks, small enough so the cache L1 can store 3 of them. In this way 2 blocks can be multiplied using the naive algorithm with high performances.
@@ -85,7 +85,7 @@ At this point, one important detail, is making sure that the compiler will inlin
 
 
 
-\section{Scripts and tests}
+\subsection{Scripts and tests}
 
 In order to test our results, a set of python scripts have been developed.
 They automatically takes care of:

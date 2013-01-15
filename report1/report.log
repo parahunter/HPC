@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.10.5)  11 JAN 2013 11:28
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2011.11.15)  11 JAN 2013 15:23
 entering extended mode
-**report.tex
-(C:\gitProjects\JellyfishRenderer\HPC\report1\report.tex
+**C:/Users/Alessandro/Documents/GitHub/HPC/report1/report.tex
+(C:/Users/Alessandro/Documents/GitHub/HPC/report1/report.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -57,10 +57,10 @@ Package graphics Info: Driver file: pdftex.def on input line 91.
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
 
 ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
-Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/message (HO)
 )
 ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
-Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+Package: ltxcmds 2011/04/18 v1.20 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count88
 ))
@@ -68,97 +68,93 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \Gin@req@width=\dimen104
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\hyperref.sty"
-Package: hyperref 2012/05/13 v6.82q Hypertext links for LaTeX
+Package: hyperref 2011/08/19 v6.82h Hypertext links for LaTeX
 
 ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\hobsub-hyperref.sty"
-Package: hobsub-hyperref 2012/04/25 v1.12 Bundle oberdiek, subset hyperref (HO)
-
+Package: hobsub-hyperref 2011/04/23 v1.4 Bundle oberdiek, subset hyperref (HO)
 
 ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\hobsub-generic.sty"
-Package: hobsub-generic 2012/04/25 v1.12 Bundle oberdiek, subset generic (HO)
-Package: hobsub 2012/04/25 v1.12 Construct package bundles (HO)
+Package: hobsub-generic 2011/04/23 v1.4 Bundle oberdiek, subset generic (HO)
+Package: hobsub 2011/04/23 v1.4 Subsetting bundle oberdiek (HO)
 Package hobsub Info: Skipping package `infwarerr' (already loaded).
 Package hobsub Info: Skipping package `ltxcmds' (already loaded).
 Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
-Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package: ifvtex 2010/03/01 v1.5 Switches for detecting VTeX and its modes (HO)
 Package ifvtex Info: VTeX not detected.
-Package: intcalc 2007/09/27 v1.1 Expandable calculations with integers (HO)
+Package: intcalc 2007/09/27 v1.1 Expandable integer calculations (HO)
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is detected.
-Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package: etexcmds 2011/02/16 v1.5 Prefix for e-TeX command names (HO)
 Package etexcmds Info: Could not find \expanded.
 (etexcmds)             That can mean that you are not using pdfTeX 1.50 or
 (etexcmds)             that some package has redefined \expanded.
 (etexcmds)             In the latter case, load this package earlier.
-Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
-Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
-Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
-)
+Package: kvsetkeys 2011/04/07 v1.13 Key value parser (HO)
+Package: kvdefinekeys 2011/04/07 v1.3 Defining keys (HO)
+Package: pdftexcmds 2011/04/22 v0.16 Utilities of pdfTeX for LuaTeX (HO)
 Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-Package: pdfescape 2011/11/25 v1.13 Implements pdfTeX's escape features (HO)
-Package: bigintcalc 2012/04/08 v1.3 Expandable calculations on big integers (HO
-)
-Package: bitset 2011/01/30 v1.1 Handle bit-vector datatype (HO)
-Package: uniquecounter 2011/01/30 v1.2 Provide unlimited unique counter (HO)
+Package: pdfescape 2011/04/04 v1.12 Provides string conversions (HO)
+Package: bigintcalc 2011/01/30 v1.2 Expandable big integer calculations (HO)
+Package: bitset 2011/01/30 v1.1 Data type bit set (HO)
+Package: uniquecounter 2011/01/30 v1.2 Provides unlimited unique counter (HO)
 )
 Package hobsub Info: Skipping package `hobsub' (already loaded).
 Package: letltxmacro 2010/09/02 v1.4 Let assignment for LaTeX macros (HO)
-Package: hopatch 2011/06/24 v1.1 Wrapper for package hooks (HO)
+Package: hopatch 2011/01/30 v1.0 Wrapper for package hooks (HO)
 Package: xcolor-patch 2011/01/30 xcolor patch
-Package: atveryend 2011/06/30 v1.8 Hooks at the very end of document (HO)
-Package atveryend Info: \enddocument detected (standard20110627).
-Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
-Package: refcount 2011/10/16 v3.4 Data extraction from label references (HO)
-Package: hycolor 2011/01/30 v1.7 Color options for hyperref/bookmark (HO)
+Package: atveryend 2011/04/23 v1.7 Hooks at very end of document (HO)
+Package: atbegshi 2011/01/30 v1.15 At begin shipout hook (HO)
+Package: refcount 2010/12/01 v3.2 Data extraction from references (HO)
+Package: hycolor 2011/01/30 v1.7 Color options of hyperref/bookmark (HO)
 )
 ("C:\Program Files\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty"
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty"
-Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+Package: kvoptions 2010/12/23 v3.10 Keyval support for LaTeX options (HO)
 )
 \@linkdim=\dimen105
 \Hy@linkcounter=\count89
 \Hy@pagecounter=\count90
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\pd1enc.def"
-File: pd1enc.def 2012/05/13 v6.82q Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2011/08/19 v6.82h Hyperref: PDFDocEncoding definition (HO)
 )
 \Hy@SavedSpaceFactor=\count91
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\hyperref.cfg"
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
-Package hyperref Info: Hyper figures OFF on input line 4062.
-Package hyperref Info: Link nesting OFF on input line 4067.
-Package hyperref Info: Hyper index ON on input line 4070.
-Package hyperref Info: Plain pages OFF on input line 4077.
-Package hyperref Info: Backreferencing OFF on input line 4082.
+Package hyperref Info: Hyper figures OFF on input line 4053.
+Package hyperref Info: Link nesting OFF on input line 4058.
+Package hyperref Info: Hyper index ON on input line 4061.
+Package hyperref Info: Plain pages OFF on input line 4068.
+Package hyperref Info: Backreferencing OFF on input line 4073.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4300.
+Package hyperref Info: Bookmarks ON on input line 4291.
 \c@Hy@tempcnt=\count92
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\ltxmisc\url.sty"
 \Urlmuskip=\muskip10
 Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 4653.
+LaTeX Info: Redefining \url on input line 4644.
 \Fld@menulength=\count93
 \Field@Width=\dimen106
 \Fld@charsize=\dimen107
-Package hyperref Info: Hyper figures OFF on input line 5773.
-Package hyperref Info: Link nesting OFF on input line 5778.
-Package hyperref Info: Hyper index ON on input line 5781.
-Package hyperref Info: backreferencing OFF on input line 5788.
-Package hyperref Info: Link coloring OFF on input line 5793.
-Package hyperref Info: Link coloring with OCG OFF on input line 5798.
-Package hyperref Info: PDF/A mode OFF on input line 5803.
-LaTeX Info: Redefining \ref on input line 5843.
-LaTeX Info: Redefining \pageref on input line 5847.
+Package hyperref Info: Hyper figures OFF on input line 5730.
+Package hyperref Info: Link nesting OFF on input line 5735.
+Package hyperref Info: Hyper index ON on input line 5738.
+Package hyperref Info: backreferencing OFF on input line 5745.
+Package hyperref Info: Link coloring OFF on input line 5750.
+Package hyperref Info: Link coloring with OCG OFF on input line 5755.
+Package hyperref Info: PDF/A mode OFF on input line 5760.
+LaTeX Info: Redefining \ref on input line 5800.
+LaTeX Info: Redefining \pageref on input line 5804.
 \Hy@abspage=\count94
 \c@Item=\count95
 \c@Hfootnote=\count96
@@ -167,7 +163,7 @@ LaTeX Info: Redefining \pageref on input line 5847.
 Package hyperref Message: Driver (autodetected): hpdftex.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\hpdftex.def"
-File: hpdftex.def 2012/05/13 v6.82q Hyperref driver for pdfTeX
+File: hpdftex.def 2011/08/19 v6.82h Hyperref driver for pdfTeX
 \Fld@listcount=\count97
 \c@bookmark@seq@number=\count98
 
@@ -240,6 +236,20 @@ Package: caption3 2012/01/12 v1.4b caption3 kernel (AR)
 \c@ContinuedFloat=\count103
 Package caption Info: hyperref package is loaded.
 )
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\epstopdf.sty"
+Package: epstopdf 2010/02/09 v2.5 Conversion with epstopdf on the fly (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\grfext.sty"
+Package: grfext 2010/08/19 v1.1 Managing graphics extensions (HO)
+)
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+))
 ("C:\Program Files\MiKTeX 2.9\tex\latex\caption\subcaption.sty"
 Package: subcaption 2012/01/12 v1.1d Sub-captions (AR)
 \c@subfigure=\count104
@@ -373,23 +383,26 @@ Package: titlesec 2011/12/15 v2.10.0 Sectioning titles
 \titlewidthlast=\dimen134
 \titlewidthfirst=\dimen135
 )
-(C:\gitProjects\JellyfishRenderer\HPC\report1\report.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
+(C:\Users\Alessandro\Documents\GitHub\HPC\report1\report.aux
 
-("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+LaTeX Warning: Label `fig:lowk' multiply defined.
+
+)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+ ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count129
 \scratchdimen=\dimen136
@@ -404,7 +417,7 @@ LaTeX Font Info:    ... okay on input line 55.
 \everyMPtoPDFconversion=\toks28
 )
 \AtBeginShipoutBox=\box37
-Package hyperref Info: Link coloring OFF on input line 55.
+Package hyperref Info: Link coloring OFF on input line 56.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
 
@@ -413,12 +426,12 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count135
 )
-LaTeX Info: Redefining \ref on input line 55.
-LaTeX Info: Redefining \pageref on input line 55.
-LaTeX Info: Redefining \nameref on input line 55.
+LaTeX Info: Redefining \ref on input line 56.
+LaTeX Info: Redefining \pageref on input line 56.
+LaTeX Info: Redefining \nameref on input line 56.
 
-(C:\gitProjects\JellyfishRenderer\HPC\report1\report.out)
-(C:\gitProjects\JellyfishRenderer\HPC\report1\report.out)
+(C:\Users\Alessandro\Documents\GitHub\HPC\report1\report.out)
+(C:\Users\Alessandro\Documents\GitHub\HPC\report1\report.out)
 \@outlinefile=\write3
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
@@ -427,55 +440,151 @@ Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@lstlisting=\count136
 
+(C:\Users\Alessandro\Documents\GitHub\HPC\report1\front/front.tex
+<front/DTU_Informatics_logo.jpg, id=79, 304.7385pt x 25.5354pt>
+File: front/DTU_Informatics_logo.jpg Graphic file (type jpg)
+
+<use front/DTU_Informatics_logo.jpg>
+Package pdftex.def Info: front/DTU_Informatics_logo.jpg used on input line 4.
+(pdftex.def)             Requested size: 339.55176pt x 28.45274pt.
+
+Overfull \hbox (282.64626pt too wide) in paragraph at lines 4--5
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--5
+
+ []
+
+<front/DTULogo.png, id=80, 26.12044pt x 38.09662pt>
+File: front/DTULogo.png Graphic file (type png)
+ <use front/DTULogo.png>
+Package pdftex.def Info: front/DTULogo.png used on input line 5.
+(pdftex.def)             Requested size: 29.26424pt x 42.67912pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 3--6
+
+ []
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/bx/sc' undefined
+(Font)              using `OT1/cmr/bx/n' instead on input line 13.
+
+File: front/DTULogo.png Graphic file (type png)
+<use front/DTULogo.png>
+Package pdftex.def Info: front/DTULogo.png used on input line 16.
+(pdftex.def)             Requested size: 26.12036pt x 38.09651pt.
+ [1
+
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <C:/Users/Alessandro/Docum
+ents/GitHub/HPC/report1/front/DTU_Informatics_logo.jpg> <C:/Users/Alessandro/Do
+cuments/GitHub/HPC/report1/front/DTULogo.png>])
+(C:\Users\Alessandro\Documents\GitHub\HPC\report1\report.toc)
+\tf@toc=\write4
+ [2
+
+]
 Chapter 1.
-(C:\gitProjects\JellyfishRenderer\HPC\report1\summary/summary.tex) [1
-
-
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Chapter 2.
-
-(C:\gitProjects\JellyfishRenderer\HPC\report1\problemStatement/problemStatement
-.tex
+(C:\Users\Alessandro\Documents\GitHub\HPC\report1\summary/summary.tex)
+(C:\Users\Alessandro\Documents\GitHub\HPC\report1\problemStatement/problemState
+ment.tex
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 4.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 4.
-) [2
+)
+(C:\Users\Alessandro\Documents\GitHub\HPC\report1\descriptionOfHardware/descrip
+tionOfHardware.tex [3
+
 
 ]
-Chapter 3.
-
-Overfull \hbox (5.0056pt too wide) in paragraph at lines 63--63
-|\OT1/cmr/bx/n/24.88 Description of Hard-ware and Soft-ware
- []
-
-
-(C:\gitProjects\JellyfishRenderer\HPC\report1\descriptionOfHardware/description
-OfHardware.tex) [3
-
-]
-(C:\gitProjects\JellyfishRenderer\HPC\report1\theory/theory.tex
-Underfull \hbox (badness 10000) in paragraph at lines 1--7
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1--7
-
- []
-
-) [4
-
-]
-Chapter 4.
-
-(C:\gitProjects\JellyfishRenderer\HPC\report1\implementation/implementation.tex
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ô in font cmr12!
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ò in font cmr12!
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ô in font cmr12!
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ò in font cmr12!
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ô in font cmr12!
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ô in font cmr12!
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ò in font cmr12!
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ô in font cmr12!
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 4.
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 44.
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 4.
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 44.
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ò in font cmr12!
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ô in font cmr12!
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ú in font cmr12!
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ù in font cmr12!
+) [4]
+(C:\Users\Alessandro\Documents\GitHub\HPC\report1\theory/theory.tex
+Underfull \hbox (badness 10000) in paragraph at lines 1--7
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1--7
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--23
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--23
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--23
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--23
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--23
+
+ []
+
+[5])
+Underfull \hbox (badness 10000) in paragraph at lines 31--77
+
+ []
+
+
+(C:\Users\Alessandro\Documents\GitHub\HPC\report1\implementation/implementation
+.tex [6]
 Missing character: There is no ‚ in font cmr12!
 Missing character: There is no Ä in font cmr12!
 Missing character: There is no ô in font cmr12!
@@ -497,12 +606,7 @@ Missing character: There is no ú in font cmr12!
 Missing character: There is no ‚ in font cmr12!
 Missing character: There is no Ä in font cmr12!
 Missing character: There is no ù in font cmr12!
-[5
-
-]
-Underfull \vbox (badness 4647) has occurred while \output is active []
-
- [6]
+ [7]
 Missing character: There is no ‚ in font cmr12!
 Missing character: There is no Ä in font cmr12!
 Missing character: There is no ú in font cmr12!
@@ -510,50 +614,209 @@ Missing character: There is no ‚ in font cmr12!
 Missing character: There is no Ä in font cmr12!
 Missing character: There is no ù in font cmr12!
 )
-[7]
-Chapter 5.
-(C:\gitProjects\JellyfishRenderer\HPC\report1\results/results.tex
+(C:\Users\Alessandro\Documents\GitHub\HPC\report1\results/results.tex
+Package epstopdf Info: Source file: <results/dgemm.eps>
+(epstopdf)                    date: 2013-01-11 13:16:47
+(epstopdf)                    size: 25681 bytes
+(epstopdf)             Output file: <results/dgemm-eps-converted-to.pdf>
+(epstopdf)                    date: 2013-01-11 13:59:54
+(epstopdf)                    size: 6167 bytes
+(epstopdf)             Command: <epstopdf --outfile=results/dgemm-eps-converted
+-to.pdf results/dgemm.eps>
+(epstopdf)             \includegraphics on input line 9.
+Package epstopdf Info: Output file is already uptodate.
 
-LaTeX Warning: Reference `fig:natdgemmcomp' on page 8 undefined on input line 7
-.
+<results/dgemm-eps-converted-to.pdf, id=182, 361.35pt x 252.945pt>
+File: results/dgemm-eps-converted-to.pdf Graphic file (type pdf)
+
+<use results/dgemm-eps-converted-to.pdf>
+Package pdftex.def Info: results/dgemm-eps-converted-to.pdf used on input line 
+9.
+(pdftex.def)             Requested size: 452.9679pt x 317.07976pt.
+ [8]
+Package epstopdf Info: Source file: <results/permutations.eps>
+(epstopdf)                    date: 2013-01-11 13:16:47
+(epstopdf)                    size: 25513 bytes
+(epstopdf)             Output file: <results/permutations-eps-converted-to.pdf>
+
+(epstopdf)                    date: 2013-01-11 13:27:32
+(epstopdf)                    size: 6026 bytes
+(epstopdf)             Command: <epstopdf --outfile=results/permutations-eps-co
+nverted-to.pdf results/permutations.eps>
+(epstopdf)             \includegraphics on input line 21.
+Package epstopdf Info: Output file is already uptodate.
+
+<results/permutations-eps-converted-to.pdf, id=201, 361.35pt x 252.945pt>
+File: results/permutations-eps-converted-to.pdf Graphic file (type pdf)
+
+<use results/permutations-eps-converted-to.pdf>
+Package pdftex.def Info: results/permutations-eps-converted-to.pdf used on inpu
+t line 21.
+(pdftex.def)             Requested size: 452.9679pt x 317.07976pt.
 
 
-LaTeX Warning: Reference `fig:permutations' on page 8 undefined on input line 1
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[9 <C:/Users/Alessandro/Documents/GitHub/HPC/report1/results/dgemm-eps-converte
+d-to.pdf>] [10 <C:/Users/Alessandro/Documents/GitHub/HPC/report1/results/permut
+ations-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <results/littlek.eps>
+(epstopdf)                    date: 2013-01-11 13:16:47
+(epstopdf)                    size: 25907 bytes
+(epstopdf)             Output file: <results/littlek-eps-converted-to.pdf>
+(epstopdf)                    date: 2013-01-11 13:59:55
+(epstopdf)                    size: 6117 bytes
+(epstopdf)             Command: <epstopdf --outfile=results/littlek-eps-convert
+ed-to.pdf results/littlek.eps>
+(epstopdf)             \includegraphics on input line 57.
+Package epstopdf Info: Output file is already uptodate.
+
+<results/littlek-eps-converted-to.pdf, id=222, 361.35pt x 252.945pt>
+File: results/littlek-eps-converted-to.pdf Graphic file (type pdf)
+
+<use results/littlek-eps-converted-to.pdf>
+Package pdftex.def Info: results/littlek-eps-converted-to.pdf used on input lin
+e 57.
+(pdftex.def)             Requested size: 452.9679pt x 317.07976pt.
+ [11 <C:/Users/Alessandro/Documents/GitHub/HPC/report1/results/littlek-eps-conv
+erted-to.pdf>]
+
+LaTeX Warning: Reference `lowk' on page 12 undefined on input line 81.
+
+Package epstopdf Info: Source file: <results/blkwrong.eps>
+(epstopdf)                    date: 2013-01-11 13:16:47
+(epstopdf)                    size: 23508 bytes
+(epstopdf)             Output file: <results/blkwrong-eps-converted-to.pdf>
+(epstopdf)                    date: 2013-01-11 14:04:43
+(epstopdf)                    size: 5507 bytes
+(epstopdf)             Command: <epstopdf --outfile=results/blkwrong-eps-conver
+ted-to.pdf results/blkwrong.eps>
+(epstopdf)             \includegraphics on input line 85.
+Package epstopdf Info: Output file is already uptodate.
+<results/blkwrong-eps-converted-to.pdf, id=232, 361.35pt x 252.945pt>
+File: results/blkwrong-eps-converted-to.pdf Graphic file (type pdf)
+
+<use results/blkwrong-eps-converted-to.pdf>
+Package pdftex.def Info: results/blkwrong-eps-converted-to.pdf used on input li
+ne 85.
+(pdftex.def)             Requested size: 452.9679pt x 317.07976pt.
+Package epstopdf Info: Source file: <results/3way.eps>
+(epstopdf)                    date: 2013-01-11 13:16:47
+(epstopdf)                    size: 24377 bytes
+(epstopdf)             Output file: <results/3way-eps-converted-to.pdf>
+(epstopdf)                    date: 2013-01-11 14:04:43
+(epstopdf)                    size: 4874 bytes
+(epstopdf)             Command: <epstopdf --outfile=results/3way-eps-converted-
+to.pdf results/3way.eps>
+(epstopdf)             \includegraphics on input line 94.
+Package epstopdf Info: Output file is already uptodate.
+
+<results/3way-eps-converted-to.pdf, id=233, 361.35pt x 252.945pt>
+File: results/3way-eps-converted-to.pdf Graphic file (type pdf)
+
+<use results/3way-eps-converted-to.pdf>
+Package pdftex.def Info: results/3way-eps-converted-to.pdf used on input line 9
 4.
+(pdftex.def)             Requested size: 452.9679pt x 317.07976pt.
 
-[8
 
-]) [9]
-Chapter 6.
-(C:\gitProjects\JellyfishRenderer\HPC\report1\conclusion/conclusion.tex)
-(C:\gitProjects\JellyfishRenderer\HPC\report1\report.bbl [10
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 83.
- [11
+[12
 
-]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 83.
+ <C:/Users/Alessandro/Documents/GitHub/HPC/report1/results/blkwrong-eps-convert
+ed-to.pdf>] [13 <C:/Users/Alessandro/Documents/GitHub/HPC/report1/results/3way-
+eps-converted-to.pdf>]
+(C:\Users\Alessandro\Documents\GitHub\HPC\report1\results/compiler.tex
+Package epstopdf Info: Source file: <results/flag-test-plot-intel.eps>
+(epstopdf)                    date: 2013-01-11 13:42:44
+(epstopdf)                    size: 27854 bytes
+(epstopdf)             Output file: <results/flag-test-plot-intel-eps-converted
+-to.pdf>
+(epstopdf)                    date: 2013-01-11 15:23:37
+(epstopdf)                    size: 7765 bytes
+(epstopdf)             Command: <epstopdf --outfile=results/flag-test-plot-inte
+l-eps-converted-to.pdf results/flag-test-plot-intel.eps>
+(epstopdf)             \includegraphics on input line 12.
+Package epstopdf Info: Output file is already uptodate.
 
-(C:\gitProjects\JellyfishRenderer\HPC\report1\report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 83.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 83.
+<results/flag-test-plot-intel-eps-converted-to.pdf, id=252, 361.35pt x 252.945p
+t>
+File: results/flag-test-plot-intel-eps-converted-to.pdf Graphic file (type pdf)
+
+ <use results/flag-test-plot-intel-eps-converted-to.pdf>
+Package pdftex.def Info: results/flag-test-plot-intel-eps-converted-to.pdf used
+ on input line 12.
+(pdftex.def)             Requested size: 362.37569pt x 253.66612pt.
+Package epstopdf Info: Source file: <results/flag-test-plot-amd.eps>
+(epstopdf)                    date: 2013-01-11 13:42:44
+(epstopdf)                    size: 26921 bytes
+(epstopdf)             Output file: <results/flag-test-plot-amd-eps-converted-t
+o.pdf>
+(epstopdf)                    date: 2013-01-11 15:23:37
+(epstopdf)                    size: 7205 bytes
+(epstopdf)             Command: <epstopdf --outfile=results/flag-test-plot-amd-
+eps-converted-to.pdf results/flag-test-plot-amd.eps>
+(epstopdf)             \includegraphics on input line 18.
+Package epstopdf Info: Output file is already uptodate.
+
+<results/flag-test-plot-amd-eps-converted-to.pdf, id=253, 361.35pt x 252.945pt>
+File: results/flag-test-plot-amd-eps-converted-to.pdf Graphic file (type pdf)
+<use results/flag-test-plot-amd-eps-converted-to.pdf>
+Package pdftex.def Info: results/flag-test-plot-amd-eps-converted-to.pdf used o
+n input line 18.
+(pdftex.def)             Requested size: 362.37569pt x 253.66612pt.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 9--100
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--100
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--100
+
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 85.
+ [14
+
+ <C:/Users/Alessandro/Documents/GitHub/HPC/report1/results/flag-test-plot-intel
+-eps-converted-to.pdf>] [15 <C:/Users/Alessandro/Documents/GitHub/HPC/report1/r
+esults/flag-test-plot-amd-eps-converted-to.pdf>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 85.
+
+(C:\Users\Alessandro\Documents\GitHub\HPC\report1\report.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 85.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 85.
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 579BB193BD55ABE35160021D571653FC;1063.
+(rerunfilecheck)             Checksum: CCC00CE59F832E0AEE85A43D6C54877F;1376.
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 83.
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 9711 strings out of 494045
- 143239 string characters out of 3148378
- 591084 words of memory out of 3000000
- 12788 multiletter control sequences out of 15000+200000
- 9554 words of font info for 35 fonts, out of 3000000 for 9000
+ 9906 strings out of 494045
+ 147736 string characters out of 3148371
+ 508289 words of memory out of 3000000
+ 12939 multiletter control sequences out of 15000+200000
+ 10460 words of font info for 38 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 37i,7n,58p,646b,1095s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 37i,7n,58p,810b,1709s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Pr
 ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Program F
 iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiK
@@ -564,9 +827,9 @@ e1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
 /cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10
 .pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:
 /Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on report.pdf (11 pages, 158952 bytes).
+Output written on report.pdf (15 pages, 302558 bytes).
 PDF statistics:
- 230 PDF objects out of 1000 (max. 8388607)
- 79 named destinations out of 1000 (max. 500000)
- 129 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 331 PDF objects out of 1000 (max. 8388607)
+ 98 named destinations out of 1000 (max. 500000)
+ 198 words of extra memory for PDF output out of 10000 (max. 10000000)
 
