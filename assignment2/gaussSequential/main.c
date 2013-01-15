@@ -28,11 +28,11 @@ void print(double *u)
 // Return: error!
 double gaussStep()
 {
-	double err=0.0;
+	register double err=0.0;
 	for(int i=1; i<=n; i++)
 		for(int j=1; j<=n; j++)
 		{
-			double step = (u[i*nn+j+1]+u[i*nn+j-1]+
+			register double step = (u[i*nn+j+1]+u[i*nn+j-1]+
 				 u[(i+1)*nn+j]+u[(i-1)*nn+j] + h*h*f(i,j,n))/4.0;
 			err += fabs(step-u[i*nn+j]);
 			u[i*nn+j]=step;
