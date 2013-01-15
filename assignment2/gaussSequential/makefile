@@ -4,7 +4,7 @@ LIBOBJS	= main.o
 
 # -fast -fsimple -fns -xarch=generic64 (not supported in linux)
 OPT	= -g -fast
-PIC	= -fPIC
+PIC	= -fPIC -lm -xopenmp
 DRY = 
 FLAGS = 
 
