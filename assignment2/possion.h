@@ -1,27 +1,26 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-const double wallVal = 25.0;
+const double wallVal = 20.0;
 
-void createMat(int n, double* result)
+double* createMat(int n)
 {
+	double* result;
 	int realSize = n + 2;
 	
 	if( (result = calloc(realSize*realSize, sizeof(double)) ) == NULL)
 	{
-		printf("noooo");
+		printf("noooo we ran out of memory or the system is mean to us :-(");
 	}
-
-
-	printf("hello");
 	int i;
-	for(i = 0 ; i < realSize ; i++)
+	for(i = 0 ; i < realSize -1 ; i++)
 	{
 		result[0 + i] 						= wallVal;
-		//result[(realSize-1)*realSize + i] 	= wallVal;
-		//result[realSize * i] 				= wallVal;
-		//result[(realSize-1) + realSize*i] 	= 0;
+		result[(realSize-1)*realSize + i] 	= wallVal;
+		result[realSize * i] 				= wallVal;
 	}
+
+	return result;
 }
 
 
