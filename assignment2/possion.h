@@ -28,7 +28,7 @@ double* createMat(int n)
 	double* result;
 	int realSize = n + 2;
 	
-	if( (result = calloc(realSize*realSize, sizeof(double)) ) == NULL)
+	if( (result = (double*)calloc(realSize*realSize, sizeof(double)) ) == NULL)
 	{
 		printf("noooo we ran out of memory or the system is mean to us :-(");
 	}
@@ -36,8 +36,10 @@ double* createMat(int n)
 	for(i = 0 ; i < realSize -1 ; i++)
 	{
 		result[0 + i] 						= wallVal;
+		result[realSize * i+(realSize-1)] = wallVal;
 		result[(realSize-1)*realSize + i] 	= wallVal;
-		result[realSize * i] 				= wallVal;
+		result[realSize * i] 				= 0;
+
 	}
 /*
 	for(int i=1; i<=n; i++)
@@ -46,14 +48,5 @@ double* createMat(int n)
 */
 	return result;
 }
-/*
-void writeimg(int n, double *u) {
-
-	for(int i = 0; i < (n+2)*(n+2); i++) {
-			u[i]=u[i]/200.0;
-	}
-  writepng("img.png", u, n, n);
-}*/
-
 
 
