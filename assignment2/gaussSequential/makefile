@@ -8,11 +8,11 @@ PIC	= -fPIC
 DRY = 
 FLAGS =
 
-CC	= sunCC
+CC	= suncc
 CFLAGS= $(OPT) $(PIC) $(XOPTS) $(DRY) $(FLAGS)
 
 
-XLIBS	= -xlic_lib=sunperf -lm# -lpngwriter -lpng
+XLIBS	= -xlic_lib=sunperf -lm -lpng # -lpngwriter -lpng
 
 $(TARGET): $(LIBOBJS)
 	$(CC)  $(CFLAGS) -o $@ $(LIBOBJS) $(XLIBS)
