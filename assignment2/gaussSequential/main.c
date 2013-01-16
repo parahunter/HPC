@@ -6,7 +6,7 @@
 #include <omp.h>
 
 #include "../possion.h"
-#include "image.c"
+#include "../image.c"
 
 int n, nn;
 double h;
