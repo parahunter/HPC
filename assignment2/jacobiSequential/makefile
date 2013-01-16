@@ -3,16 +3,16 @@ LIBSRCS	=
 LIBOBJS	= main.o
 
 # -fast -fsimple -fns -xarch=generic64 (not supported in linux)
-OPT	= -g -fast #-xopenmp
-PIC	= -fPIC 
+OPT	= -g -O3 #-fast #-xopenmp
+PIC	= #-fPIC 
 DRY = 
 FLAGS =
 
-CC	= suncc
+CC	= g++
 CFLAGS= $(OPT) $(PIC) $(XOPTS) $(DRY) $(FLAGS)
 
 
-XLIBS	= -xlic_lib=sunperf -lm -lpng # -lpngwriter -lpng
+XLIBS	= -lm -lpng # -lpngwriter -lpng
 
 $(TARGET): $(LIBOBJS)
 	$(CC)  $(CFLAGS) -o $@ $(LIBOBJS) $(XLIBS)

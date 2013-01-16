@@ -7,11 +7,11 @@
 #include <omp.h>
 
 #include "../possion.h"
-#include "../image.c"
+//#include "../image.c"
 
 int n = 0;
 double h;
-int iterations;
+
 int iterationsLeft;
 double errLimit;
 
@@ -26,7 +26,7 @@ char mode = 'i';
 
 void updateMat(double* from, double* to)
 {
-	#pragma omp for
+	#pragma omp parallel for default(shared)
 	for(int i = 1 ; i < realSize -1; i++)
 	{
 		for(int j = 1 ; j < realSize -1; j++)
@@ -96,7 +96,7 @@ int main ( int argc, char *argv[] )
 	if(mode=='i')
 	{
 		iterations=iterationsLeft;
-			#pragma omp parallel shared(u1, u2)
+			//#pragma omp parallel shared(u1, u2)
 			{
 		for(int i=0; i<iterationsLeft/2; i++)
 		{
@@ -114,7 +114,7 @@ int main ( int argc, char *argv[] )
 		int iterBlock=1000;
 		while(err>errLimit)
 		{
-			#pragma omp parallel shared(u1, u2)
+			//#pragma omp parallel shared(u1, u2)
 			{
 			for(int i=0; i<iterBlock/2; i++)
 			{
@@ -145,7 +145,7 @@ int main ( int argc, char *argv[] )
 	printf("W Time:\t%f\n",wt);
 	printf("C Time:\t%f\n",((float)t)/CLOCKS_PER_SEC);
 	
-	writeImg (n+2, u1);
+	//writeImg (n+2, u1);
 
 	if(argc>=5 && argv[4][0] == 'p')
 		print(u1, realSize);
