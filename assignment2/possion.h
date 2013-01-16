@@ -4,8 +4,6 @@
 const double wallVal = 20.0;
 const double radiatorVal = 200.0;
 
-//these holds the boundary conditions for the radiator
-int rxMin, rxMax, ryMin, ryMax;
 
 void print(double *u, int nn)
 {
@@ -17,22 +15,18 @@ void print(double *u, int nn)
 	}
 }
 
-
-int cx(double a, int n)
+int c(double a, int n)
 {
-	return  (0.5 + 0.5 * a ) * (double)n;
+	return (int)( 0.5 * (double)n + 0.5 * a * (double) n );
 }
 
-int cy(double a, int n)
-{
-	return (0.5 + 0.5 * a ) * (double)n;
-}
+int fc_1_3, fc_m2_3, fc_0, fc_m1_3;
 
 double f(int i, int j, int n)
 {
 	int realSize = n + 2;	
 
-	if(rxMin < i && i <= rxMax && ryMin < j && j <= ryMax )
+	if(fc_0 < i && i <= fc_1_3  && fc_m2_3 < j && j <= fc_m1_3 )
 		return radiatorVal;
 	else
 		return 0;
@@ -54,24 +48,22 @@ double* createMat(int n)
 	for(i = 0 ; i < realSize -1 ; i++)
 	{
 		result[0 + i] 	      			= wallVal;
-		result[realSize * i + (realSize-1)] 	= 0.0;
+		result[realSize * i+(realSize-1)] 	= wallVal;
 		result[(realSize-1)*realSize + i] 	= wallVal;
-		result[realSize * i] 			= wallVal;
+		result[realSize * i] 			= 0;
 
 	}
-
+	
+	fc_0=c(0,n);
+	fc_1_3 = c(1.0/3.0,n);
+	fc_m2_3=c(-2.0/3.0,n);
+	fc_m1_3= c(-1.0/3.0,n);
+	
+/*
 	for(int i=1; i<=n; i++)
 		for(int j=1; j<=n; j++)
 			result[i*realSize+j]=f(i,j,n);
-
-	//because the image lib outputs pictures in column first order we need to change the coordinates of the radiator
-	rxMin = cx(1.0/3.0,n);
-	rxMax = cx(2.0/3.0,n);
-	ryMin = cy(0,n);
-	ryMax = cy(1.0/3.0,n);
-
-	//printf(" [%d %d] [%d %d]", rxMin, rxMax, ryMin, ryMax);
-
+*/
 	return result;
 }
 

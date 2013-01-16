@@ -9,26 +9,52 @@
 #include "../image.c"
 
 int n, nn;
-double h;
+double h,hh;
 double *u;
-
-
-
-
 
 
 // Return: error!
 double gaussStep()
 {
-	register double err=0.0;
+	double err=0.0;
 	for(int i=1; i<=n; i++)
-		for(int j=1; j<=n; j++)
+	{
+		for(int j=1; j<=n; j+=2)
 		{
-			register double step = (u[i*nn+j+1]+u[i*nn+j-1]+
-				 u[(i+1)*nn+j]+u[(i-1)*nn+j] + h*h*f(i,j,n))/4.0;
+			double step = (u[i*nn+j+1]+u[i*nn+j-1]+
+				 u[(i+1)*nn+j]+u[(i-1)*nn+j] + hh*f(i,j,n))/4.0;
+			u[i*nn+j]=step;
+		}
+		for(int j=2; j<=n; j+=2)
+		{
+			double step = (u[i*nn+j+1]+u[i*nn+j-1]+
+				 u[(i+1)*nn+j]+u[(i-1)*nn+j] + hh*f(i,j,n))/4.0;
+			u[i*nn+j]=step;
+		}
+	}
+	return err;
+}
+
+double gaussStepE()
+{
+	double err=0.0;
+	for(int i=1; i<=n; i++)
+	{
+		for(int j=1; j<=n; j+=2)
+		{
+			double step = (u[i*nn+j+1]+u[i*nn+j-1]+
+				 u[(i+1)*nn+j]+u[(i-1)*nn+j] + hh*f(i,j,n))/4.0;
 			err += fabs(step-u[i*nn+j]);
 			u[i*nn+j]=step;
 		}
+		for(int j=2; j<=n; j+=2)
+		{
+			double step = (u[i*nn+j+1]+u[i*nn+j-1]+
+				 u[(i+1)*nn+j]+u[(i-1)*nn+j] + hh*f(i,j,n))/4.0;
+			err += fabs(step-u[i*nn+j]);
+			u[i*nn+j]=step;
+		}
+	}
 	return err;
 }
 
@@ -37,14 +63,28 @@ int lastIteration=0;
 
 void gaussIterations(int iterations)
 {
-	for(int i=0; i<iterations; i++)
+	for(int i=0; i<iterations-1; i++)
 		lastErr=gaussStep();
+	lastErr=gaussStepE();
 	lastIteration = iterations;
 }
-void gaussErr(double err)
+void gaussErr(double errLimit)
 {
-	lastIteration=1;
-	while((lastErr = gaussStep())>err) lastIteration++;
+	
+	lastErr = 2*errLimit;
+	lastIteration=0;
+	int iterBlock=100;
+	while(lastErr>errLimit)
+	{
+
+		for(int i=0; i<iterBlock-1; i++)
+		{
+			gaussStep();
+		}
+		lastErr = gaussStepE();
+		lastIteration += iterBlock;
+	}
+	
 }
 int main(int argc, char* argv[])
 {
@@ -54,7 +94,8 @@ int main(int argc, char* argv[])
 	printf("N=%i\n",n);
 	nn = n+2;
 	h = 2.0/n;
-
+	hh = h*h;
+	
 	char mode='i'; // e for Err or i for iteration
 	int iterations;
 	double errLimit;
