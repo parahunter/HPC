@@ -28,4 +28,3 @@ def parseData(out):
 		if len(t.split("\t")) > 1:
 			outdata.append(float(t.split("\t")[1]))
 	return outdata[0], outdata[1], outdata[2], outdata[3]
-	
