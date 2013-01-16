@@ -27,21 +27,19 @@ char mode = 'i';
 double updateMat(double* from, double* to)
 {
 	double err = 0;
-	#pragma omp for
+	#pragma omp parallel for collapse(2) reduction(+: err)
 	for(int i = 1 ; i < realSize -1; i++)
 	{
 		for(int j = 1 ; j < realSize -1; j++)
 		{
 			double step = (from[i*realSize + j-1] + from[(i-1)*realSize + j] + from[i*realSize+j+1] + from[(i+1)*realSize + j] +  h*h * f(i,j,n) )*0.25;
-				#pragma omg critical
-				{
-			err += fabs( step - to[i*realSize+j] ); }
+			double tmpErr = fabs( step - to[i*realSize+j] );
+			err += tmpErr;
 			//printf("step %f \n ", step);
 			to[i*realSize + j] = step;
-		}				
+		}
 	}
-	#pragma omg critical
-{	iterations++; }
+	iterations++;
 	return err;
 }
 
@@ -84,16 +82,16 @@ int main ( int argc, char *argv[] )
 
 	double wt = omp_get_wtime();
 	clock_t t = clock();
-	double err;
-	#pragma omp parallel
+	double err=2*errLimit;
+
 	{
-		while((mode == 'i' && --iterationsLeft > 0)||
-			(mode == 'e' && err > errLimit))
+		while((mode == 'i' && --iterationsLeft > 0) ||
+		(mode == 'e' && err > errLimit))
 		{
 			err =  updateMat(u1, u2);
-			swap(&u1, &u2);		
-		}	
-	}
+			swap(&u1, &u2);
+		}
+	}	
 	wt = omp_get_wtime()-wt;
 	t = clock()-t;
 

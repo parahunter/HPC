@@ -24,24 +24,31 @@ int iterations = 0;
 
 char mode = 'i';
 
-double updateMat(double* from, double* to)
+void updateMat(double* from, double* to)
 {
-	double err = 0;
-	#pragma omp parallel for collapse(2) reduction(+: err)
+	#pragma omp for
 	for(int i = 1 ; i < realSize -1; i++)
 	{
 		for(int j = 1 ; j < realSize -1; j++)
 		{
 			double step = (from[i*realSize + j-1] + from[(i-1)*realSize + j] + from[i*realSize+j+1] + from[(i+1)*realSize + j] +  h*h * f(i,j,n) )*0.25;
-			err += fabs( step - to[i*realSize+j] );
-			//printf("step %f \n ", step);
 			to[i*realSize + j] = step;
 		}
 	}
-	iterations++;
-	return err;
 }
 
+double errCheck(double *from, double *to)
+{
+	double err=0;
+	for(int i = 1 ; i < realSize -1; i++)
+	{
+		for(int j = 1 ; j < realSize -1; j++)
+		{
+			err += fabs( to[i*realSize+j] - from[i*realSize+j] );
+		}
+	}
+	return err;
+}
 
 void swap(double** a, double** b)
 {
@@ -49,6 +56,8 @@ void swap(double** a, double** b)
 	*a = *b;
 	*b = temp;
 }
+
+
 
 int main ( int argc, char *argv[] ) 
 {
@@ -83,6 +92,40 @@ int main ( int argc, char *argv[] )
 	clock_t t = clock();
 	double err;
 	
+	
+	if(mode=='i')
+	{
+		iterations=iterationsLeft;
+			#pragma omp parallel shared(u1, u2)
+			{
+		for(int i=0; i<iterationsLeft/2; i++)
+		{
+
+			updateMat(u1, u2);
+			updateMat(u2, u1);
+			}
+		}
+		err = errCheck(u1, u2);
+	}
+	if(mode=='e')
+	{
+		err = 2*errLimit;
+		iterations=0;
+		int iterBlock=1000;
+		while(err>errLimit)
+		{
+			#pragma omp parallel shared(u1, u2)
+			{
+			for(int i=0; i<iterBlock/2; i++)
+			{
+				updateMat(u1, u2);
+				updateMat(u2, u1);
+			}
+			}
+			iterations += iterBlock;
+			err = errCheck(u1, u2);
+		}
+	}/*
 	while(1)
 	{
 		err =  updateMat(u1, u2);
@@ -93,7 +136,7 @@ int main ( int argc, char *argv[] )
 			break;
 		else if(mode == 'e' && err < errLimit)
 			break;
-	}	
+	}	*/
 	wt = omp_get_wtime()-wt;
 	t = clock()-t;
 
