@@ -70,7 +70,7 @@ double* createMat(int n)
 	ryMin = cy(0,n);
 	ryMax = cy(1.0/3.0,n);
 
-	printf(" [%d %d] [%d %d]", rxMin, rxMax, ryMin, ryMax);
+	//printf(" [%d %d] [%d %d]", rxMin, rxMax, ryMin, ryMax);
 
 	return result;
 }
