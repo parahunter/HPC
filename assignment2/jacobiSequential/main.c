@@ -11,7 +11,6 @@
 
 int n = 0;
 double h;
-int iterations;
 int iterationsLeft;
 double errLimit;
 
@@ -31,11 +30,11 @@ double updateMat(double* from, double* to)
 	{
 		for(int j = 1 ; j < realSize -1; j++)
 		{
-			double step = (from[i*realSize + j-1] + from[(i-1)*realSize + j] + from[i*realSize+j+1] + from[(i+1)*realSize + j] +  h*h * f(i,j,n) )*0.25;
+			double step = (from[j*realSize + i-1] + from[(j-1)*realSize + i] + from[j*realSize+i+1] + from[(j+1)*realSize + i] +  h*h * f(i,j,n) )*0.25;
 			
 			err += fabs( step - to[i*realSize+j] );
 			//printf("step %f \n ", step);
-			to[i*realSize + j] = step;
+			to[j*realSize + i] = step;
 		}				
 	}	
 
@@ -87,14 +86,16 @@ int main ( int argc, char *argv[] )
 	
 	while(1)
 	{
-		err =  updateMat(u1, u2);
-
-		swap(&u1, &u2);		
-		
-		if(mode == 'i' && --iterationsLeft <= 0)
+		if(mode == 'i' && iterationsLeft <= 0)
 			break;
 		else if(mode == 'e' && err < errLimit)
 			break;
+
+		err =  updateMat(u1, u2);
+
+		swap(&u1, &u2);
+
+		iterationsLeft--;		
 	}	
 	wt = omp_get_wtime()-wt;
 	t = clock()-t;
