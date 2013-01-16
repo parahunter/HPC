@@ -3,7 +3,7 @@ LIBSRCS	=
 LIBOBJS	= main.o
 
 # -fast -fsimple -fns -xarch=generic64 (not supported in linux)
-OPT	=  -g -O3 #-g -fast #-xopenmp
+OPT	=  -g -O3 -fopenmp#-g -fast #-xopenmp
 PIC	= #-fPIC 
 DRY = 
 FLAGS =

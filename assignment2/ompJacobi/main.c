@@ -26,7 +26,7 @@ char mode = 'i';
 
 void updateMat(double* from, double* to)
 {
-	#pragma omp parallel for default(shared)
+	#pragma omp for schedule(runtime)
 	for(int i = 1 ; i < realSize -1; i++)
 	{
 		for(int j = 1 ; j < realSize -1; j++)
@@ -96,15 +96,15 @@ int main ( int argc, char *argv[] )
 	if(mode=='i')
 	{
 		iterations=iterationsLeft;
-			//#pragma omp parallel shared(u1, u2)
+			#pragma omp parallel
 			{
-		for(int i=0; i<iterationsLeft/2; i++)
-		{
+			for(int i=0; i<iterationsLeft/2; i++)
+			{
 
-			updateMat(u1, u2);
-			updateMat(u2, u1);
+				updateMat(u1, u2);
+				updateMat(u2, u1);
+				}
 			}
-		}
 		err = errCheck(u1, u2);
 	}
 	if(mode=='e')
@@ -114,7 +114,7 @@ int main ( int argc, char *argv[] )
 		int iterBlock=1000;
 		while(err>errLimit)
 		{
-			//#pragma omp parallel shared(u1, u2)
+			#pragma omp parallel
 			{
 			for(int i=0; i<iterBlock/2; i++)
 			{
@@ -125,18 +125,7 @@ int main ( int argc, char *argv[] )
 			iterations += iterBlock;
 			err = errCheck(u1, u2);
 		}
-	}/*
-	while(1)
-	{
-		err =  updateMat(u1, u2);
-
-		swap(&u1, &u2);		
-		
-		if(mode == 'i' && --iterationsLeft <= 0)
-			break;
-		else if(mode == 'e' && err < errLimit)
-			break;
-	}	*/
+	}
 	wt = omp_get_wtime()-wt;
 	t = clock()-t;
 
