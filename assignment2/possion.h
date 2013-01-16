@@ -33,12 +33,13 @@ double* createMat(int n)
 		printf("noooo we ran out of memory or the system is mean to us :-(");
 	}
 	int i;
+
 	for(i = 0 ; i < realSize -1 ; i++)
 	{
-		result[0 + i] 						= wallVal;
-		result[realSize * i+(realSize-1)] = wallVal;
+		result[0 + i] 	      			= wallVal;
+		result[realSize * i+(realSize-1)] 	= wallVal;
 		result[(realSize-1)*realSize + i] 	= wallVal;
-		result[realSize * i] 				= 0;
+		result[realSize * i] 			= 0;
 
 	}
 /*
