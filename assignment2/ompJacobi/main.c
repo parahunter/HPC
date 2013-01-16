@@ -7,7 +7,7 @@
 #include <omp.h>
 
 #include "../possion.h"
-//#include "../image.c"
+#include "../image.c"
 
 int n = 0;
 double h;
@@ -145,7 +145,7 @@ int main ( int argc, char *argv[] )
 	printf("W Time:\t%f\n",wt);
 	printf("C Time:\t%f\n",((float)t)/CLOCKS_PER_SEC);
 	
-	//writeImg (n+2, u1);
+	writeImg (n+2, u1);
 
 	if(argc>=5 && argv[4][0] == 'p')
 		print(u1, realSize);

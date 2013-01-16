@@ -83,9 +83,9 @@ static int save_png_to_file (bitmap_t *bitmap, const char *path)
     
     /* Initialize rows of PNG. */
 
-    row_pointers = png_malloc (png_ptr, bitmap->height * sizeof (png_byte *));
+    row_pointers = (png_byte **) png_malloc (png_ptr, bitmap->height * sizeof (png_byte *));
     for (y = 0; y < bitmap->height; ++y) {
-        png_byte *row = 
+        png_byte *row = (png_byte*)
             png_malloc (png_ptr, sizeof (uint8_t) * bitmap->width * pixel_size);
         row_pointers[y] = row;
         for (x = 0; x < bitmap->width; ++x) {
@@ -148,7 +148,7 @@ void writeImg (int nn, double *u)
     fruit.width = nn;
     fruit.height = nn;
 
-    fruit.pixels = calloc (sizeof (pixel_t), fruit.width * fruit.height);
+    fruit.pixels = (pixel_t*)calloc (sizeof (pixel_t), fruit.width * fruit.height);
 
     for (y = 0; y < fruit.height; y++) {
         for (x = 0; x < fruit.width; x++) {
