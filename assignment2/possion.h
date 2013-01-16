@@ -5,6 +5,15 @@ const double wallVal = 20.0;
 const double radiatorVal = 200.0;
 
 
+void print(double *u, int nn)
+{
+	for(int i=0; i<nn; i++)
+	{
+		for(int j=0; j<nn; j++)
+			printf("%f\t",u[i*nn+j]);
+		printf("\n");
+	}
+}
 
 int c(double a, int n)
 {

@@ -33,7 +33,7 @@ double updateMat(double* from, double* to)
 		{
 			double step = (from[i*realSize + j-1] + from[(i-1)*realSize + j] + from[i*realSize+j+1] + from[(i+1)*realSize + j] +  h*h * f(i,j,n) )*0.25;
 			
-			err += abs( step - to[i*realSize+j] );
+			err += fabs( step - to[i*realSize+j] );
 			//printf("step %f \n ", step);
 			to[i*realSize + j] = step;
 		}				
@@ -44,17 +44,6 @@ double updateMat(double* from, double* to)
 	return err;
 }
 
-void print()
-{
-	for(int i = 0 ; i < realSize; i++)
-	{
-		for(int j = 0 ; j < realSize ; j++)
-		{
-			printf("%f ", u1[i*realSize + j]);
-		}
-		printf("\n");
-	}
-}
 
 void swap(double** a, double** b)
 {
@@ -118,7 +107,7 @@ int main ( int argc, char *argv[] )
 	writeImg (n+2, u1);
 
 	if(argc>=5 && argv[4][0] == 'p')
-		print();
+		print(u1, realSize);
 
 	return 0;
 }

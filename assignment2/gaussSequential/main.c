@@ -14,15 +14,7 @@ double *u;
 
 
 
-void print(double *u)
-{
-	for(int i=0; i<nn; i++)
-	{
-		for(int j=0; j<nn; j++)
-			printf("%f\t",u[i*nn+j]);
-		printf("\n");
-	}
-}
+
 
 
 // Return: error!
@@ -79,7 +71,6 @@ int main(int argc, char* argv[])
 			errLimit = atof(argv[3]);
 		}
 	}
-
 	u=createMat(n);
 	double wt = omp_get_wtime();
 	clock_t t = clock();
@@ -104,5 +95,5 @@ int main(int argc, char* argv[])
 	//writepng("img.png", u, n+2, n+2);
 	writeImg (n+2, u);
 	if(argc>=5 && argv[4][0]=='p')
-		print(u);
+		print(u, nn);
 }
