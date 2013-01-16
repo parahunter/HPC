@@ -36,7 +36,7 @@ double updateMat(double* from, double* to)
 			err += fabs( step - to[i*realSize+j] );
 			//printf("step %f \n ", step);
 			to[i*realSize + j] = step;
-		}				
+		}
 	}
 	iterations++;
 	return err;
