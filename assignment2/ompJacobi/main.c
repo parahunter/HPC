@@ -32,7 +32,7 @@ void updateMat(double* from, double* to)
 	{
 		for(int j = 1 ; j < realSize -1; j++)
 		{
-			double step = (from[i*realSize + j-1] + from[(i-1)*realSize + j] + from[i*realSize+j+1] + from[(i+1)*realSize + j] +  hh * f(i,j,n) )*0.25;
+			double step = (from[i*realSize + j-1] + from[(i-1)*realSize + j] + from[i*realSize+j+1] + from[(i+1)*realSize + j])*0.25;// +  hh * f(i,j,n) )*0.25;
 			to[i*realSize + j] = step;
 		}
 	}

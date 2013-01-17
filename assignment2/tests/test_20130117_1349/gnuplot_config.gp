@@ -149,11 +149,11 @@ set xlabel 'Requested Threads'
 set ylabel 'Time (s)'
 #set logscale x
 #set xtics 4,2,2048
-set title 'Omp Jacobi scaling behaviour (N=1000, i =2000)'
-plot "data_std3.dat" using 1:2 title "Wall time - Basic OMP" w lp, \
-	"data_opt3.dat" using 1:2 title "Wall time - OMP Optimized" w lp
+set title 'G++ reduction performances (N=1000, i=2000)'
+plot "data_reduction2.dat" using 1:2 title "2000 for with reduction" w lp, \
+	"data_noreduction2.dat" using 1:2 title "1 for with reduction" w lp
 set terminal postscript eps enhanced color
-set output "plot_time3.eps"
+set output "plot_time.eps"
 replot
 set term pop; set out;
 #    EOF

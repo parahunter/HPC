@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0 EPSF-2.0
-%%Title: plot_speedup.eps
+%%Title: plot_time.eps
 %%Creator: gnuplot 4.4 patchlevel 2
-%%CreationDate: Thu Jan 17 14:39:32 2013
+%%CreationDate: Thu Jan 17 14:51:14 2013
 %%DocumentFonts: (atend)
 %%BoundingBox: 50 50 410 302
 %%EndComments
@@ -44,13 +44,13 @@ systemdict /pdfmark known not {
   userdict /pdfmark systemdict /cleartomark get put
 } if
 SDict begin [
-  /Title (plot_speedup.eps)
+  /Title (plot_time.eps)
   /Subject (gnuplot plot)
   /Creator (gnuplot 4.4 patchlevel 2)
   /Author (s111071)
 %  /Producer (gnuplot)
 %  /Keywords ()
-  /CreationDate (Thu Jan 17 14:39:32 2013)
+  /CreationDate (Thu Jan 17 14:51:14 2013)
   /DOCINFO pdfmark
 end
 } ifelse
@@ -479,67 +479,77 @@ LTb
 -63 0 V
 stroke
 602 448 M
-[ [(Helvetica) 140.0 0.0 true true 0 ( 1)]
-] -46.7 MRshow
-1.000 UL
-LTb
-686 1044 M
-63 0 V
-6128 0 R
--63 0 V
-stroke
-602 1044 M
-[ [(Helvetica) 140.0 0.0 true true 0 ( 1.2)]
-] -46.7 MRshow
-1.000 UL
-LTb
-686 1640 M
-63 0 V
-6128 0 R
--63 0 V
-stroke
-602 1640 M
-[ [(Helvetica) 140.0 0.0 true true 0 ( 1.4)]
-] -46.7 MRshow
-1.000 UL
-LTb
-686 2236 M
-63 0 V
-6128 0 R
--63 0 V
-stroke
-602 2236 M
-[ [(Helvetica) 140.0 0.0 true true 0 ( 1.6)]
-] -46.7 MRshow
-1.000 UL
-LTb
-686 2831 M
-63 0 V
-6128 0 R
--63 0 V
-stroke
-602 2831 M
-[ [(Helvetica) 140.0 0.0 true true 0 ( 1.8)]
-] -46.7 MRshow
-1.000 UL
-LTb
-686 3427 M
-63 0 V
-6128 0 R
--63 0 V
-stroke
-602 3427 M
 [ [(Helvetica) 140.0 0.0 true true 0 ( 2)]
 ] -46.7 MRshow
 1.000 UL
 LTb
-686 4023 M
+686 969 M
 63 0 V
 6128 0 R
 -63 0 V
 stroke
-602 4023 M
-[ [(Helvetica) 140.0 0.0 true true 0 ( 2.2)]
+602 969 M
+[ [(Helvetica) 140.0 0.0 true true 0 ( 2.5)]
+] -46.7 MRshow
+1.000 UL
+LTb
+686 1491 M
+63 0 V
+6128 0 R
+-63 0 V
+stroke
+602 1491 M
+[ [(Helvetica) 140.0 0.0 true true 0 ( 3)]
+] -46.7 MRshow
+1.000 UL
+LTb
+686 2012 M
+63 0 V
+6128 0 R
+-63 0 V
+stroke
+602 2012 M
+[ [(Helvetica) 140.0 0.0 true true 0 ( 3.5)]
+] -46.7 MRshow
+1.000 UL
+LTb
+686 2534 M
+63 0 V
+6128 0 R
+-63 0 V
+stroke
+602 2534 M
+[ [(Helvetica) 140.0 0.0 true true 0 ( 4)]
+] -46.7 MRshow
+1.000 UL
+LTb
+686 3055 M
+63 0 V
+6128 0 R
+-63 0 V
+stroke
+602 3055 M
+[ [(Helvetica) 140.0 0.0 true true 0 ( 4.5)]
+] -46.7 MRshow
+1.000 UL
+LTb
+686 3576 M
+63 0 V
+6128 0 R
+-63 0 V
+stroke
+602 3576 M
+[ [(Helvetica) 140.0 0.0 true true 0 ( 5)]
+] -46.7 MRshow
+1.000 UL
+LTb
+686 4098 M
+63 0 V
+6128 0 R
+-63 0 V
+stroke
+602 4098 M
+[ [(Helvetica) 140.0 0.0 true true 0 ( 5.5)]
 ] -46.7 MRshow
 1.000 UL
 LTb
@@ -549,7 +559,7 @@ LTb
 -63 0 V
 stroke
 602 4619 M
-[ [(Helvetica) 140.0 0.0 true true 0 ( 2.4)]
+[ [(Helvetica) 140.0 0.0 true true 0 ( 6)]
 ] -46.7 MRshow
 1.000 UL
 LTb
@@ -656,7 +666,7 @@ LCb setrgbcolor
 ] -46.7 MCshow
 LTb
 3781 4829 M
-[ [(Helvetica) 140.0 0.0 true true 0 (Omp Jacobi speedup \(N=1000, i =2000\))]
+[ [(Helvetica) 140.0 0.0 true true 0 (G++ reduction performances \(N=1000, i=2000\))]
 ] -46.7 MCshow
 LCb setrgbcolor
 LTb
@@ -669,28 +679,28 @@ LTb
 LT0
 LCb setrgbcolor
 770 721 M
-[ [(Helvetica) 140.0 0.0 true true 0 (Wall time - Basic OMP)]
+[ [(Helvetica) 140.0 0.0 true true 0 (2000 for with reduction)]
 ] -46.7 MLshow
 LT0
-2954 721 M
+2786 721 M
 399 0 V
-686 448 M
-884 981 V
-885 786 V
-884 -83 V
-885 647 V
-884 42 V
-885 311 V
-884 -103 V
-686 448 Pls
-1570 1429 Pls
-2455 2215 Pls
-3339 2132 Pls
-4224 2779 Pls
-5108 2821 Pls
-5993 3132 Pls
-6877 3029 Pls
-3153 721 Pls
+686 4133 M
+1570 2311 L
+885 -347 V
+884 -547 V
+885 -222 V
+884 -134 V
+885 -73 V
+884 -60 V
+686 4133 Pls
+1570 2311 Pls
+2455 1964 Pls
+3339 1417 Pls
+4224 1195 Pls
+5108 1061 Pls
+5993 988 Pls
+6877 928 Pls
+2985 721 Pls
 % End plot #1
 % Begin plot #2
 1.000 UP
@@ -698,28 +708,28 @@ LT0
 LT1
 LCb setrgbcolor
 770 581 M
-[ [(Helvetica) 140.0 0.0 true true 0 (Wall time - OMP Optimized)]
+[ [(Helvetica) 140.0 0.0 true true 0 (1 for with reduction)]
 ] -46.7 MLshow
 LT1
-2954 581 M
+2786 581 M
 399 0 V
-686 448 M
-884 1360 V
-885 433 V
-884 841 V
-885 446 V
-884 366 V
-885 170 V
-884 229 V
-686 448 Crs
-1570 1808 Crs
-2455 2241 Crs
-3339 3082 Crs
-4224 3528 Crs
-5108 3894 Crs
-5993 4064 Crs
-6877 4293 Crs
-3153 581 Crs
+686 3543 M
+1570 2342 L
+885 -610 V
+884 -360 V
+885 -270 V
+5108 996 L
+885 -41 V
+884 -91 V
+686 3543 Crs
+1570 2342 Crs
+2455 1732 Crs
+3339 1372 Crs
+4224 1102 Crs
+5108 996 Crs
+5993 955 Crs
+6877 864 Crs
+2985 581 Crs
 % End plot #2
 1.000 UL
 LTb

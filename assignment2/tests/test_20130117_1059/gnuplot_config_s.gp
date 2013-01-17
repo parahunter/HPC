@@ -149,11 +149,11 @@ set xlabel 'Requested Threads'
 set ylabel 'Time (s)'
 #set logscale x
 #set xtics 4,2,2048
-set title 'Omp Jacobi speedup (N=512, i =1000)'
-plot "sdata_std2.dat" using 1:2 title "Wall time - Basic OMP" w lp, \
-	"sdata_opt.dat" using 1:2 title "Wall time - OMP Optimized" w lp
+set title 'Omp Jacobi speedup (N=1000, i =2000)'
+plot "data_std3.dat" using 1:3 title "Wall time - Basic OMP" w lp, \
+	"data_opt3.dat" using 1:3 title "Wall time - OMP Optimized" w lp
 set terminal postscript eps enhanced color
-set output "plot.eps"
+set output "plot_speedup.eps"
 replot
 set term pop; set out;
 #    EOF
