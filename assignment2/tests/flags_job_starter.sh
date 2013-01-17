@@ -1,7 +1,7 @@
 #!/bin/sh
 #PBS -N assignment2_convergence
 #PBS -q hpc
-#PBS -l nodes=1:ppn=1
+#PBS -l nodes=1:ppn=16
 #PBS -l walltime=00:10:00
 #PBS -e out.err
 #PBS -o out.out
@@ -9,7 +9,7 @@
 date 
 
 cd $PBS_O_WORKDIR
-python ./convergence.py
+python ./ompScaling.py
 
 date
 exit 0

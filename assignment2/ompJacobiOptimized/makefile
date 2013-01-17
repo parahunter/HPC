@@ -1,9 +1,9 @@
-TARGET	= ompJacobi.exe
+TARGET	= ompJacobiOptimized.exe
 LIBSRCS	= 
 LIBOBJS	= main.o
 
 # -fast -fsimple -fns -xarch=generic64 (not supported in linux)
-OPT	= -g -O3 -xopenmp
+OPT	= -g -O3 -fopenmp
 PIC	= #-fPIC 
 DRY = 
 FLAGS =
@@ -12,7 +12,7 @@ CC	= g++
 CFLAGS= $(OPT) $(PIC) $(XOPTS) $(DRY) $(FLAGS)
 
 
-XLIBS	= -lm -lpng # -lpngwriter -lpng
+XLIBS	=  -lm -lpng # -lpngwriter -lpng
 
 $(TARGET): $(LIBOBJS)
 	$(CC)  $(CFLAGS) -o $@ $(LIBOBJS) $(XLIBS)
