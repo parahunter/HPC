@@ -1,7 +1,7 @@
 ms = [100*x for x in range(1,7)]
 thresolds = [10**(-x) for x in range(1,5)]
 Ns = [2**x for x in range(0,11)]
-Ps = range(1,16)
+Ps = range(1,9)
 
 N_fixed = 512
 m_fixed = 100

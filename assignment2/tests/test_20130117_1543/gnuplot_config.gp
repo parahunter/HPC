@@ -144,16 +144,18 @@ set fontpath
 set fit noerrorvariables
 GNUTERM = "wxt"
 #set key left bottom Left title 'Legend' box 7
-set key left bottom Left
+set key right bottom Left
 set xlabel 'Requested Threads'
 set ylabel 'Time (s)'
 #set logscale x
-#set xtics 4,2,2048
-set title 'Omp Jacobi scaling behaviour (N=100, i=150k)'
-plot "data_std.dat" using 1:2 title "Wall time - Basic OMP" w lp, \
-	"data_opt.dat" using 1:2 title "Wall time - OMP Optimized" w lp
+#set ytics 0,1,4
+set title 'Optimization per problem size'
+plot "data_250.dat" using 1:3 title "N=250" w lp, \
+"data_500.dat" using 1:3 title "N=500" w lp, \
+"data_1000.dat" using 1:3 title "N=1000" w lp, \
+"data_5000.dat" using 1:3 title "N=5000" w lp
 set terminal postscript eps enhanced color
-set output "plot.eps"
+set output "plot_speedup.eps"
 replot
 set term pop; set out;
 #    EOF

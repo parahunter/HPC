@@ -15,12 +15,13 @@ def main():
 	os.mkdir(testname)
 	os.chdir(testname)
 	call("lscpu > cpuinfo.txt", shell=True)
-	N_fixed = 100
+	N_fixed = 250
 	print "Tests running..."
+	p1 = -1;
 	for p in Ps: #x axis
 		thresold, iterations, timeWall, timeCPU = ({},{},{},{})
 		program = "./ompJacobiOptimized.exe"
-		m = 150000
+		m = 50000
 		print "Testing N = %d, max_iterations = %d" % (N_fixed, m)
 		
 		origWD = os.getcwd() # remember our original working directory
@@ -34,11 +35,12 @@ def main():
 		process.wait()
 		os.chdir(origWD) # get back to our original working directory
 
-
 		print stdout
 		thresold[program], iterations[program], timeWall[program], timeCPU[program] = parseData(stdout)
+		if p==1:
+			p1=timeWall[program]
 
-		write_row_two(filename, p, timeWall[program],timeCPU[program]);
+		write_row_two(filename, p, timeWall[program],p1/timeWall[program]);
 
 	os.chdir("..")
 
