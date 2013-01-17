@@ -153,7 +153,7 @@ void writeImg (int nn, double *u)
     for (y = 0; y < fruit.height; y++) {
         for (x = 0; x < fruit.width; x++) {
             pixel_t * pixel = pixel_at (& fruit, x, y);
-            double v = u[x*nn+y];
+            double v = u[y*nn+x];
             pixel->red = fpix (v, 20.0);
             pixel->blue = fpix (20-v, 20.0);
 

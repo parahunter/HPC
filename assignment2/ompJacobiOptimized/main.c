@@ -39,7 +39,7 @@ void updateMat(double* from, double* to)
 }
 void updateMatE(double* from, double* to)
 {
-	#pragma omp for schedule(runtime)
+	#pragma omp parallel for schedule(runtime) reduction(+: err)
 	for(int i = 1 ; i < realSize -1; i++)
 	{
 		for(int j = 1 ; j < realSize -1; j++)
@@ -100,13 +100,12 @@ int main ( int argc, char *argv[] )
 
 	double wt = omp_get_wtime();
 	clock_t t = clock();
-	double err;
 	
 	
 	if(mode=='i')
 	{
 		iterations=iterationsLeft;
-		#pragma omp parallel  reduction(+ : err)
+		#pragma omp parallel
 		{
 		for(int i=0; i<(iterationsLeft/2)-1; i++)
 		{
@@ -114,31 +113,30 @@ int main ( int argc, char *argv[] )
 			updateMat(u2, u1);
 		}
 		updateMat(u1, u2);
-
+		}
 		{ err = 0; }
 		updateMatE(u2, u1);
-		}
+		
 	}
 	if(mode=='e')
 	{
 		err = 2*errLimit;
 		iterations=0;
 		int iterBlock=100;
-		#pragma omp parallel shared(err)
-		{
 		while(err>errLimit)
 		{
-
+		#pragma omp parallel shared(err)
+		{
 			for(int i=0; i<(iterBlock/2)-1; i++)
 			{
 				updateMat(u1, u2);
 				updateMat(u2, u1);
 			}
+		
 			updateMat(u1, u2);
-			#pragma omp master
+		}
 			{ err=0; iterations += iterBlock;}
 			updateMatE(u2, u1);
-		}
 		}
 	}
 	wt = omp_get_wtime()-wt;

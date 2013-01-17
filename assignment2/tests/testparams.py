@@ -10,7 +10,7 @@ thresold_fixed = 0.001
 programNames = {"gauss" : "./gaussSequential.exe"}
 
 params = {"fixed_iterations" : "i", "fixed_thresold" : "e"}
-unuseful_lines = 2
+unuseful_lines = 1
 
 
 def write_row_two(filename,x,y1,y2):
