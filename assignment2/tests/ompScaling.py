@@ -15,13 +15,13 @@ def main():
 	os.mkdir(testname)
 	os.chdir(testname)
 	call("lscpu > cpuinfo.txt", shell=True)
-	N_fixed = 250
+	N_fixed = 2600
 	print "Tests running..."
 	p1 = -1;
 	for p in Ps: #x axis
 		thresold, iterations, timeWall, timeCPU = ({},{},{},{})
 		program = "./ompJacobiOptimized.exe"
-		m = 50000
+		m = 400
 		print "Testing N = %d, max_iterations = %d" % (N_fixed, m)
 		
 		origWD = os.getcwd() # remember our original working directory
@@ -30,7 +30,7 @@ def main():
 		
 		print ((program + " %d %s %f") % (N_fixed,params["fixed_iterations"],m)).split()
 		print os.getcwd()
-		process = Popen(( ( program + " %d %s %f ") % (N_fixed,params["fixed_iterations"],m)).split() ,stdout= PIPE,bufsize=4096,env={"OMP_NUM_THREADS": str(p)}) 
+		process = Popen(( ( program + " %d %s %f ") % (N_fixed,params["fixed_iterations"],m)).split() ,stdout= PIPE,bufsize=4096,env={"OMP_NUM_THREADS": str(p), "OMP_SCHEDULE": "dynamic"}) 
 		(stdout,stderr) = process.communicate()
 		process.wait()
 		os.chdir(origWD) # get back to our original working directory
