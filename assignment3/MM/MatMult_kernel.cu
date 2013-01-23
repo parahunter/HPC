@@ -34,48 +34,62 @@ __global__ void MatMult_kernel_v1(const double* A, const double* B, double* C, i
  // - Make sure that the kernel does not read or write outside memory allocated.
  //
 {
-/*	int index = (blockIdx.x * blockDim.x + threadIdx.x); 	
+	//reversed order for better coalescence 
+	int j = blockIdx.x * blockDim.x + threadIdx.x;
+	int i = blockIdx.y * blockDim.y + threadIdx.y;
 	
+	int index = i * N + j;
+	
+	//printf("(%d, %d) %d \n", i,j,index);
+
 	double sum = 0.0;
-	for(int i = 0; i < M; i++) {
-		const double xv = x[i];
-		for(int j = index; j < N; j+=gridDim.x * blockDim.x) {	
-			sum += A[i*M + j]*xv;
-		}
+
+	for(int k = 0; k < K; k++) 
+	{
+		sum += A[k + i * N] * B[ k*K + j];  
 	}
-	y[index] = sum;
-*/
+
+	C[index] = sum;
 }
 
 #include "AtomicAdd.h"
 __global__ void MatMult_kernel_v2(const double* A, const double* B, double* C, int M, int N, int K)
-//
-// 2D grid + atomic add kernel
-//
- // YOUR TASKS:
- // - Improve your naive kernel to support higher occupancy for wide matrices.
- // - You should use a 2D grid (of 1D thread blocks).
- // - Have threads update the output vector by using the supplied double atomic add.
- // - Use cudaMset to clear the output vector before the kernel is called.
 {
-//	int tid = threadIdx.x;
-//	int blkidx = blockIdx.x * gridDim.x + blockIdx.y;
-//	int index = (blkidx * blockDim.x + tid); 	
+	const int BLOCKSIZE = 4;
+	//reversed order for better coalescence 
+	int jb = ( blockIdx.x * blockDim.x + threadIdx.x ) * BLOCKSIZE;
+	int ib = ( blockIdx.y * blockDim.y + threadIdx.y ) * BLOCKSIZE;
+	
+	int index = ib * N + jb;
+	
+	double sm[16] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
-/*	int index = (blockIdx.x * blockDim.x + threadIdx.x); 	
+//	for(int i = 0 ; i < BLOCKSIZE * BLOCKSIZE ; i++)				
+	//	sm[ i] = 0.0;
 
-	double sum = 0.0;
-	int ysub = M / gridDim.y;
-	int offset = blockIdx.y * ysub;
-	for(int i = 0; i < ysub; i++) {
-		const double xv = x[i + offset];
-		for(int j = index; j < N; j+= blockDim.x * gridDim.x) {	
-			sum += A[(i + offset)*M + j]*xv;
+		for(int k = 0; k < K; k++) 
+		{
+
+			for(int j = 0 ; j < BLOCKSIZE ; j++)
+			{	
+	for(int i = 0 ; i < BLOCKSIZE ; i++)
+	{
+			
+
+				sm[j + BLOCKSIZE * i ] += A[k + (ib + i) * N]  * - B[ k*K + (jb + j)];  
+			}
 		}
 	}
-	atomicAdd(&y[index], sum);
-//	y[index] = sum;
-*/
+	
+	for(int i = 0 ; i < BLOCKSIZE ; i++)
+	{
+		for(int j = 0 ; j < BLOCKSIZE ; j++)
+		{
+			C[(i+ib) * N + (j+jb)] = sm[j + BLOCKSIZE * i ];
+			//if(ib == 4 && jb == 8)
+			//	printf("(%d, %d) %d \n", ib, jb, (i+ib) * N + (j+jb));
+		}
+	}
 }
 
 extern "C" {
@@ -87,7 +101,5 @@ void MatMult_cublas(const double* d_A, const double* d_B, double* d_C, int M, in
 // Transposed matrix-vector multiplication using CUBLAS on GPU
 //
 {
-
-
-
+	cublasDgemm('N','N', M, N, K, 1.0, d_B, N, d_A, K, 0.0, d_C, N);
 }

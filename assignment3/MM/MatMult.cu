@@ -8,6 +8,7 @@
 
 #include <omp.h>
 
+
 int main(int argc, char *argv[])
 {
 
@@ -25,8 +26,8 @@ int main(int argc, char *argv[])
 	printf("  Usage: ./MatMult <M:default=4096> <N:default=4096> <K:default=4096>  <threadsPerBlock:default=128> <reps:default=10>\n\n");
 	if (argc>1 ? M = atoi(argv[1]) : M = 4096);
 	if (argc>2 ? N = atoi(argv[2]) : N = 4096);
-	if (argc>3 ? N = atoi(argv[3]) : K = 4096);
-	if (argc>4 ? threadsPerBlock = atoi(argv[4]) : threadsPerBlock = 128);
+	if (argc>3 ? K = atoi(argv[3]) : K = 4096);
+	if (argc>4 ? threadsPerBlock = atoi(argv[4]) : threadsPerBlock = 16);
 	if (argc>5 ? reps = atoi(argv[5]) : reps = 10);
 
 	// blocks to cover all M elements in output vector
@@ -48,9 +49,9 @@ int main(int argc, char *argv[])
  * Initialization of memory*
  ***************************/
 
-	size_A = M * N * sizeof(double);
-	size_B = M * K * sizeof(double);
-	size_C = K * N * sizeof(double);
+	size_A = M * K * sizeof(double);
+	size_B = K * N * sizeof(double);
+	size_C = M * N * sizeof(double);
 	h_A = (double *) malloc(size_A);
 	h_B = (double *) malloc(size_B);
 	h_C = (double *) malloc(size_C);  // reference blas call output
@@ -58,10 +59,10 @@ int main(int argc, char *argv[])
 	h_C1 = (double *) malloc(size_C); // kernel v1 output
 	h_C2 = (double *) malloc(size_C); // kernel v2 output
 	h_C3 = (double *) malloc(size_C); // cublas output
-	for (int i = 0; i < M * N; ++i) {
+	for (int i = 0; i < M * K; ++i) {
 		h_A[i] = rand()/(double)RAND_MAX;
 	}
-	for (int i = 0; i < M; ++i) {
+	for (int i = 0; i < K * N; ++i) {
 		h_B[i] = rand()/(double)RAND_MAX;
 	}
 	checkCudaErrors(cudaMalloc((void**)&d_A, size_A)); 
@@ -127,11 +128,18 @@ int main(int argc, char *argv[])
     cudaDeviceSynchronize();
 	sdkStopTimer(&timer1);
 
+	dim3 blockSize(threadsPerBlock, threadsPerBlock);
+			
+	int blocksPerGridN = (N+threadsPerBlock-1)/threadsPerBlock;
+	int blocksPerGridM = (M+threadsPerBlock-1)/threadsPerBlock;
+	
+	dim3 gridSize(blocksPerGridN, blocksPerGridM);
+	
 	// launch kernel
 	sdkStartTimer(&timer2);
 	for (int iter = 0; iter < reps; ++iter) 
 	{
-		//MatMult_kernel_v1<<<blocksPerGrid, threadsPerBlock, 0>>>(d_A,d_B,d_C,M,N,K);
+		MatMult_kernel_v1<<<gridSize, blockSize, 0>>>(d_A,d_B,d_C,M,N,K);
 	}
     cudaDeviceSynchronize();
 	sdkStopTimer(&timer2);
@@ -164,17 +172,22 @@ int main(int argc, char *argv[])
     cudaDeviceSynchronize();
 	sdkStopTimer(&timer1);
 
+	blockSize = dim3(threadsPerBlock / 4, threadsPerBlock / 4);
+			
+	blocksPerGridN = (N+threadsPerBlock-1)/threadsPerBlock;
+	blocksPerGridM = (M+threadsPerBlock-1)/threadsPerBlock;
+	
+	gridSize = dim3(blocksPerGridN, blocksPerGridM);
 	// launch kernel
 	sdkStartTimer(&timer2);
 	for (int iter = 0; iter < reps; ++iter) 
-	{
+	{ 
 		checkCudaErrors(cudaMemset(d_C, 0, size_C)); 
  // YOUR TASKS:
  // - Invoke MatVec_kernel_v2 using a 2D grid.
  // Insert code below this line:
-	checkCudaErrors(cudaMemset(d_C,0.0,N));
-	dim3 blk (blocksPerGrid,blocksPerGrid);
-	//MatMult_kernel_v2<<<blk, threadsPerBlock, 0>>>(d_A,d_B,d_C,M,N,K);
+
+		MatMult_kernel_v2<<<gridSize, blockSize>>>(d_A,d_B,d_C,M,N,K);
 	}
 	cudaDeviceSynchronize();
 	sdkStopTimer(&timer2);
@@ -211,7 +224,7 @@ int main(int argc, char *argv[])
 	sdkStartTimer(&timer2);
 	for (int iter = 0; iter < reps; ++iter) 
 	{
-		//MatMult_cublas(d_A, d_B, d_C, M, N, K);
+		MatMult_cublas(d_A, d_B, d_C, M, N, K);
 	}
     cudaDeviceSynchronize();
 	sdkStopTimer(&timer2);
@@ -236,7 +249,7 @@ int main(int argc, char *argv[])
 
 	// calculate two-norms of result vectors
 	double norm, norm_gold, norm_v1, norm_v2, norm_cublas;
-	for (int i = 0; i < N; ++i)
+	for (int i = 0; i < M*N; ++i)
 	{
 		norm += h_C[i]*h_C[i];
 		norm_gold += h_C0[i]*h_C0[i];
@@ -249,27 +262,31 @@ int main(int argc, char *argv[])
 	norm_v1 = sqrt(norm_v1);
 	norm_v2 = sqrt(norm_v2);
 	norm_cublas = sqrt(norm_cublas);
+	
+	printf("norm %f norm_v1 %f \n", norm, norm_v2);	
+	
 
+	double flops = (double)M*N*K*2;
 	// output verification and timings
     printf("  CPU blas time                 : %3.2f (ms)\n",time_blas);
-    printf("  CPU blas flop                 : %3.2f (Gflops) \n\n",(double)M*N*2/time_blas/1e6);
+    printf("  CPU blas flop                 : %3.2f (Gflops) \n\n",flops/time_blas/1e6);
     printf("  CPU gold time                 : %3.2f (ms) , speedup %.2fx\n",time_gold,time_blas/time_gold);
-    printf("  CPU gold flop                 : %3.2f (Gflops) \n",(double)M*N*2/time_gold/1e6);
+    printf("  CPU gold flop                 : %3.2f (Gflops) \n",flops/time_gold/1e6);
     if (abs(norm-norm_gold)/norm < 1e-12 ? printf("  PASSED\n\n") : printf("  FAILED \n\n")  );
     printf("  GPU v1 time compute           : %3.2f (ms) , speedup %.2fx\n",time_v1,time_blas/time_v1);
 	printf("  GPU v1 time comp+trans        : %3.2f (ms) , speedup %.2fx\n",time_v1+transfer_v1,time_blas/(time_v1+transfer_v1));
-    printf("  GPU v1 flops device           : %2.2f (Gflops) \n",(double)M*N*2/time_v1/1e6);
-    printf("  GPU v1 flops host-device-host : %2.2f (Gflops) \n",(double)M*N*2/(time_v1+transfer_v1)/1e6);
+    printf("  GPU v1 flops device           : %2.2f (Gflops) \n",flops/time_v1/1e6);
+    printf("  GPU v1 flops host-device-host : %2.2f (Gflops) \n",flops/(time_v1+transfer_v1)/1e6);
     if (abs(norm-norm_v1)/norm < 1e-12 ? printf("  PASSED\n\n") : printf("  FAILED \n\n")  );
     printf("  GPU v2 time compute           : %3.2f (ms) , speedup %.2fx\n",time_v2,time_blas/time_v2);
 	printf("  GPU v2 time comp+trans        : %3.2f (ms) , speedup %.2fx\n",time_v2+transfer_v2,time_blas/(time_v2+transfer_v2));
-    printf("  GPU v2 flops device           : %2.2f (Gflops) \n",(double)M*N*2/time_v2/1e6);
-    printf("  GPU v2 flops host-device-host : %2.2f (Gflops) \n",(double)M*N*2/(time_v2+transfer_v2)/1e6);
+    printf("  GPU v2 flops device           : %2.2f (Gflops) \n",flops/time_v2/1e6);
+    printf("  GPU v2 flops host-device-host : %2.2f (Gflops) \n",flops/(time_v2+transfer_v2)/1e6);
     if (abs(norm-norm_v2)/norm < 1e-12 ? printf("  PASSED\n\n") : printf("  FAILED \n\n")  );
     printf("  GPU cublas time compute           : %3.2f (ms) , speedup %.2fx\n",time_cublas,time_blas/time_cublas);
 	printf("  GPU cublas time comp+trans        : %3.2f (ms) , speedup %.2fx\n",time_cublas+transfer_cublas,time_blas/(time_cublas+transfer_cublas));
-    printf("  GPU cublas flops device           : %2.2f (Gflops) \n",(double)M*N*2/time_cublas/1e6);
-    printf("  GPU cublas flops host-device-host : %2.2f (Gflops) \n",(double)M*N*2/(time_cublas+transfer_cublas)/1e6);
+    printf("  GPU cublas flops device           : %2.2f (Gflops) \n",flops/time_cublas/1e6);
+    printf("  GPU cublas flops host-device-host : %2.2f (Gflops) \n",flops/(time_cublas+transfer_cublas)/1e6);
     if (abs(norm-norm_cublas)/norm < 1e-12 ? printf("  PASSED\n\n") : printf("  FAILED \n\n")  );
 
 /***************************
