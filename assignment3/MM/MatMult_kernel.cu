@@ -55,39 +55,33 @@ __global__ void MatMult_kernel_v1(const double* A, const double* B, double* C, i
 #include "AtomicAdd.h"
 __global__ void MatMult_kernel_v2(const double* A, const double* B, double* C, int M, int N, int K)
 {
-	const int BLOCKSIZE = 4;
 	//reversed order for better coalescence 
-	int jb = ( blockIdx.x * blockDim.x + threadIdx.x ) * BLOCKSIZE;
-	int ib = ( blockIdx.y * blockDim.y + threadIdx.y ) * BLOCKSIZE;
+	int jb = ( blockIdx.x * blockDim.x + threadIdx.x ) * 4;
+	int ib = ( blockIdx.y * blockDim.y + threadIdx.y ) * 4;
 	
 	int index = ib * N + jb;
 	
 	double sm[16] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
-//	for(int i = 0 ; i < BLOCKSIZE * BLOCKSIZE ; i++)				
+//	for(int i = 0 ; i < 4 * 4 ; i++)				
 	//	sm[ i] = 0.0;
 
-		for(int k = 0; k < K; k++) 
-		{
-
-			for(int j = 0 ; j < BLOCKSIZE ; j++)
-			{	
-	for(int i = 0 ; i < BLOCKSIZE ; i++)
+	for(int k = 0; k < K; k++) 
 	{
-			
-
-				sm[j + BLOCKSIZE * i ] += A[k + (ib + i) * N]  * - B[ k*K + (jb + j)];  
+		for(int i = 0 ; i < 4 ; i++)
+		{	
+			for(int j = 0 ; j < 4 ; j++)
+			{
+				sm[j + 4 * i ] += A[k + (ib + i) * K]  * B[ k*N + (jb + j)];  
 			}
 		}
 	}
-	
-	for(int i = 0 ; i < BLOCKSIZE ; i++)
+
+	for(int i = 0 ; i < 4 ; i++)	
 	{
-		for(int j = 0 ; j < BLOCKSIZE ; j++)
+		for(int j = 0 ; j < 4 ; j++)
 		{
-			C[(i+ib) * N + (j+jb)] = sm[j + BLOCKSIZE * i ];
-			//if(ib == 4 && jb == 8)
-			//	printf("(%d, %d) %d \n", ib, jb, (i+ib) * N + (j+jb));
+			C[(i+ib) * N + (j+jb)] = sm[j + 4 * i ];
 		}
 	}
 }

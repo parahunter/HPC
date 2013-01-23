@@ -172,12 +172,12 @@ int main(int argc, char *argv[])
     cudaDeviceSynchronize();
 	sdkStopTimer(&timer1);
 
-	blockSize = dim3(threadsPerBlock / 4, threadsPerBlock / 4);
+	blockSize = dim3(threadsPerBlock , threadsPerBlock);
 			
 	blocksPerGridN = (N+threadsPerBlock-1)/threadsPerBlock;
 	blocksPerGridM = (M+threadsPerBlock-1)/threadsPerBlock;
 	
-	gridSize = dim3(blocksPerGridN, blocksPerGridM);
+	gridSize = dim3(blocksPerGridN/4, blocksPerGridM/4);
 	// launch kernel
 	sdkStartTimer(&timer2);
 	for (int iter = 0; iter < reps; ++iter) 
@@ -263,7 +263,7 @@ int main(int argc, char *argv[])
 	norm_v2 = sqrt(norm_v2);
 	norm_cublas = sqrt(norm_cublas);
 	
-	printf("norm %f norm_v1 %f \n", norm, norm_v2);	
+//	printf("norm %f norm_v1 %f \n", norm, norm_v2);	
 	
 
 	double flops = (double)M*N*K*2;
