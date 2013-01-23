@@ -59,8 +59,6 @@ __global__ void MatMult_kernel_v2(const double* A, const double* B, double* C, i
 	int jb = ( blockIdx.x * blockDim.x + threadIdx.x ) * 4;
 	int ib = ( blockIdx.y * blockDim.y + threadIdx.y ) * 4;
 	
-	int index = ib * N + jb;
-	
 	double sm[16] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 //	for(int i = 0 ; i < 4 * 4 ; i++)				
@@ -86,6 +84,10 @@ __global__ void MatMult_kernel_v2(const double* A, const double* B, double* C, i
 	}
 }
 
+__global__ void MatMult_kernel_v3(const double* A, const double* B, double* C, int M, int N, int K)
+{
+
+}
 extern "C" {
 #include <cublas.h>
 }
