@@ -3,36 +3,27 @@
 //
 #include "AtomicAdd.h"
 #include "stdio.h"
-void MatMult_gold(const double* A, const double* x, double* y, int M, int N)
+void MatMult_gold(const double* A, const double* B, double* C, int M, int N, int K)
 //
-// Naive version where only global memory and automatic variables are accessed.
+// Naive version.
 //
 {
-	int i, j;
-	double tmp;
-	for (i=0; i < N; i++) y[i] = 0;
-	for (j=0; j < M; j++) {
-		tmp = x[j];
-		for (i=0; i < N; i++) {
-			y[i] += A[i+j*N] * tmp;
 
-		}
-	}
 }
 
 extern "C" {
 #include <cblas.h>
 }
 
-void MatMult_blas(const double* A, const double* x, double* y, int M, int N)
+void MatMult_blas(const double* A, const double* B, double* C, int M, int N, int K)
 //
 // Transposed matrix-vector multiplication using BLAS on CPU
 //
 {
-	cblas_dgemv(CblasRowMajor,CblasTrans,M,N,1.0,A,N,x,1,0.0,y,1);
+	cblas_dgemm(CblasRowMajor,CblasNoTrans,CblasNoTrans, M, N, K, 1.0, A, K, B, N, 0.0, C, N);
 }
 
-__global__ void MatMult_kernel_v1(const double* A, const double* x, double* y, int M, int N)
+__global__ void MatMult_kernel_v1(const double* A, const double* B, double* C, int M, int N, int K)
 //
 // Naive version where only global memory and automatic variables are accessed.
 //
@@ -43,7 +34,7 @@ __global__ void MatMult_kernel_v1(const double* A, const double* x, double* y, i
  // - Make sure that the kernel does not read or write outside memory allocated.
  //
 {
-	int index = (blockIdx.x * blockDim.x + threadIdx.x); 	
+/*	int index = (blockIdx.x * blockDim.x + threadIdx.x); 	
 	
 	double sum = 0.0;
 	for(int i = 0; i < M; i++) {
@@ -53,10 +44,11 @@ __global__ void MatMult_kernel_v1(const double* A, const double* x, double* y, i
 		}
 	}
 	y[index] = sum;
+*/
 }
 
 #include "AtomicAdd.h"
-__global__ void MatMult_kernel_v2(const double* A, const double* x, double* y, int M, int N)
+__global__ void MatMult_kernel_v2(const double* A, const double* B, double* C, int M, int N, int K)
 //
 // 2D grid + atomic add kernel
 //
@@ -70,7 +62,7 @@ __global__ void MatMult_kernel_v2(const double* A, const double* x, double* y, i
 //	int blkidx = blockIdx.x * gridDim.x + blockIdx.y;
 //	int index = (blkidx * blockDim.x + tid); 	
 
-	int index = (blockIdx.x * blockDim.x + threadIdx.x); 	
+/*	int index = (blockIdx.x * blockDim.x + threadIdx.x); 	
 
 	double sum = 0.0;
 	int ysub = M / gridDim.y;
@@ -83,30 +75,19 @@ __global__ void MatMult_kernel_v2(const double* A, const double* x, double* y, i
 	}
 	atomicAdd(&y[index], sum);
 //	y[index] = sum;
+*/
 }
 
 extern "C" {
 #include <cublas.h>
 }
 
-void MatMult_cublas(const double* d_A, const double* d_x, double* d_y, int M, int N)
+void MatMult_cublas(const double* d_A, const double* d_B, double* d_C, int M, int N, int K)
 //
 // Transposed matrix-vector multiplication using CUBLAS on GPU
 //
- // YOUR TASKS:
- // - Insert a call to the function cublasDgemv() in the CUBLAS library.
 {
-	cublasDgemv ('N', 
-			M, 
-			N, 
-			1.0, 
-			d_A, 
-			M, 
-			d_x,
-			1, 
-			0.0, 
-			d_y, 
-			1);
+
 
 
 }

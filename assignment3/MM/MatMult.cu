@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
 	sdkStartTimer(&timer1);
 	for (int iter = 0; iter < reps; ++iter) 
 	{
-		//MatMult_blas(h_A, h_B, h_C, M, N);
+		MatMult_blas(h_A, h_B, h_C, M, N, K);
 	}
     cudaDeviceSynchronize();
 	sdkStopTimer(&timer1);
@@ -104,7 +104,7 @@ int main(int argc, char *argv[])
 	sdkStartTimer(&timer1);
 	for (int iter = 0; iter < reps; ++iter) 
 	{
-		//MatMult_gold(h_A, h_B, h_C0, M, N);
+		//MatMult_gold(h_A, h_B, h_C0, M, N, K);
 	}
     cudaDeviceSynchronize();
 	sdkStopTimer(&timer1);
@@ -131,7 +131,7 @@ int main(int argc, char *argv[])
 	sdkStartTimer(&timer2);
 	for (int iter = 0; iter < reps; ++iter) 
 	{
-		//MatMult_kernel_v1<<<blocksPerGrid, threadsPerBlock, 0>>>(d_A,d_B,d_C,M,N);
+		//MatMult_kernel_v1<<<blocksPerGrid, threadsPerBlock, 0>>>(d_A,d_B,d_C,M,N,K);
 	}
     cudaDeviceSynchronize();
 	sdkStopTimer(&timer2);
@@ -174,7 +174,7 @@ int main(int argc, char *argv[])
  // Insert code below this line:
 	checkCudaErrors(cudaMemset(d_C,0.0,N));
 	dim3 blk (blocksPerGrid,blocksPerGrid);
-	//MatMult_kernel_v2<<<blk, threadsPerBlock, 0>>>(d_A,d_B,d_C,M,N);
+	//MatMult_kernel_v2<<<blk, threadsPerBlock, 0>>>(d_A,d_B,d_C,M,N,K);
 	}
 	cudaDeviceSynchronize();
 	sdkStopTimer(&timer2);
@@ -211,7 +211,7 @@ int main(int argc, char *argv[])
 	sdkStartTimer(&timer2);
 	for (int iter = 0; iter < reps; ++iter) 
 	{
-		//MatMult_cublas(d_A, d_B, d_C, M, N);
+		//MatMult_cublas(d_A, d_B, d_C, M, N, K);
 	}
     cudaDeviceSynchronize();
 	sdkStopTimer(&timer2);
