@@ -1,0 +1,26 @@
+Poisson problem.
+  Usage: ./Jacobi <N:default=128> <Iterations:default=100>  <threadsPerBlockLine:default=16>
+
+Device 0: "Tesla M2050".
+  Maximum number of threads per block: 1024.
+
+Threads per block line= 16.
+Number of blocks [gridDim.x] = 8.
+Matrix size [NxN] = 128x128.
+
+  CPU gold time                 : 3125.27 (ms) , speedup 1.00x
+  CPU gold flop                 : 0.00 (Gflops) 
+  PASSED
+
+  GPU v1 time compute           : 4.93 (ms) , speedup 633.54x
+  GPU v1 time comp+trans        : 5.16 (ms) , speedup 606.02x
+  GPU v1 flops device           : 0.66 (Gflops) 
+  GPU v1 flops host-device-host : 0.64 (Gflops) 
+  PASSED
+
+  GPU v2 time compute           : 5.41 (ms) , speedup 577.36x
+  GPU v2 time comp+trans        : 5.67 (ms) , speedup 551.49x
+  GPU v2 flops device           : 0.61 (Gflops) 
+  GPU v2 flops host-device-host : 0.01 (Gflops) 
+  PASSED
+

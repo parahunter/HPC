@@ -146,7 +146,7 @@ GNUTERM = "wxt"
 #set key left bottom Left title 'Legend' box 7
 set key right bottom Left
 set xlabel 'Requested Threads'
-set ylabel 'Time (s)'
+set ylabel 'Speed-up'
 #set logscale x
 #set ytics 0,1,4
 set title 'Optimization per problem size'
