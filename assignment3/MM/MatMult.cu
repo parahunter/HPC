@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
 	double *d_A, *d_B, *d_C;
 	double *h_A, *h_B, *h_C, *h_C0, *h_C1, *h_C2, *h_C3;
 	cudaDeviceProp deviceProp;
+	char mode;
 
 /***************************
  * Input & info
@@ -29,6 +30,8 @@ int main(int argc, char *argv[])
 	if (argc>3 ? K = atoi(argv[3]) : K = 4096);
 	if (argc>4 ? threadsPerBlock = atoi(argv[4]) : threadsPerBlock = 16);
 	if (argc>5 ? reps = atoi(argv[5]) : reps = 10);
+	if (argc>6 ? mode = argv[6][0] : mode = 'd');
+
 
 	// blocks to cover all M elements in output vector
 	blocksPerGrid = (N+threadsPerBlock-1)/threadsPerBlock;
@@ -310,6 +313,10 @@ int main(int argc, char *argv[])
 
 	double flops = (double)M*N*K*2;
 	// output verification and timings
+
+	if(mode == 'd')
+	{
+	
     printf("  CPU blas time                 : %3.2f (ms)\n",time_blas);
     printf("  CPU blas flop                 : %3.2f (Gflops) \n\n",flops/time_blas/1e6);
     printf("  GPU v1 time compute           : %3.2f (ms) , speedup %.2fx\n",time_v1,time_blas/time_v1);
@@ -334,6 +341,12 @@ int main(int argc, char *argv[])
     printf("  GPU cublas flops device           : %2.2f (Gflops) \n",flops/time_cublas/1e6);
     printf("  GPU cublas flops host-device-host : %2.2f (Gflops) \n",flops/(time_cublas+transfer_cublas)/1e6);
     if (abs(norm-norm_cublas)/norm < 1e-12 ? printf("  PASSED\n\n") : printf("  FAILED \n\n")  );
+
+	}
+	else
+	{
+		printf("%d \t %f \t %f \t %f \t %f \t %f", M*N, flops/time_blas/1e6, flops/time_v1/1e6 ,flops/time_v2/1e6, flops/time_v3/1e6, flops/time_cublas/1e6);
+	}
 
 /***************************
  * Cleaning memory         *
