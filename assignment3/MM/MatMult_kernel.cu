@@ -46,7 +46,7 @@ __global__ void MatMult_kernel_v1(const double* A, const double* B, double* C, i
 
 	for(int k = 0; k < K; k++) 
 	{
-		sum += A[k + i * N] * B[ k*K + j];  
+		sum += A[k + i * K] * B[ k*N + j];  
 	}
 
 	C[index] = sum;
@@ -152,26 +152,26 @@ Suggested steps:
 
 	int blockK = 16;
 	for(int l = 0; l<K; l+=blockK)
-	for(int k = 0; k < blockK; k++) 
 	{
 		int ix = threadIdx.x;
 		int iy = threadIdx.y;
 		for(int b=0; b<4; b++)
 		{
 			A_s[iy+(b*16)][ix]=A[(blk_y + iy+(b*16))*K+ix+l];
-			B_s[iy][ix+(b*16)]=B[(iy+l)*K+ix+(b*16)+blk_x];
+			B_s[iy][ix+(b*16)]=B[(iy+l)*N+ix+(b*16)+blk_x];
 		}
 		__syncthreads();
-		for(int ba = 0 ; ba < 4 ; ba++)
-		{	
+		for(int k = 0; k < blockK; k++) 
+		{
 			for(int bb = 0 ; bb < 4 ; bb++)
-			{
-				int iya = threadIdx.y+(ba*16);
-				int ixb = threadIdx.x+(bb*16);
-				int irem = k;
+			for(int ba = 0 ; ba < 4 ; ba++)
+				{
+					int iya = threadIdx.y+(ba*16);
+					int ixb = threadIdx.x+(bb*16);
+					int irem = k;
 
-				sm[ba*4+bb] += A_s[iya][irem]* B_s[irem][ixb];
-				}
+					sm[ba*4+bb] += A_s[iya][irem]*B_s[irem][ixb];
+					}
 		}
 	}
 	

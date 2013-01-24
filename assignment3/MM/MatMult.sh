@@ -9,4 +9,4 @@ cd $PBS_O_WORKDIR
 
 module load cuda
 
-./MatMult
+./MatMult 1024 1024 1024
