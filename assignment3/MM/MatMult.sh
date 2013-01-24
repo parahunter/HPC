@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-#PBS -N MatVec
+#PBS -N MatMult
 #PBS -l walltime=00:10:00
 #PBS -q 02614
 #PBS -l nodes=1:gpus=1
