@@ -158,7 +158,7 @@ int main(int argc, char *argv[])
     cudaDeviceSynchronize();
 	sdkStopTimer(&timer1);
 
-	blockSize = dim3(threadsPerBlock , threadsPerBlock);
+	blockSize = dim3(threadsPerBlock, threadsPerBlock);
 			
 	blocksPerGridN = (N+threadsPerBlock-1)/threadsPerBlock;
 	blocksPerGridM = (M+threadsPerBlock-1)/threadsPerBlock;
@@ -175,6 +175,8 @@ int main(int argc, char *argv[])
 
 		MatMult_kernel_v2<<<gridSize, blockSize>>>(d_A,d_B,d_C,M,N,K);
 	}
+
+
 	cudaDeviceSynchronize();
 	sdkStopTimer(&timer2);
 
@@ -187,6 +189,14 @@ int main(int argc, char *argv[])
     cudaDeviceSynchronize();
 	sdkStopTimer(&timer1);
 
+/*
+	for(int i = 0; i < N; i++) {
+		for(int j = 0; j < N; j++) {
+			printf("%f ", h_C2[i*N+j]);
+		}
+		printf("\n");
+	}
+*/
 	transfer_v2 = sdkGetTimerValue(&timer1);
 	time_v2 = sdkGetTimerValue(&timer2)/reps;
 
@@ -219,6 +229,8 @@ int main(int argc, char *argv[])
 		checkCudaErrors(cudaMemset(d_C, 0, size_C)); 
 		MatMult_kernel_v3<<<gridSize, blockSize>>>(d_A,d_B,d_C,M,N,K);
 	}
+
+	
 	cudaDeviceSynchronize();
 	sdkStopTimer(&timer2);
 
@@ -294,7 +306,7 @@ int main(int argc, char *argv[])
 	norm_v2 = sqrt(norm_v2);
 	norm_cublas = sqrt(norm_cublas);
 	
-//	printf("norm %f norm_v1 %f \n", norm, norm_v2);	
+	printf("norm %f norm_v1 %f \n", norm, norm_v3);	
 	
 
 	double flops = (double)M*N*K*2;
