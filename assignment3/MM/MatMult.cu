@@ -189,14 +189,7 @@ int main(int argc, char *argv[])
     cudaDeviceSynchronize();
 	sdkStopTimer(&timer1);
 
-/*
-	for(int i = 0; i < N; i++) {
-		for(int j = 0; j < N; j++) {
-			printf("%f ", h_C2[i*N+j]);
-		}
-		printf("\n");
-	}
-*/
+
 	transfer_v2 = sdkGetTimerValue(&timer1);
 	time_v2 = sdkGetTimerValue(&timer2)/reps;
 
@@ -245,7 +238,13 @@ int main(int argc, char *argv[])
 
 	transfer_v3 = sdkGetTimerValue(&timer1);
 	time_v3 = sdkGetTimerValue(&timer2)/reps;
-
+/*
+	for(int i = 0; i < N; i++) {
+		for(int j = 0; j < N; j++) {
+			printf("%4.2f ", h_C0[i*N+j]);
+		}
+		printf("\n");
+	}*/
 
 /***************************
  * GPU execution cublas        *

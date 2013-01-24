@@ -151,53 +151,38 @@ Suggested steps:
 	__shared__ double B_s[16][64];	
 
 	int blockK = 16;
-	
-	for(int l = 0; l < K/blockK; l++) {
-		for(int i = 0; i < 4; i++) {
-			int ix = blk_x + l * blockDim.x;
-			int ixx = ix + threadIdx.x;
-			int iy = blk_y + i * blockDim.y;
-			int iyy = iy + threadIdx.y;
-		
-			A_s[iyy - blk_y][threadIdx.x] = A[ixx + iyy * K];
-
-			ix = blk_x + i * blockDim.x;
-			ixx = ix + threadIdx.x;
-			iy = blk_y + l * blockDim.y;
-			iyy = iy + threadIdx.y;
-
-			B_s[threadIdx.y][ixx - blk_x] = B[ixx + iyy * K];
-
+	for(int l = 0; l<K; l+=blockK)
+	for(int k = 0; k < blockK; k++) 
+	{
+		int ix = threadIdx.x;
+		int iy = threadIdx.y;
+		for(int b=0; b<4; b++)
+		{
+			A_s[iy+(b*16)][ix]=A[(blk_y + iy+(b*16))*K+ix+l];
+			B_s[iy][ix+(b*16)]=B[(iy+l)*K+ix+(b*16)+blk_x];
 		}
-
 		__syncthreads();
-		for(int kk = 0; kk < blockK; kk++) {
-			int k = kk + blockK * l;
-			for(int i = 0 ; i < 4 ; i++)
-			{	
-				for(int j = 0 ; j < 4 ; j++)
-				{
-					int ix = blk_x + i * blockDim.x;
-					int ixx = ix + threadIdx.x;
-					int iy = blk_y + j * blockDim.y;
-					int iyy = iy + threadIdx.y;
+		for(int ba = 0 ; ba < 4 ; ba++)
+		{	
+			for(int bb = 0 ; bb < 4 ; bb++)
+			{
+				int iya = threadIdx.y+(ba*16);
+				int ixb = threadIdx.x+(bb*16);
+				int irem = k;
 
-						sm[j + 4 * i ] += A_s[iyy - blk_y][kk] * B[ k*N + ixx];//[k + iyy * K]  * B[ k*N + ixx];  
-					}
-			}
+				sm[ba*4+bb] += A_s[iya][irem]* B_s[irem][ixb];
+				}
 		}
 	}
 	
-	for(int i = 0 ; i < 4 ; i++)	
-	{
-		for(int j = 0 ; j < 4 ; j++)
+	for(int ba = 0 ; ba < 4 ; ba++)
+	{	
+		for(int bb = 0 ; bb < 4 ; bb++)
 		{
 
-			int ix = blk_x + i * blockDim.x;
-			int ixx = ix + threadIdx.x;
-			int iy = blk_y + j* blockDim.y;
-			int iyy = iy + threadIdx.y;
-			C[iyy * N + ixx] = sm[j + 4 * i ];
+			int ix = blk_x + bb * blockDim.x + threadIdx.x;
+			int iy = blk_y + ba * blockDim.y + threadIdx.y;
+			C[iy * N + ix] = sm[ba*4+bb];
 		}
 	}
 
