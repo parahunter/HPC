@@ -3,36 +3,27 @@
 //
 #include "AtomicAdd.h"
 #include "stdio.h"
-void MatMult_gold(const double* A, const double* x, double* y, int M, int N)
+void MatMult_gold(const double* A, const double* B, double* C, int M, int N, int K)
 //
-// Naive version where only global memory and automatic variables are accessed.
+// Naive version.
 //
 {
-	int i, j;
-	double tmp;
-	for (i=0; i < N; i++) y[i] = 0;
-	for (j=0; j < M; j++) {
-		tmp = x[j];
-		for (i=0; i < N; i++) {
-			y[i] += A[i+j*N] * tmp;
 
-		}
-	}
 }
 
 extern "C" {
 #include <cblas.h>
 }
 
-void MatMult_blas(const double* A, const double* x, double* y, int M, int N)
+void MatMult_blas(const double* A, const double* B, double* C, int M, int N, int K)
 //
 // Transposed matrix-vector multiplication using BLAS on CPU
 //
 {
-	cblas_dgemv(CblasRowMajor,CblasTrans,M,N,1.0,A,N,x,1,0.0,y,1);
+	cblas_dgemm(CblasRowMajor,CblasNoTrans,CblasNoTrans, M, N, K, 1.0, A, K, B, N, 0.0, C, N);
 }
 
-__global__ void MatMult_kernel_v1(const double* A, const double* x, double* y, int M, int N)
+__global__ void MatMult_kernel_v1(const double* A, const double* B, double* C, int M, int N, int K)
 //
 // Naive version where only global memory and automatic variables are accessed.
 //
@@ -43,70 +34,68 @@ __global__ void MatMult_kernel_v1(const double* A, const double* x, double* y, i
  // - Make sure that the kernel does not read or write outside memory allocated.
  //
 {
-	int index = (blockIdx.x * blockDim.x + threadIdx.x); 	
+	//reversed order for better coalescence 
+	int j = blockIdx.x * blockDim.x + threadIdx.x;
+	int i = blockIdx.y * blockDim.y + threadIdx.y;
 	
+	int index = i * N + j;
+	
+	//printf("(%d, %d) %d \n", i,j,index);
+
 	double sum = 0.0;
-	for(int i = 0; i < M; i++) {
-		const double xv = x[i];
-		for(int j = index; j < N; j+=gridDim.x * blockDim.x) {	
-			sum += A[i*M + j]*xv;
-		}
+
+	for(int k = 0; k < K; k++) 
+	{
+		sum += A[k + i * N] * B[ k*K + j];  
 	}
-	y[index] = sum;
+
+	C[index] = sum;
 }
 
 #include "AtomicAdd.h"
-__global__ void MatMult_kernel_v2(const double* A, const double* x, double* y, int M, int N)
-//
-// 2D grid + atomic add kernel
-//
- // YOUR TASKS:
- // - Improve your naive kernel to support higher occupancy for wide matrices.
- // - You should use a 2D grid (of 1D thread blocks).
- // - Have threads update the output vector by using the supplied double atomic add.
- // - Use cudaMset to clear the output vector before the kernel is called.
+__global__ void MatMult_kernel_v2(const double* A, const double* B, double* C, int M, int N, int K)
 {
-//	int tid = threadIdx.x;
-//	int blkidx = blockIdx.x * gridDim.x + blockIdx.y;
-//	int index = (blkidx * blockDim.x + tid); 	
+	//reversed order for better coalescence 
+	int jb = ( blockIdx.x * blockDim.x + threadIdx.x ) * 4;
+	int ib = ( blockIdx.y * blockDim.y + threadIdx.y ) * 4;
+	
+	double sm[16] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
-	int index = (blockIdx.x * blockDim.x + threadIdx.x); 	
+//	for(int i = 0 ; i < 4 * 4 ; i++)				
+	//	sm[ i] = 0.0;
 
-	double sum = 0.0;
-	int ysub = M / gridDim.y;
-	int offset = blockIdx.y * ysub;
-	for(int i = 0; i < ysub; i++) {
-		const double xv = x[i + offset];
-		for(int j = index; j < N; j+= blockDim.x * gridDim.x) {	
-			sum += A[(i + offset)*M + j]*xv;
+	for(int k = 0; k < K; k++) 
+	{
+		for(int i = 0 ; i < 4 ; i++)
+		{	
+			for(int j = 0 ; j < 4 ; j++)
+			{
+				sm[j + 4 * i ] += A[k + (ib + i) * K]  * B[ k*N + (jb + j)];  
+			}
 		}
 	}
-	atomicAdd(&y[index], sum);
-//	y[index] = sum;
+
+	for(int i = 0 ; i < 4 ; i++)	
+	{
+		for(int j = 0 ; j < 4 ; j++)
+		{
+			C[(i+ib) * N + (j+jb)] = sm[j + 4 * i ];
+		}
+	}
 }
 
+__global__ void MatMult_kernel_v3(const double* A, const double* B, double* C, int M, int N, int K)
+{
+
+}
 extern "C" {
 #include <cublas.h>
 }
 
-void MatMult_cublas(const double* d_A, const double* d_x, double* d_y, int M, int N)
+void MatMult_cublas(const double* d_A, const double* d_B, double* d_C, int M, int N, int K)
 //
 // Transposed matrix-vector multiplication using CUBLAS on GPU
 //
- // YOUR TASKS:
- // - Insert a call to the function cublasDgemv() in the CUBLAS library.
 {
-	cublasDgemv ('N', 
-			M, 
-			N, 
-			1.0, 
-			d_A, 
-			M, 
-			d_x,
-			1, 
-			0.0, 
-			d_y, 
-			1);
-
-
+	cublasDgemm('N','N', M, N, K, 1.0, d_B, N, d_A, K, 0.0, d_C, N);
 }

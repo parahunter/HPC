@@ -1,0 +1,36 @@
+Matrix-vector multiplication.
+  Usage: ./MatMult <M:default=4096> <N:default=4096> <K:default=4096>  <threadsPerBlock:default=128> <reps:default=10>
+
+Device 0: "Tesla M2050".
+  Maximum number of threads per block: 1024.
+
+Threads per block = 16.
+Number of blocks [gridDim.x] = 256.
+Matrix size [MxN] = 4096x4096.
+
+norm 4194735.845555 norm_v1 4194735.845555 
+  CPU blas time                 : 13595.03 (ms)
+  CPU blas flop                 : 10.11 (Gflops) 
+
+  CPU gold time                 : 0.00 (ms) , speedup 135950247.45x
+  CPU gold flop                 : 1374389469.44 (Gflops) 
+  FAILED 
+
+  GPU v1 time compute           : 2158.61 (ms) , speedup 6.30x
+  GPU v1 time comp+trans        : 2299.69 (ms) , speedup 5.91x
+  GPU v1 flops device           : 63.67 (Gflops) 
+  GPU v1 flops host-device-host : 59.76 (Gflops) 
+  PASSED
+
+  GPU v2 time compute           : 2722.31 (ms) , speedup 4.99x
+  GPU v2 time comp+trans        : 2862.28 (ms) , speedup 4.75x
+  GPU v2 flops device           : 50.49 (Gflops) 
+  GPU v2 flops host-device-host : 48.02 (Gflops) 
+  PASSED
+
+  GPU cublas time compute           : 413.46 (ms) , speedup 32.88x
+  GPU cublas time comp+trans        : 553.41 (ms) , speedup 24.57x
+  GPU cublas flops device           : 332.41 (Gflops) 
+  GPU cublas flops host-device-host : 248.35 (Gflops) 
+  PASSED
+
