@@ -345,7 +345,7 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		printf("%d \t %f \t %f \t %f \t %f \t %f", M*N, flops/time_blas/1e6, flops/time_v1/1e6 ,flops/time_v2/1e6, flops/time_v3/1e6, flops/time_cublas/1e6);
+		printf("%d \t %f \t %f \t %f \t %f \t %f", N, flops/time_blas/1e6, flops/time_v1/1e6 ,flops/time_v2/1e6, flops/time_v3/1e6, flops/time_cublas/1e6);
 	}
 
 /***************************
