@@ -144,12 +144,12 @@ set fontpath
 set fit noerrorvariables
 GNUTERM = "wxt"
 #set key left bottom Left title 'Legend' box 7
-set key left bottom Left
+set key left top Left
 set xlabel 'Requested Threads'
 set ylabel 'Time (s)'
 #set logscale x
 #set xtics 4,2,2048
-set title 'G++ reduction performances (N=1000, i=2000)'
+set title 'G++ performances of reduction operation (N=1000, i=2000)'
 plot "data_reduction2.dat" using 1:2 title "2000 for with reduction" w lp, \
 	"data_noreduction2.dat" using 1:2 title "1 for with reduction" w lp
 set terminal postscript eps enhanced color

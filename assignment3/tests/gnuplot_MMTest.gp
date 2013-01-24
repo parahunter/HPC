@@ -144,16 +144,18 @@ set fontpath
 set fit noerrorvariables
 GNUTERM = "wxt"
 #set key left bottom Left title 'Legend' box 7
-set key left top Left
-set xlabel 'Requested Threads'
-set ylabel 'Speedup'
-#set logscale x
-#set xtics 4,2,2048
-set title 'G++ performances of reduction operation (N=1000, i=2000)'
-plot "data_reduction2.dat" using 1:3 title "2000 for with reduction" w lp, \
-	"data_noreduction2.dat" using 1:3 title "1 for with reduction" w lp
+set key left bottom Left
+set xlabel 'Matrix size'
+set ylabel 'GFlops
+set xtics 4,2,2048
+set title 'Comparison of non-optimized versus optimized parallel jacobi'
+plot "MMTest.dat" using 1:2 title "BLAS" w lp, \
+"MMTest.dat" using 1:3 title "Naive" w lp, \
+"MMTest.dat" using 1:4 title "Register blocked" w lp, \
+"MMTest.dat" using 1:5 title "Shared memory" w lp, \
+"MMTest.dat" using 1:6 title "CUPLAS" w lp
 set terminal postscript eps enhanced color
-set output "plot_speedup.eps"
+set output "plot-MatMult-gflops.eps"
 replot
 set term pop; set out;
 #    EOF
