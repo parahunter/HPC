@@ -117,14 +117,14 @@ __global__ void Jacobi_v2(double* u1, double* u2,int N)
 			}
 			else
 			{
-/*				if(threadIdx.x==0)
+				if(threadIdx.x==0)
 					data[(id-1)*nd+jd]=u1[(i-1)*N+j];
 				if(threadIdx.y==0)
 					data[id*nd+jd-1]=u1[i*N+j-1];		
 				if(threadIdx.x==blockDim.x-1)
 					data[(id+1)*nd+jd]=u1[(i+1)*N+j];
 				if(threadIdx.y==blockDim.y-1)
-					data[id*nd+jd+1]=u1[i*N+j+1];*/	
+					data[id*nd+jd+1]=u1[i*N+j+1];
 				u2[i*N + j] = (
 					data[id*nd + jd-1] + data[(id-1)*nd + jd] + 
 					data[id*nd+jd+1] + data[(id+1)*nd + jd] +  

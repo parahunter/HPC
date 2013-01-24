@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
 	for(int k=0; k<iterations; k++)
 	{
 		Jacobi_v1<<<blocksPerGrid, threadsPerBlock, 0>>>(d_A1,d_B1,N);	
-		cudaDeviceSynchronize();
+//		cudaDeviceSynchronize();
 	checkCudaErrors(cudaGetLastError());
 		Jacobi_v1<<<blocksPerGrid, threadsPerBlock, 0>>>(d_B1,d_A1,N);
 		cudaDeviceSynchronize();
