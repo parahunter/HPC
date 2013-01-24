@@ -31,34 +31,34 @@ def parseData(out):
 	return outdata;
 
 def main():
-	filename = "MMTest.dat"
+	filename = "PoissonTest1.dat"
 	fi = open(filename,"w+")
 	fi.write("");
 	fi.close()
 		
 	print "Tests running..."
 	for size in matSizes: #x axis
-		program = "./MatMult"
+		program = "./Jacobi"
 				
 		origWD = os.getcwd() # remember our original working directory
 
-		os.chdir("../MM/")
+		os.chdir("../Poisson/")
 		
-		print ((program + " %d %d %d %d %d t") % ( size, size, size, kernelSize, iterations)).split()
+		print ((program + " %d %d %d") % (size, iterations, kernelSize)).split()
 		print os.getcwd()
-		process = Popen(( (program + " %d %d %d %d %d t") % ( size, size, size, kernelSize, iterations)).split() ,stdout= PIPE,bufsize=4096) 
+		process = Popen(((program + " %d %d %d") % (size, iterations, kernelSize)).split() ,stdout= PIPE,bufsize=4096) 
 		(stdout,stderr) = process.communicate()
 		process.wait()
 		
-		print stdout
+		#print stdout
 		
 		os.chdir("../tests/")
-
+		print stdout
 		result = parseData(stdout)
-		print result;
+		
 		writeRow(filename, result)
-
-	call("gnuplot \"gnuplot_MMTest.gp\"", shell=True)
+	
+	call("gnuplot \"gnuplot_PoissonTest1.gp\"", shell=True)
 
 
 if __name__ == "__main__":

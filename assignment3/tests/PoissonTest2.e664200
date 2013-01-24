@@ -1,0 +1,6 @@
+id: cannot find name for group ID 2012
+Loaded module: cuda/5.0
+Failed to initialize wxWidgets.
+"gnuplot_PoissonTest2.gp", line 162: warning: Warning - difficulty fitting plot titles into key
+"gnuplot_PoissonTest2.gp", line 162: warning: Too many axis ticks requested (>5)
+"gnuplot_PoissonTest2.gp", line 162: warning: Too many axis ticks requested (>5)

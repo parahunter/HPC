@@ -148,15 +148,15 @@ GNUTERM = "wxt"
 #set key left bottom Left title 'Legend' box 7
 set key left bottom Left
 set xlabel 'Matrix size'
-set ylabel 'GFlops
-set title 'Comparison of BLAS dgemm rutine versus GPU Matrix Matrix multiplication implementations'
-plot "MMTest.dat" using 1:2 title "BLAS" w lp, \
-"MMTest.dat" using 1:3 title "Naive" w lp, \
-"MMTest.dat" using 1:4 title "Register blocked" w lp, \
-"MMTest.dat" using 1:5 title "Shared memory" w lp, \
-"MMTest.dat" using 1:6 title "CUPLAS" w lp
+set ylabel 'Walltime'
+set title 'Effect of different matrix sizes with different implementations of the Jacobi method'
+plot 'PoissonTest1.dat' using 1:4 title 'CPU Implementation' w lp, \
+"PoissonTest1.dat" using 1:10 title "GPU Naive" w lp, \
+"PoissonTest1.dat" using 1:12 title "GPU Naive with transfer time" w lp, \
+"PoissonTest1.dat" using 1:16 title "GPU shared" w lp, \
+"PoissonTest1.dat" using 1:18 title "GPU shared with transfer time" w lp
 set terminal postscript eps enhanced color
-set output "plot-MatMult-gflops.eps"
+set output "plot-poisson-test1.eps"
 replot
 set term pop; set out;
 #    EOF

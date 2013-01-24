@@ -141,22 +141,27 @@ set colorbox default
 set colorbox vertical origin screen 0.9, 0.2, 0 size screen 0.05, 0.6, 0 front bdefault
 set loadpath 
 set fontpath
-set xtics (64, 128, 256, 512, 1024, 2048, 4096)
+set xtics (2,4,8,16,32)
 #set format x "%4.0f"
 set fit noerrorvariables
 GNUTERM = "wxt"
 #set key left bottom Left title 'Legend' box 7
 set key left bottom Left
-set xlabel 'Matrix size'
-set ylabel 'GFlops
-set title 'Comparison of BLAS dgemm rutine versus GPU Matrix Matrix multiplication implementations'
-plot "MMTest.dat" using 1:2 title "BLAS" w lp, \
-"MMTest.dat" using 1:3 title "Naive" w lp, \
-"MMTest.dat" using 1:4 title "Register blocked" w lp, \
-"MMTest.dat" using 1:5 title "Shared memory" w lp, \
-"MMTest.dat" using 1:6 title "CUPLAS" w lp
+set xlabel 'Thread block size'
+set ylabel 'Walltime'
+set title 'Effect of different block sizes on the GPU implementation of the Jacobi method'
+plot "PoissonTest2.dat" using 1:2 title "64 matrix" w lp, \
+"PoissonTest2.dat" using 1:3 title "64 matrix with transfer time" w lp, \
+"PoissonTest2.dat" using 1:4 title "128 matrix" w lp, \
+"PoissonTest2.dat" using 1:5 title "128 matrix with transfer time" w lp, \
+"PoissonTest2.dat" using 1:6 title "512 matrix" w lp, \
+"PoissonTest2.dat" using 1:7 title "512 matrix with transfer time" w lp, \
+"PoissonTest2.dat" using 1:8 title "1024 matrix" w lp, \
+"PoissonTest2.dat" using 1:9 title "1024 matrix with transfer time" w lp, \
+"PoissonTest2.dat" using 1:10 title "4096 matrix" w lp, \
+"PoissonTest2.dat" using 1:11 title "4096 matrix with transfer time" w lp
 set terminal postscript eps enhanced color
-set output "plot-MatMult-gflops.eps"
+set output "plot-poisson-test2.eps"
 replot
 set term pop; set out;
 #    EOF
