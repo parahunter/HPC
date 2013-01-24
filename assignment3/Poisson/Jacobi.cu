@@ -21,13 +21,11 @@ int main(int argc, char *argv[])
 /***************************
  * Input & info
  ***************************/
-
-	printf("Poisson problem.\n");
-	printf("  Usage: ./Jacobi <N:default=128> <Iterations:default=100>  <threadsPerBlockLine:default=16>\n\n");
+	char debug='F';
 	if (argc>1 ? N = atoi(argv[1]) : N = 128);
 	if (argc>2 ? iterations = atoi(argv[2]) : iterations = 100);
 	if (argc>3 ? threadsPerBlock.x = atoi(argv[3]) : threadsPerBlock.x = 16);
-
+	if (argc>4 ? debug = argv[4][0] : debug='F');
 
 	// blocks to cover all M elements in output vector
 	threadsPerBlock.y=threadsPerBlock.x;
@@ -36,16 +34,21 @@ int main(int argc, char *argv[])
 	
 	// Check limitation of available device
 	cudaGetDeviceProperties(&deviceProp, 0); // assumed only one device = 0
-	printf("Device 0: \"%s\".\n", deviceProp.name);
-	printf("  Maximum number of threads per block: %d.\n\n", deviceProp.maxThreadsPerBlock);
-	if (threadsPerBlock.x*threadsPerBlock.y > deviceProp.maxThreadsPerBlock)
+	if(debug=='T')
 	{
-		printf("Error : threadsPerBlock exceeds maximum.\n"); exit(0);
+		printf("Poisson problem.\n");
+		printf("  Usage: ./Jacobi <N:default=128> <Iterations:default=100>  <threadsPerBlockLine:default=16> <debugMode [T|F]:default=F>\n\n");
+
+		printf("Device 0: \"%s\".\n", deviceProp.name);
+		printf("  Maximum number of threads per block: %d.\n\n", deviceProp.maxThreadsPerBlock);
+		if (threadsPerBlock.x*threadsPerBlock.y > deviceProp.maxThreadsPerBlock)
+		{
+			printf("Error : threadsPerBlock exceeds maximum.\n"); exit(0);
+		}
+		printf("Threads per block line= %d.\n",threadsPerBlock.x);
+		printf("Number of blocks [gridDim.x] = %d.\n",blocksPerGrid.x);
+		printf("Matrix size [NxN] = %dx%d.\n\n",N,N); 
 	}
-	printf("Threads per block line= %d.\n",threadsPerBlock.x);
-	printf("Number of blocks [gridDim.x] = %d.\n",blocksPerGrid.x);
-	printf("Matrix size [NxN] = %dx%d.\n\n",N,N); 
-		
 /***************************
  * Initialization of memory*
  ***************************/
@@ -195,6 +198,9 @@ int main(int argc, char *argv[])
 	double 	norm=norm_gold;
 	double time_blas=time_gold;
 	// output verification and timings
+	
+	if(debug=='T')
+	{
     printf("  CPU gold time                 : %3.2f (ms) , speedup %.2fx\n",time_gold,time_blas/time_gold);
     printf("  CPU gold flop                 : %3.2f (Gflops) \n",(double)N*N*iterations*2/time_gold/1e6);
     if (abs(norm-norm_gold)/norm < 1e-12 ? printf("  PASSED\n\n") : printf("  FAILED \n\n")  );
@@ -208,7 +214,25 @@ int main(int argc, char *argv[])
     printf("  GPU v2 flops device           : %2.2f (Gflops) \n",(double)N*N*iterations*2/time_v2/1e6);
     printf("  GPU v2 flops host-device-host : %2.2f (Gflops) \n",(double)N*N*2/(time_v2+transfer_v2)/1e6);
     if (abs(norm-norm_v2)/norm < 1e-12 ? printf("  PASSED\n\n") : printf("  FAILED \n\n")  );
+}else
+{ 
+		printf("%d %d %d ",N,iterations,threadsPerBlock.x);
 
+		printf("%3.2f %.2f ",time_gold,time_blas/time_gold); //cpu time and speedup
+printf("%3.2f %.2f ",time_gold,time_blas/time_gold); //cpu time 2 and speedup
+    printf("%3.2f ",(double)N*N*iterations*2/time_gold/1e6); //cpu gflop
+    printf("%3.2f ",(double)N*N*iterations*2/time_gold/1e6); //cpu gflop
+        
+    printf("%3.2f %.2f ",time_v1,time_blas/time_v1); //gpu 1 time
+	printf("%3.2f %.2f ",time_v1+transfer_v1,time_blas/(time_v1+transfer_v1)); // gpu 1 time 2
+    printf("%2.2f ",(double)N*N*iterations*2/time_v1/1e6); //gpu 1 flop 1
+    printf("%2.2f ",(double)N*N*iterations*2/(time_v1+transfer_v1)/1e6); //gpu 1 flops 2
+    
+    printf("%3.2f %.2f ",time_v2,time_blas/time_v2); //gpu 2 time 1
+	printf("%3.2f %.2f ",time_v2+transfer_v2,time_blas/(time_v2+transfer_v2)); //gpu 2 time 2
+    printf("%2.2f ",(double)N*N*iterations*2/time_v2/1e6); //flops 1
+    printf("%2.2f\n",(double)N*N*2/(time_v2+transfer_v2)/1e6); //flops 2
+    }
 /*
 print(h_A0, N);
 printf("\n\n\n");

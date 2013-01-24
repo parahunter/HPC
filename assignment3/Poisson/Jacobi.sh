@@ -1,12 +1,12 @@
 #!/bin/sh
 #
-#PBS -N MatVec
+#PBS -N TestJacobi_12_12_32
 #PBS -l walltime=00:10:00
 #PBS -q 02614
-#PBS -l nodes=1:gpus=1
+#PBS -l nodes=1:ppn=12:gpus=1
 
 cd $PBS_O_WORKDIR
 
 module load cuda
 
-./Jacobi
+ONP_NUM_THREADS=12 ./Jacobi 2048 100 16
