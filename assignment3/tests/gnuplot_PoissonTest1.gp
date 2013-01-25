@@ -141,7 +141,7 @@ set colorbox default
 set colorbox vertical origin screen 0.9, 0.2, 0 size screen 0.05, 0.6, 0 front bdefault
 set loadpath 
 set fontpath
-set xtics (64, 128, 256, 512, 1024, 2048, 4096)
+#set xtics (64, 128, 256, 512, 1024, 2048, 4096)
 #set format x "%4.0f"
 set fit noerrorvariables
 GNUTERM = "wxt"
@@ -150,11 +150,7 @@ set key left bottom Left
 set xlabel 'Matrix size'
 set ylabel 'Walltime'
 set title 'Effect of different matrix sizes with different implementations of the Jacobi method'
-plot 'PoissonTest1.dat' using 1:4 title 'CPU Implementation' w lp, \
-"PoissonTest1.dat" using 1:10 title "GPU Naive" w lp, \
-"PoissonTest1.dat" using 1:12 title "GPU Naive with transfer time" w lp, \
-"PoissonTest1.dat" using 1:16 title "GPU shared" w lp, \
-"PoissonTest1.dat" using 1:18 title "GPU shared with transfer time" w lp
+plot 'PoissonTest1.dat' using 1:4 title 'CPU Implementation' w lp
 set terminal postscript eps enhanced color
 set output "plot-poisson-test1.eps"
 replot

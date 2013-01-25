@@ -1,8 +1,0 @@
-id: cannot find name for group ID 2012
-Loaded module: cuda/5.0
-Traceback (most recent call last):
-  File "./PoissonTest2.py", line 69, in <module>
-    main()
-  File "./PoissonTest2.py", line 62, in main
-    fi.write(item + "\n");
-NameError: global name 'item' is not defined

@@ -217,7 +217,10 @@ int main(int argc, char *argv[])
 }else
 { 
 		printf("%d \t %d \t %d \t",N,iterations,threadsPerBlock.x);
-
+		printf("%f \t %f \t %f \t", time_gold, time_v1, time_v2);
+		printf(" %f \t %f \t", transfer_v1/(time_v1+transfer_v1), transfer_v2/(time_v2+transfer_v2));
+		printf(" %f \t %f \n", transfer_v1, transfer_v2);
+		return;
 		printf("%3.2f \t %.2f \t",time_gold,time_blas/time_gold); //cpu time and speedup
 printf("%3.2f \t %.2f \t",time_gold,time_blas/time_gold); //cpu time 2 and speedup
     printf("%3.2f \t",(double)N*N*iterations*2/time_gold/1e6); //cpu gflop
@@ -228,7 +231,7 @@ printf("%3.2f \t %.2f \t",time_gold,time_blas/time_gold); //cpu time 2 and speed
     printf("%2.2f \t",(double)N*N*iterations*2/time_v1/1e6); //gpu 1 flop 1
     printf("%2.2f \t",(double)N*N*iterations*2/(time_v1+transfer_v1)/1e6); //gpu 1 flops 2
     
-    printf("%3.2f \t %.2f \t",time_v2,time_blas/time_v2); //gpu 2 time 1
+    printf("%3.2f \t %.2f \t",time_v1,time_blas/time_v2); //gpu 2 time 1
 	printf("%3.2f \t %.2f \t",time_v2+transfer_v2,time_blas/(time_v2+transfer_v2)); //gpu 2 time 2
     printf("%2.2f \t",(double)N*N*iterations*2/time_v2/1e6); //flops 1
     printf("%2.2f\n",(double)N*N*2/(time_v2+transfer_v2)/1e6); //flops 2

@@ -110,9 +110,9 @@ __global__ void Jacobi_v2(double* u1, double* u2,int N)
 			
 			data[id*nd+jd]=u1[i*N+j];	
 				
-			__syncthreads();
 			if(i==0|| j==0||i==N-1||j==N-1)
 			{
+				__syncthreads();
 				u2[i*N + j]=data[id*nd + jd];
 			}
 			else
@@ -125,6 +125,7 @@ __global__ void Jacobi_v2(double* u1, double* u2,int N)
 					data[(id+1)*nd+jd]=u1[(i+1)*N+j];
 				if(threadIdx.y==blockDim.y-1)
 					data[id*nd+jd+1]=u1[i*N+j+1];
+			__syncthreads();
 				u2[i*N + j] = (
 					data[id*nd + jd-1] + data[(id-1)*nd + jd] + 
 					data[id*nd+jd+1] + data[(id+1)*nd + jd] +  

@@ -8,5 +8,5 @@
 cd $PBS_O_WORKDIR
 
 module load cuda
-
-./MatMult 1024 1024 1024
+lscpu
+./MatMult 64 125 128
