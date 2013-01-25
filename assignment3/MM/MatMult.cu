@@ -126,6 +126,7 @@ int main(int argc, char *argv[])
 	
 	// launch kernel
 	sdkStartTimer(&timer2);
+	printf("N: %d  M: %d  K: %d  ",N, M, K);
 	for (int iter = 0; iter < reps; ++iter) 
 	{
 		MatMult_kernel_v1<<<gridSize, blockSize, 0>>>(d_A,d_B,d_C,M,N,K);
@@ -166,7 +167,8 @@ int main(int argc, char *argv[])
 	blocksPerGridN = (N+threadsPerBlock-1)/threadsPerBlock;
 	blocksPerGridM = (M+threadsPerBlock-1)/threadsPerBlock;
 	
-	gridSize = dim3(blocksPerGridN/4, blocksPerGridM/4);
+	gridSize = dim3((blocksPerGridN+3)/4, (blocksPerGridM+3)/4);
+	printf("Real grid size (x): %d \n",gridSize.x);
 	// launch kernel
 	sdkStartTimer(&timer2);
 	for (int iter = 0; iter < reps; ++iter) 
@@ -217,7 +219,7 @@ int main(int argc, char *argv[])
 	blocksPerGridN = (N+threadsPerBlock-1)/threadsPerBlock;
 	blocksPerGridM = (M+threadsPerBlock-1)/threadsPerBlock;
 	
-	gridSize = dim3(blocksPerGridN/4, blocksPerGridM/4);
+	gridSize = dim3((blocksPerGridN+3)/4, (blocksPerGridM+3)/4);
 	// launch kernel
 	sdkStartTimer(&timer2);
 	for (int iter = 0; iter < reps; ++iter) 

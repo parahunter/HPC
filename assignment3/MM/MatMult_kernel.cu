@@ -16,9 +16,8 @@ __global__ void MatMult_kernel_v1(const double* A, const double* B, double* C, i
 	int j = blockIdx.x * blockDim.x + threadIdx.x;
 	int i = blockIdx.y * blockDim.y + threadIdx.y;	
 	int index = i * N + j;
-
+	if(i>=M || j>=N) return;
 	double sum = 0.0;
-
 	for(int k = 0; k < K; k++) 
 	{
 		sum += A[k + i * K] * B[ k*N + j];  
@@ -65,9 +64,9 @@ __global__ void MatMult_kernel_v2(const double* A, const double* B, double* C, i
 
 __global__ void MatMult_kernel_v2(const double* A, const double* B, double* C, int M, int N, int K)
 {
-	int blk_x = blockIdx.x * blockDim.x * 4;
-	int blk_y = blockIdx.y * blockDim.y * 4;
-
+	int ix = (blockIdx.x * blockDim.x * 4) + threadIdx.x;
+	int iy = (blockIdx.y * blockDim.y * 4) + threadIdx.y;
+	
 	//printf("%d,%d,%d,%d\n",blockIdx.x, blockDim.x, blockDim.y, gridDim.x);
 	double sm[16] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
@@ -78,9 +77,10 @@ __global__ void MatMult_kernel_v2(const double* A, const double* B, double* C, i
 		{	
 			for(int j = 0 ; j < 4 ; j++)
 			{
-				int ixx = blk_x + i * blockDim.x + threadIdx.x;
-				int iyy = blk_y + j * blockDim.y + threadIdx.y;
-				sm[j + 4 * i ] += A[k + iyy * K]  * B[ k*N + ixx];  
+				int ixx = ix + i * blockDim.x;
+				int iyy = iy + j * blockDim.y;
+				if(ixx<N && iyy<M)
+				sm[j + 4 * i ] += A[k + iyy * K] * B[ k*N + ixx];  
 			}
 		}
 	}
@@ -90,8 +90,9 @@ __global__ void MatMult_kernel_v2(const double* A, const double* B, double* C, i
 	{
 		for(int j = 0 ; j < 4 ; j++)
 		{
-			int ixx = blk_x + i * blockDim.x + threadIdx.x;
-			int iyy = blk_y + j * blockDim.y + threadIdx.y;
+			int ixx = ix + i * blockDim.x;
+			int iyy = iy + j * blockDim.y;
+			if(ixx<N && iyy<M)
 			C[iyy * N + ixx] = sm[j + 4 * i ];
 		}
 	}
@@ -129,8 +130,14 @@ __global__ void MatMult_kernel_v3(const double* A, const double* B, double* C, i
 		for(int b = 0; b < 4; b++)
 		{
 			int off = b*16;
-			A_s[iy + off][ix] = A[(blk_y + iy + off) * K + ix + l];
-			B_s[iy][ix + off] = B[(iy + l) * N + ix + off + blk_x];
+			if(ix + l<K && (blk_y + iy + off)<M)
+				A_s[iy + off][ix] = A[(blk_y + iy + off) * K + ix + l];
+			else
+				A_s[iy + off][ix] = 0;
+			if(ix + off + blk_x<N && (iy + l)<K)
+				B_s[iy][ix + off] = B[(iy + l) * N + ix + off + blk_x];
+			else
+				B_s[iy][ix + off]=0;
 		}
 
 		// synchronization to ensure the shared memory is filled
@@ -156,9 +163,10 @@ __global__ void MatMult_kernel_v3(const double* A, const double* B, double* C, i
 	{	
 		for(int bb = 0; bb < 4 ; bb++)
 		{
-			int ix = blk_x + bb * blockDim.x + threadIdx.x;
-			int iy = blk_y + ba * blockDim.y + threadIdx.y;
-			C[iy * N + ix] = sm[ba * 4 + bb];
+			int ixx = blk_x + bb * blockDim.x + threadIdx.x;
+			int iyy = blk_y + ba * blockDim.y + threadIdx.y;
+			if(ixx<N && iyy<M)
+			C[iyy * N + ixx] = sm[ba * 4 + bb];
 		}
 	}
 }
@@ -169,5 +177,5 @@ void MatMult_cublas(const double* d_A, const double* d_B, double* d_C, int M, in
 // Transposed matrix-vector multiplication using CUBLAS on GPU
 //
 {
-	cublasDgemm('N','N', M, N, K, 1.0, d_B, N, d_A, K, 0.0, d_C, N);
+	cublasDgemm('N','N', N, M, K, 1.0, d_B, N, d_A, K, 0.0, d_C, N);
 }
